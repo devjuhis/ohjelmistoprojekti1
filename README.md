@@ -25,9 +25,9 @@ Scrum-sykli toistuu jokaisessa sprintissä, ja jokainen sykli tuottaa valmista j
 ## Työjonot
 
 ## Roolit
-Scrum-tiimi sisältää seuraavat roolit:
--Kehittäjät
--Tuoteomistaja
+Scrum-tiimi sisältää seuraavat roolit:<br>
+-Kehittäjät<br>
+-Tuoteomistaja<br>
 -Scrum Master
 
 ## Kokoukset
