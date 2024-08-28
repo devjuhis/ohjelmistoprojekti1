@@ -12,3 +12,5 @@ Haaga-Helian kurssilla ohjelmistoprojekti1 tuotettava projekti
 ## Kokoukset
 
 ## Miksi Scrum toimii?
+moimoimoi
+
