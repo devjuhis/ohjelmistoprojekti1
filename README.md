@@ -27,8 +27,9 @@ Sprintit ovat lyhyitä enintään kuukauden mittaisia ajanjaksoja, jolloin suori
 Sprintissä suoritettavat tehtävät valitaan työjonosta. Sprintissä suoritettavat tehtävät tulisi olla tarpeeksi pilkottuja, niin, että ne voidaan suorittaa yhden sprintin aikana, sillä sprinteissä on tavoitteena saada aikaan toimivia, potentiaalisesti julkaisukelpoisia ominaisuuksia. Kesken jääneet tehtävät eivät olet toivottuja, sillä kesken jäänyt tehtävä hylätään sprintin loppukokouksessa. Myöskään sprintin tavoitteita ei tule vaihtaa kesken sprintin. 
 
 ## Työjonot
-Työjono on järjestetty lista siitä, mitä tarvitaan tuotteen parantamiseksi. 
-Työjonot koostuvat kohteista, joita Scrum-tiimin tulee tehdä valmiiksi yhden Sprintin aikana. Kohteiden tulee olla sen suuruisia, että ne voidaan saavuttaa.
+**Tuotteen kehitysjono** on järjestetty lista siitä, mitä tarvitaan tuotteen parantamiseksi. Työjono koostuu kohteista, joita Scrum-tiimin tulee tehdä valmiiksi yhden Sprintin aikana. Kohteiden tulee olla sen suuruisia, että ne voidaan saavuttaa. Tuotteen kehitysjonossa korkealle järjestetyt kohdat ovat yleensä selkeämpiä ja yksityiskohtaisempia kuin matalammalle järjestetyt kohdat.
+
+**Sprintin kehitysjono** koostuu sprinttiin valituista tuotteen kehitysjonon kohdista sekä suunnitelmasta niiden toteuttamiseksi. Kehitystiimi muokkaa sprintin kehitysjonoa koko sprintin ajan oppiessaan lisää siitä, mitä tarvitaan sprintin tavoitteen saavuttamiseksi.
 
 ## Roolit
 Scrum-tiimi sisältää seuraavat roolit:<br>
