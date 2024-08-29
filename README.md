@@ -33,9 +33,9 @@ Sprintissä suoritettavat tehtävät valitaan työjonosta. Sprintissä suoritett
 
 ## Roolit
 Scrum-tiimi sisältää seuraavat roolit:<br>
--Kehittäjät<br>
--Tuoteomistaja<br>
--Scrum Master
+* Kehittäjät<br>
+* Tuoteomistaja<br>
+* Scrum Master
 
 ## Kokoukset
 
