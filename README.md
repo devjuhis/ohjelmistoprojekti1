@@ -36,8 +36,34 @@ Scrum-tiimi sisältää seuraavat roolit:<br>
 
 ## Kokoukset
 
+Scrum-kokousten tarkoitus on parantaa tiimin yhteistyötä, tuottaa arvoa asiakkaalle ja pitää kaikki samalla sivulla. Tehokkaat kokoukset ovat lyhyitä, säännöllisiä ja keskittyvät olennaiseen.
+
+**Onnistuneen kokouksen tunnusmerkkejä:**
+
+*   **Selkeät järjestelyt:** Aika, paikka ja aihe on sovittu etukäteen.
+    
+*   **Osallistujat mukana:** Kaikki tarvittavat henkilöt ovat kutsuttu ja valmistautuneet.
+    
+*   **Tarkka aikataulu:** Kokoukset pysyvät aikataulussa ja käsitellään asiat järjestyksessä.
+    
+*   **Aktiivinen osallistuminen:** Kaikkien mielipide otetaan huomioon ja päätökset tehdään yhdessä.
+    
+*   **Visuaalisuus:** Visuaaliset apuvälineet selkeyttävät keskustelua ja päätöksiä.
+    
+
+**Hyvin toteutetut kokoukset:**
+
+*   **Lisäävät läpinäkyvyyttä:** Jokainen tietää, missä mennään ja mikä on seuraava askel.
+    
+*   **Vahvistavat tiimityötä:** Yhteinen ymmärrys tavoitteista ja tehtävistä lisää yhteistyötä.
+    
+*   **Tehostavat työskentelyä:** Selkeät päätökset ja roolit vähentävät epäselvyyttä ja turhia keskusteluja.
+
+
 ## Miksi Scrum toimii?
 
+Scrum on joustava ja tehokas projektinhallintamenetelmä, joka sopii erityisesti nopeasti muuttuvassa toimintaympäristössä. Scrum jakaa projektit lyhyisiin iteraatioihin, jolloin tuloksia saadaan aikaan nopeasti ja muutoksiin voidaan reagoida joustavasti. Tiimityö, jatkuva parantaminen ja selkeät tavoitteet ovat Scrumin kulmakivet. Menetelmä on helppo ottaa käyttöön ja se soveltuu monenlaisiin projekteihin. Scrum mahdollistaa sen, että tuote kehittyy vähitellen ja asiakas saa nähdä työn tuloksia säännöllisesti, mikä lisää projektin läpinäkyvyyttä ja vähentää riskejä.
 
+Scrum on osoittautunut erittäin tehokkaaksi projektinhallintamenetelmäksi myös tilanteissa, joissa kehittäjät työskentelevät etänä tai omissa ympäristöissä. Sen joustavuus ja painotus säännölliseen kommunikaatioon tekevät siitä erinomaisen valinnan hajautetuille tiimeille.
 
 
