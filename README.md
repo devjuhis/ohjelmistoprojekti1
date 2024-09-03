@@ -1,5 +1,5 @@
-# ohjelmistoprojekti1
-Haaga-Helian kurssilla ohjelmistoprojekti1 tuotettava projekti
+# Scrum-ohje
+
 
 ## Scrum-syklin yleiskuvaus
 
