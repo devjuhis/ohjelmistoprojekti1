@@ -16,17 +16,19 @@ Käyttöliittymäteknologioista hyödynnämme React-kirjastoa.
 
 ## Järjestelmän määrittely
 
-Määrittelyssä järjestelmää tarkastellaan käyttäjän näkökulmasta. Järjestelmän
-toiminnot hahmotellaan käyttötapausten tai käyttäjätarinoiden kautta, ja kuvataan järjestelmän
-käyttäjäryhmät.
+### Käyttäjäryhmät 
 
--   Lyhyt kuvaus käyttäjäryhmistä (rooleista)
--   Käyttäjäroolit ja roolien tarvitsemat toiminnot, esim. käyttötapauskaaviona
-    (use case diagram) tai käyttäjätarinoina.
--   Lyhyt kuvaus käyttötapauksista tai käyttäjätarinat
+Järjestelmässä on perustason käyttäjiä sekä admin-tason käyttäjiä. Lipunmyynnissä työskentelevillä myyjillä on peruskäyttäjän oikeudet, joilla voi hoitaa ja peruuttaa myyntitapahtumia, tulostaa lippuja sekä tarkastella ennakkomyyntien ajankohtia. Myymäläpäälliköllä sekä yrityksen johtoryhmän jäsenillä on admin-tason oikeudet, joilla voi peruskäyttäjän oikeuksien lisäksi lisätä uusia tapahtumia, hallinnoida ja tarkastella tapahtuman tietoja sekä tarkastella myyntiraportteja.
 
-Kuvauksissa kannattaa harkita, mikä on toteuttajalle ja asiakkaalle oleellista
-tietoa ja keskittyä siihen.
+### Käyttötapauskaavio 
+
+![Käyttötapauskaavio](documents/kayttajaroolit.png)
+
+### Käyttötapausten kuvaus
+
+Järjestelmän olennaisin tehtävä on myydä sekä tulostaa asiakkaalle lippuja. Myyntitapahtuman ollakseen onnistunut tarvitsee tähän tietenkin tukevia toimintoja, kuten virheellisten myyntitapahtumien peruutuksen ja hinnan hakemisen tietokannasta. Lisäksi, jotta ylimääräiset liput saadaan myytyä tulee ne voida tulostaa tapahtumassa ovelta myytäväksi. Jotta on lippuja mitä myydä tapahtumia tulee tietenkin myös voida luoda tapahtumia järjestelmään.
+
+Yritystoimintaa ylläpitäville tahoille on tärkeää saada tietoa tapahtumista esimerkiksi yrityksen talouden hoitamisen vuoksi, joten järjestelmästä tulee pystyä näkemään tapahtumien tietoja kuten myytyjen lippujen määrää. Lisäksi mahdollisissa muutostilanteissa tulee tapahtuman tietoja pystyä muokkaamaan, jotta järjestelmän tieto ei ole virheellistä.
 
 ## Käyttöliittymä
 
