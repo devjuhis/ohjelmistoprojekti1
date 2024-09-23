@@ -77,6 +77,16 @@ attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän t
 > lippu_id | int FK | Viittaus lippuun [lippu](#Lippu)-taulussa
 > maara | int | Lipun määrä 1 tai -1
 
+> ### _Hinnasto_
+> _Hinnasto-taulu sisältää tapahtuman hinnastoluokat. Tapahtumalla voi olla useita hintaluokkia, mutta hintaluokka voi kuulua vain yhteen tapahtumaan._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> hinnasto_id | int PK | Erittelyn id
+> maksutapahtuma_id | int FK | Viittaus maksutapahtumaan [maksutapahtuma](#Maksutapahtuma)-taulussa
+> lippu_id | int FK | Viittaus lippuun [lippu](#Lippu)-taulussa
+> maara | int | Lipun määrä 1 tai -1
+
 ## Tekninen kuvaus
 
 Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset
