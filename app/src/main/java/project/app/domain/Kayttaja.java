@@ -9,9 +9,9 @@ import jakarta.persistence.Id;
 public class Kayttaja {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long kayttaja_id;
-    
+
     private String etunimi;
 
     private String sukunimi;
@@ -22,12 +22,12 @@ public class Kayttaja {
 
     private String oikeus;
 
-    //Tyhjä konstruktori
+    // Tyhjä konstruktori
     public Kayttaja() {
     }
 
-    //Konstruktori arvoilla
-    public Kayttaja(long kayttaja_id, String etunimi, String sukunimi, String salasana, String kayttajatunnus,
+    // Konstruktori arvoilla
+    public Kayttaja(String etunimi, String sukunimi, String salasana, String kayttajatunnus,
             String oikeus) {
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
@@ -36,7 +36,7 @@ public class Kayttaja {
         this.oikeus = oikeus;
     }
 
-    //Getterit ja setterit
+    // Getterit ja setterit
     public long getKayttaja_id() {
         return kayttaja_id;
     }
@@ -85,15 +85,11 @@ public class Kayttaja {
         this.oikeus = oikeus;
     }
 
-    //ToString
+    // ToString
     @Override
     public String toString() {
         return "Kayttaja [kayttaja_id=" + kayttaja_id + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi
                 + ", salasana=" + salasana + ", kayttajatunnus=" + kayttajatunnus + ", oikeus=" + oikeus + "]";
     }
 
-    
-
-    
 }
-
