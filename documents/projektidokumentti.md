@@ -42,7 +42,7 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 [Luokkakaavio](ticketguru_luokkakaavo.pdf)
 
 > ### _Tapahtuma_
-> _Tapahtuma-taulu sisältää myynnissä olevat tapahtumat. Tapahtumaan voi olla monia myytyjä lippuja, mutta lipun tapahtumia voi olla vain yksi._
+> _Tapahtuma-taulu sisältää myynnissä olevat tapahtumat. Tapahtumaan voi olla monia myytyjä lippuja, mutta lipun tapahtumia voi olla vain yksi. Manager/admin luo uusia tapahtumia myytäväksi._
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
