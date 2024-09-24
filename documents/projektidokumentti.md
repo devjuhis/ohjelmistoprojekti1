@@ -82,11 +82,11 @@ attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän t
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
-> hinnasto_id | int PK | Erittelyn id
-> maksutapahtuma_id | int FK | Viittaus maksutapahtumaan [maksutapahtuma](#Maksutapahtuma)-taulussa
-> lippu_id | int FK | Viittaus lippuun [lippu](#Lippu)-taulussa
-> maara | int | Lipun määrä 1 tai -1
->
+> hinnasto_id | int PK | Hinnaston id
+> tapahtuma_id | int FK | Viittaus tapahtumaan [tapahtuma](#Tapahtuma)-taulussa
+> hintaluokka | varchar(30) | Hintaluokka esim. opiskelija
+> hinta | double | Hinta
+
 >  ### _Lippu_
 > _Lippu-taulu sisältää lipun tiedot. Lippu taulu yhdistyy Tapahtuma ja Hinnasto tauluihin. Yhdellä lipulla on yksi hinta ja yksi tapahtuma._
 >
