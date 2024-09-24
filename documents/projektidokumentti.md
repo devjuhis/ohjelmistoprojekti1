@@ -86,6 +86,16 @@ attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän t
 > maksutapahtuma_id | int FK | Viittaus maksutapahtumaan [maksutapahtuma](#Maksutapahtuma)-taulussa
 > lippu_id | int FK | Viittaus lippuun [lippu](#Lippu)-taulussa
 > maara | int | Lipun määrä 1 tai -1
+>
+>  ### _Lippu_
+> _Lippu-taulu sisältää lipun tiedot. Lippu taulu yhdistyy Tapahtuma ja Hinnasto tauluihin. Yhdellä lipulla on yksi hinta ja yksi tapahtuma._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> lippu_id | int PK | lipun id
+> tapahtuma_id | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
+> hinnasto_id | int FK | Viittaus hinnastoon [Hinnasto](#Hinnasto)-taulussa
+> kaytetty | int | Lippu on joko käyttämätön -> 0 tai käytetty ->1
 
 ## Tekninen kuvaus
 
