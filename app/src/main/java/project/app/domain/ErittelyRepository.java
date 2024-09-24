@@ -1,5 +1,7 @@
 package project.app.domain;
 
-public interface ErittelyRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface ErittelyRepository extends CrudRepository<Erittely, Long> {
 
 }
