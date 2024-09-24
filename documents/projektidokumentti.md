@@ -46,16 +46,6 @@ Lisäksi kukin järjestelmän tietoelementti ja sen attribuutit kuvataan
 tietohakemistossa. Tietohakemisto tarkoittaa yksinkertaisesti vain jokaisen elementin (taulun) ja niiden
 attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän tyyliin:
 
-> ### _Tilit_
-> _Tilit-taulu sisältää käyttäjätilit. Käyttäjällä voi olla monta tiliä. Tili kuuluu aina vain yhdelle käyttäjälle._
->
-> Kenttä | Tyyppi | Kuvaus
-> ------ | ------ | ------
-> id | int PK | Tilin id
-> nimimerkki | varchar(30) |  Tilin nimimerkki
-> avatar | int FK | Tilin avatar, viittaus [avatar](#Avatar)-tauluun
-> kayttaja | int FK | Viittaus käyttäjään [käyttäjä](#Kayttaja)-taulussa
-
 > ### _Maksutapahtuma_
 > _Maksutapahtuma-taulu sisältää käyttäjätilit. Maksutapahtumalla voi olla monta erittelyä. Erittely kuuluu aina vain yhdelle maksutapahtumalle. Maksutapahtumalla voi olla yksi käyttäjä. Käyttäjällä voi olla useita maksutapahtumia._
 >
@@ -92,10 +82,22 @@ attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän t
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
-> lippu_id | int PK | lipun id
+> lippu_id | int PK | Lipun id
 > tapahtuma_id | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
 > hinnasto_id | int FK | Viittaus hinnastoon [Hinnasto](#Hinnasto)-taulussa
 > kaytetty | int | Lippu on joko käyttämätön -> 0 tai käytetty ->1
+
+>  ### _Käyttäjä_
+> _Käyttäjä-taulu sisältää ohjelman käyttäjien tiedot. Ohjelman käyttäjiä ovat esimerkiksi myyjä ja manageri._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> kayttaja_id | int PK | Käyttäjän id
+> etunimi | varchar(30) | Ohjelmaa käyttävän henkilön etunimi
+> sukunimi | varchar(30) | Ohjelmaa käyttävän henkilön sukunimi
+> salasana | varchar(256) | Ohjelmaa käyttävän henkilön tunnuksen salasana
+> kayttajatunnus | varchar(30) | Ohjelmaa käyttävän henkilön tunnuksen käyttäjätunnus
+> oikeus | varchar(30) | Ohjelmaa käyttävän henkilön oikeudet, peruskäyttäjä tai admin
 
 ## Tekninen kuvaus
 
