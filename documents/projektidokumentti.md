@@ -39,7 +39,7 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 ## Tietokanta
 
 ### Luokkakaavio
-[Luokkakaavio](ticketguru luokkakaavo.pdf)
+[Luokkakaavio](documents/ticketguru luokkakaavo.pdf)
 
 > ### _Maksutapahtuma_
 > _Maksutapahtuma-taulu sisältää käyttäjätilit. Maksutapahtumalla voi olla monta erittelyä. Erittely kuuluu aina vain yhdelle maksutapahtumalle. Maksutapahtumalla voi olla yksi käyttäjä. Käyttäjällä voi olla useita maksutapahtumia._
