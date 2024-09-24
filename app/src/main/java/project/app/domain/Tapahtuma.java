@@ -15,6 +15,7 @@ public class Tapahtuma {
     @Column(length = 60)
     private String paikka;
 
+    @Column(length = 500)
     private String kuvaus;
 
     private int lippumaara;
