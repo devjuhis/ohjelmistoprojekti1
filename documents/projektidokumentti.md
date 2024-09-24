@@ -41,6 +41,18 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 ### Luokkakaavio
 [Luokkakaavio](ticketguru_luokkakaavo.pdf)
 
+> ### _Tapahtuma_
+> _Tapahtuma-taulu sisältää myynnissä olevat tapahtumat. Tapahtumaan voi olla monia myytyjä lippuja, mutta lipun tapahtumia voi olla vain yksi._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> tapahtuma_id | int PK | Tapahtuman id
+> aika | date | Tapahtuman päivämäärä
+> paikka | varchar(60) | Tapahtuman sijainti
+> kuvaus | varchar(500) | Tapahtuman kuvaus
+> lippumaara | int | Kuinka paljon lippuja on myynnissä
+> ennakkomyynti | date | Päivämäärä, jolloin lippujen ennakkomyynti loppuu
+
 > ### _Maksutapahtuma_
 > _Maksutapahtuma-taulu sisältää käyttäjätilit. Maksutapahtumalla voi olla monta erittelyä. Erittely kuuluu aina vain yhdelle maksutapahtumalle. Maksutapahtumalla voi olla yksi käyttäjä. Käyttäjällä voi olla useita maksutapahtumia._
 >
