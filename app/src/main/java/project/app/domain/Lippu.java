@@ -20,7 +20,7 @@ public class Lippu {
 
     @OneToOne
     @JoinColumn(name = "tapahtuma_id", nullable = false)
-    private Tapahtuma tapahtuma;
+    private Maksutapahtuma tapahtuma;
 
     @OneToOne
     @JoinColumn(name = "hinnasto_id")
@@ -30,7 +30,7 @@ public class Lippu {
     private int kaytetty = 0;
 
     // getterit ja setterit
-    public int getLippuId() {
+    public long getLippuId() {
         return lippu_id;
     }
 
@@ -38,11 +38,11 @@ public class Lippu {
         this.lippu_id = lippu_id;
     }
 
-    public Tapahtuma getTapahtuma() {
+    public Maksutapahtuma getTapahtuma() {
         return tapahtuma;
     }
 
-    public void setTapahtuma(Tapahtuma tapahtuma) {
+    public void setTapahtuma(Maksutapahtuma tapahtuma) {
         this.tapahtuma = tapahtuma;
     }
 

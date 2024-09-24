@@ -20,7 +20,7 @@ public class Hinnasto {
     //FK erittely_id
     @ManyToOne
     @JoinColumn(name = "tapahtuma_id", nullable = false)
-    private Tapahtuma tapahtuma;
+    private Maksutapahtuma tapahtuma;
 
     @Column (length = 30)
     private String hintaluokka;
