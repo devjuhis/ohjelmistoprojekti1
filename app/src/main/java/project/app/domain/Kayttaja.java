@@ -29,7 +29,6 @@ public class Kayttaja {
     //Konstruktori arvoilla
     public Kayttaja(long kayttaja_id, String etunimi, String sukunimi, String salasana, String kayttajatunnus,
             String oikeus) {
-        this.kayttaja_id = kayttaja_id;
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
         this.salasana = salasana;
