@@ -2,6 +2,6 @@ package project.app.domain;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface MaksutapahtumaRepository extends CrudRepository<Erittely, Long> {
+public interface MaksutapahtumaRepository extends CrudRepository<Maksutapahtuma, Long> {
 
 }

@@ -1,5 +1,8 @@
 package project.app.domain;
 
-public interface HinnastoRepository {
+import org.springframework.data.repository.CrudRepository;
 
+public interface HinnastoRepository extends CrudRepository<Hinnasto, Long> {
+
+    Hinnasto findByHinnastoid(long hinnastoid);
 }

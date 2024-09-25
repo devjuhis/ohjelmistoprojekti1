@@ -8,7 +8,7 @@ public class Tapahtuma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long tapahtuma_id;
+    private long tapahtumaid;
 
     private LocalDate aika;
 
@@ -33,12 +33,12 @@ public class Tapahtuma {
         this.ennakkomyynti = ennakkomyynti;
     }
 
-    public long getTapahtuma_id() {
-        return tapahtuma_id;
+    public long getTapahtumaid() {
+        return tapahtumaid;
     }
 
     public void setTapahtuma_id(long tapahtuma_id) {
-        this.tapahtuma_id = tapahtuma_id;
+        this.tapahtumaid = tapahtuma_id;
     }
 
     public LocalDate getAika() {
@@ -83,7 +83,7 @@ public class Tapahtuma {
 
     @Override
     public String toString() {
-        return "Tapahtuma [tapahtuma_id=" + tapahtuma_id + ", aika=" + aika + ", paikka=" + paikka + ", kuvaus="
+        return "Tapahtuma [tapahtuma_id=" + tapahtumaid + ", aika=" + aika + ", paikka=" + paikka + ", kuvaus="
                 + kuvaus + ", lippumaara=" + lippumaara + ", ennakkomyynti=" + ennakkomyynti + "]";
     }
 }

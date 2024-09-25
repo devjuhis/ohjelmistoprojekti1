@@ -13,7 +13,7 @@ public class Erittely {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long erittely_id;
+    private long erittelyid;
     private Integer maara;
 //FK maksutapahtuma_id 
     @ManyToOne
@@ -36,13 +36,13 @@ public class Erittely {
     }
 
     // getterit ja setterit
-    public long getErittely_id() {
-        return erittely_id;
+    public long getErittelyid() {
+        return erittelyid;
     }
 
 
-    public void setErittely_id(long erittely_id) {
-        this.erittely_id = erittely_id;
+    public void setErittelyid(long erittely_id) {
+        this.erittelyid = erittely_id;
     }
 
 
@@ -77,7 +77,7 @@ public class Erittely {
 
     @Override
     public String toString() {
-        return "Erittely [erittely_id=" + erittely_id + ", maara=" + maara + ", maksutapahtuma=" + maksutapahtuma
+        return "Erittely [erittely_id=" + erittelyid + ", maara=" + maara + ", maksutapahtuma=" + maksutapahtuma
                 + ", lippu=" + lippu + "]";
     }
 

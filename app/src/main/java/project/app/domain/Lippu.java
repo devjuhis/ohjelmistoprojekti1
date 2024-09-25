@@ -16,11 +16,11 @@ import jakarta.persistence.OneToOne;
 public class Lippu {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private long lippu_id;
+    private long lippuid;
 
     @OneToOne
     @JoinColumn(name = "tapahtuma_id", nullable = false)
-    private Maksutapahtuma tapahtuma;
+    private Tapahtuma tapahtuma;
 
     @OneToOne
     @JoinColumn(name = "hinnasto_id")
@@ -29,20 +29,29 @@ public class Lippu {
     @Column(nullable = true)
     private int kaytetty = 0;
 
+    public Lippu() {
+    }
+
+    public Lippu(Tapahtuma tapahtuma, Hinnasto hinnasto, int kaytetty) {
+        this.tapahtuma = tapahtuma;
+        this.hinnasto = hinnasto;
+        this.kaytetty = kaytetty;
+    }
+
     // getterit ja setterit
     public long getLippuId() {
-        return lippu_id;
+        return lippuid;
     }
 
     public void setLippuId(int lippu_id) {
-        this.lippu_id = lippu_id;
+        this.lippuid = lippu_id;
     }
 
-    public Maksutapahtuma getTapahtuma() {
+    public Tapahtuma getTapahtuma() {
         return tapahtuma;
     }
 
-    public void setTapahtuma(Maksutapahtuma tapahtuma) {
+    public void setTapahtuma(Tapahtuma tapahtuma) {
         this.tapahtuma = tapahtuma;
     }
 
@@ -61,4 +70,11 @@ public class Lippu {
     public void setKaytetty(int kaytetty) {
         this.kaytetty = kaytetty;
     }
+
+    @Override
+    public String toString() {
+        return "Lippu [lippuid=" + lippuid + ", tapahtuma=" + tapahtuma + ", hinnasto=" + hinnasto + ", kaytetty="
+                + kaytetty + "]";
+    }
+    
 }

@@ -16,7 +16,7 @@ public class Maksutapahtuma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long maksutapahtuma_id;
+    private long maksutapahtumaid;
     private double hintayhteensa;
     private LocalDateTime aikaleima;
     
@@ -41,13 +41,13 @@ public class Maksutapahtuma {
     }
 
     // getterit ja setterit
-    public long getMaksutapahtuma_id() {
-        return maksutapahtuma_id;
+    public long getMaksutapahtumaid() {
+        return maksutapahtumaid;
     }
 
 
     public void setMaksutapahtuma_id(long maksutapahtuma_id) {
-        this.maksutapahtuma_id = maksutapahtuma_id;
+        this.maksutapahtumaid = maksutapahtuma_id;
     }
 
 
@@ -93,7 +93,7 @@ public class Maksutapahtuma {
     // ToString ilman erittelyt-listaa
     @Override
     public String toString() {
-        return "Maksutapahtuma [maksutapahtuma_id=" + maksutapahtuma_id + ", hintayhteensa=" + hintayhteensa
+        return "Maksutapahtuma [maksutapahtuma_id=" + maksutapahtumaid + ", hintayhteensa=" + hintayhteensa
                 + ", aikaleima=" + aikaleima + ", kayttaja=" + kayttaja + "]";
     }
 
