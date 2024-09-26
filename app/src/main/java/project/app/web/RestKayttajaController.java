@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.app.domain.Kayttaja;
@@ -36,9 +37,12 @@ public class RestKayttajaController {
 
     // REST haetaan käyttäjä id:llä
     @GetMapping("/kayttajat/{id}")
-    public Optional<Kayttaja> getKayttajaById(@PathVariable("id") Long id) {
+    public ResponseEntity<Kayttaja> getKayttajaById(@PathVariable("id") Long id) {
         logger.info("Fetching kayttaja with id: {}", id);
-        return repository.findById(id);
+        Optional<Kayttaja> kayttaja = repository.findById(id);
+
+        return kayttaja.map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // REST luodaan uusi käyttäjä
@@ -50,7 +54,7 @@ public class RestKayttajaController {
 
     // REST muokataan käyttäjän tietoja
     @PatchMapping("/kayttajat/{id}")
-    public Kayttaja ediKayttaja(@PathVariable("id") Long id, @RequestBody Kayttaja ediKayttaja) {
+    public ResponseEntity<Kayttaja> editKayttaja (@PathVariable("id") Long id, @RequestBody Kayttaja ediKayttaja) {
 
         logger.info("Editing kayttaja with id: {}", id);
 
@@ -78,19 +82,26 @@ public class RestKayttajaController {
             oldkayttaja.setOikeus(ediKayttaja.getOikeus());;
         }
 
-        return repository.save(oldkayttaja);
+        return ResponseEntity.ok(oldkayttaja);
 
         } else {
-        //Tähän varmaan jotain parempaa validointia jossain kohti
-            return null;
+            return ResponseEntity.notFound().build();
         }
     }
     
     // REST poistetaan käyttäjä
     @DeleteMapping("/kayttajat/{id}")
-    public void deleteKayttajaById(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteKayttajaById(@PathVariable("id") Long id) {
         logger.info("Deleting kayttaja with id: {}", id);
-        repository.deleteById(id);
+
+        Optional<Kayttaja> kayttaja = repository.findById(id);
+
+        if (kayttaja.isPresent()) {
+            repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+              return ResponseEntity.notFound().build();
+        }
     }
     
 }
