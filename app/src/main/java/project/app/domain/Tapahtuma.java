@@ -10,6 +10,9 @@ public class Tapahtuma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long tapahtumaid;
 
+    @Column(length = 60)
+    private String nimi;
+
     private LocalDate aika;
 
     @Column(length = 60)
@@ -25,7 +28,8 @@ public class Tapahtuma {
     public Tapahtuma() {
     }
 
-    public Tapahtuma(LocalDate aika, String paikka, String kuvaus, int lippumaara, LocalDate ennakkomyynti) {
+    public Tapahtuma(String nimi, LocalDate aika, String paikka, String kuvaus, int lippumaara, LocalDate ennakkomyynti) {
+        this.nimi = nimi;
         this.aika = aika;
         this.paikka = paikka;
         this.kuvaus = kuvaus;
@@ -37,8 +41,16 @@ public class Tapahtuma {
         return tapahtumaid;
     }
 
-    public void setTapahtuma_id(long tapahtuma_id) {
-        this.tapahtumaid = tapahtuma_id;
+    public void setTapahtumaid(long tapahtumaid) {
+        this.tapahtumaid = tapahtumaid;
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
     }
 
     public LocalDate getAika() {
@@ -83,7 +95,7 @@ public class Tapahtuma {
 
     @Override
     public String toString() {
-        return "Tapahtuma [tapahtuma_id=" + tapahtumaid + ", aika=" + aika + ", paikka=" + paikka + ", kuvaus="
-                + kuvaus + ", lippumaara=" + lippumaara + ", ennakkomyynti=" + ennakkomyynti + "]";
+        return "Tapahtuma [tapahtumaid=" + tapahtumaid + ", nimi=" + nimi + ", aika=" + aika + ", paikka=" + paikka
+                + ", kuvaus=" + kuvaus + ", lippumaara=" + lippumaara + ", ennakkomyynti=" + ennakkomyynti + "]";
     }
 }

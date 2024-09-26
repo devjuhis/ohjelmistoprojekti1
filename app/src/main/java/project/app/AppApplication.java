@@ -37,7 +37,7 @@ public class AppApplication {
 			LocalDate myynninloppu = LocalDate.of(2024, 12, 14);
 			LocalDateTime aikaleima = LocalDateTime.now();
 
-			tapahtumarepo.save(new Tapahtuma(aika, "Olympiastadion", "Hyvä tapahtuma :D", 600, myynninloppu));
+			tapahtumarepo.save(new Tapahtuma("Uusi tapahtuma", aika, "Olympiastadion", "Hyvä tapahtuma :D", 600, myynninloppu));
 			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaid(1), "opiskelija", 12));
 			kayttajarepo.save(new Kayttaja("matti", "esimerkki", "salasana", "matti123", "ADMIN"));
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaid(1), hintarepo.findByHinnastoid(1), 0));
