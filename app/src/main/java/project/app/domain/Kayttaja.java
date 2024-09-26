@@ -10,7 +10,7 @@ public class Kayttaja {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long kayttajaid;
+    private long kayttajaId;
 
     private String etunimi;
 
@@ -38,11 +38,11 @@ public class Kayttaja {
 
     // Getterit ja setterit
     public long getKayttajaid() {
-        return kayttajaid;
+        return kayttajaId;
     }
 
-    public void setKayttajaid(long kayttaja_id) {
-        this.kayttajaid = kayttaja_id;
+    public void setKayttajaid(long kayttajaId) {
+        this.kayttajaId = kayttajaId;
     }
 
     public String getEtunimi() {
@@ -88,7 +88,7 @@ public class Kayttaja {
     // ToString
     @Override
     public String toString() {
-        return "Kayttaja [kayttaja_id=" + kayttajaid + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi
+        return "Kayttaja [kayttaja_id=" + kayttajaId + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi
                 + ", salasana=" + salasana + ", kayttajatunnus=" + kayttajatunnus + ", oikeus=" + oikeus + "]";
     }
 

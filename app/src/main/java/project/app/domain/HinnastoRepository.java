@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface HinnastoRepository extends CrudRepository<Hinnasto, Long> {
 
-    Hinnasto findByHinnastoid(long hinnastoid);
+    Hinnasto findByHinnastoId(long hinnastoid);
 }

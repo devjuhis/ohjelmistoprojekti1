@@ -38,14 +38,19 @@ public class AppApplication {
 			LocalDateTime aikaleima = LocalDateTime.now();
 
 			tapahtumarepo.save(new Tapahtuma("Uusi tapahtuma", aika, "Olympiastadion", "Hyvä tapahtuma :D", 600, myynninloppu));
-			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaid(1), "opiskelija", 12));
+			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "opiskelija", 12));
+			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "elakelainen", 11));
 			kayttajarepo.save(new Kayttaja("matti", "esimerkki", "salasana", "matti123", "ADMIN"));
-			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaid(1), hintarepo.findByHinnastoid(1), 0));
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1), 0, 1));
 
-			//Näissä virhe logiikan kanssa
 			//erittelyrepo.save(new Erittely(1, null, lippurepo.findByLippuid(1)));
-			//maksurepo.save(new Maksutapahtuma(55, aikaleima, erittelyrepo.findByLippu(lippurepo.findByLippuid(1)), kayttajarepo.findByKayttajatunnus("matti123")));
+			maksurepo.save(new Maksutapahtuma(55, aikaleima, kayttajarepo.findByKayttajatunnus("matti123")));
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1), maksurepo.findByMaksutapahtumaId(1),0, 1));
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1), maksurepo.findByMaksutapahtumaId(1),0, 1));
 
+			Lippu muutettavaLippu = lippurepo.findByLippuId(1);
+			muutettavaLippu.setMaksutapahtuma(maksurepo.findByMaksutapahtumaId(1));
+			lippurepo.save(muutettavaLippu);
 		};
 	}
 

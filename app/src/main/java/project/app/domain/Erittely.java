@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -14,13 +16,16 @@ public class Erittely {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long erittelyid;
+
     private Integer maara;
-//FK maksutapahtuma_id 
+
+    //FK maksutapahtuma_id 
     @ManyToOne
     @JoinColumn(name = "maksutapahtuma_id")
     private Maksutapahtuma maksutapahtuma;
-//FK lippu_id 
-    @ManyToOne
+
+    //FK lippu_id 
+    @OneToOne
     @JoinColumn(name = "lippu_id")
     private Lippu lippu;
 

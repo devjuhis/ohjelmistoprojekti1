@@ -8,7 +8,7 @@ public class Tapahtuma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long tapahtumaid;
+    private long tapahtumaId;
 
     @Column(length = 60)
     private String nimi;
@@ -37,12 +37,12 @@ public class Tapahtuma {
         this.ennakkomyynti = ennakkomyynti;
     }
 
-    public long getTapahtumaid() {
-        return tapahtumaid;
+    public long getTapahtumaId() {
+        return tapahtumaId;
     }
 
-    public void setTapahtumaid(long tapahtumaid) {
-        this.tapahtumaid = tapahtumaid;
+    public void setTapahtumaId(long tapahtumaId) {
+        this.tapahtumaId = tapahtumaId;
     }
 
     public String getNimi() {
@@ -95,7 +95,7 @@ public class Tapahtuma {
 
     @Override
     public String toString() {
-        return "Tapahtuma [tapahtumaid=" + tapahtumaid + ", nimi=" + nimi + ", aika=" + aika + ", paikka=" + paikka
+        return "Tapahtuma [tapahtumaid=" + tapahtumaId + ", nimi=" + nimi + ", aika=" + aika + ", paikka=" + paikka
                 + ", kuvaus=" + kuvaus + ", lippumaara=" + lippumaara + ", ennakkomyynti=" + ennakkomyynti + "]";
     }
 }
