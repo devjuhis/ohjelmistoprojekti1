@@ -1,4 +1,4 @@
-# Base-URL
+# Rajapinnan kuvaus
 
 Lopullisen toimivan palvelun base-URL tulee olemaan 'http://ticketguru.com'.
 
