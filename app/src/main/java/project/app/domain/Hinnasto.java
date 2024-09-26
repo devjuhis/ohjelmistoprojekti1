@@ -15,7 +15,7 @@ public class Hinnasto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long hinnastoid;
+    private long hinnastoId;
     
     //FK erittely_id
     @ManyToOne
@@ -37,11 +37,11 @@ public class Hinnasto {
     }
 
     public long getHinnastoid() {
-        return hinnastoid;
+        return hinnastoId;
     }
 
-    public void setHinnastoid(long hinnasto_id) {
-        this.hinnastoid = hinnasto_id;
+    public void setHinnastoid(long hinnastoId) {
+        this.hinnastoId = hinnastoId;
     }
 
     public Tapahtuma getTapahtuma() {
@@ -70,7 +70,7 @@ public class Hinnasto {
 
     @Override
     public String toString() {
-        return "Hinnasto [hinnasto_id=" + hinnastoid + ", tapahtuma=" + tapahtuma + ", hintaluokka=" + hintaluokka
+        return "Hinnasto [hinnasto_id=" + hinnastoId + ", tapahtuma=" + tapahtuma + ", hintaluokka=" + hintaluokka
                 + ", hinta=" + hinta + "]";
     }
     

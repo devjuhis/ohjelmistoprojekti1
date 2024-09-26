@@ -16,16 +16,17 @@ public class Maksutapahtuma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long maksutapahtumaid;
+    private long maksutapahtumaId;
     private double hintayhteensa;
     private LocalDateTime aikaleima;
     
-//FK erittely_id
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "maksutapahtuma")
-    private List<Erittely> erittelyt;
-//FK kayttaja_id
+    //FK erittely_id
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "maksutapahtuma")
+    //private List<Erittely> erittelyt;
+
+    //FK kayttaja_id
     @ManyToOne
-    @JoinColumn(name = "kayttaja_id")
+    @JoinColumn(name = "kayttajaId")
     private Kayttaja kayttaja;
 
     // Parametriton konstruktori
@@ -33,21 +34,21 @@ public class Maksutapahtuma {
     }
 
     // Parametrillinen konstruktori
-    public Maksutapahtuma(double hintayhteensa, LocalDateTime aikaleima, List<Erittely> erittelyt, Kayttaja kayttaja) {
+    public Maksutapahtuma(double hintayhteensa, LocalDateTime aikaleima, /*List<Erittely> erittelyt,*/ Kayttaja kayttaja) {
         this.hintayhteensa = hintayhteensa;
         this.aikaleima = aikaleima;
-        this.erittelyt = erittelyt;
+        //this.erittelyt = erittelyt;
         this.kayttaja = kayttaja;
     }
 
     // getterit ja setterit
-    public long getMaksutapahtumaid() {
-        return maksutapahtumaid;
+    public long getMaksutapahtumaId() {
+        return maksutapahtumaId;
     }
 
 
-    public void setMaksutapahtuma_id(long maksutapahtuma_id) {
-        this.maksutapahtumaid = maksutapahtuma_id;
+    public void setMaksutapahtuma_id(long maksutapahtumaId) {
+        this.maksutapahtumaId = maksutapahtumaId;
     }
 
 
@@ -71,14 +72,14 @@ public class Maksutapahtuma {
     }
 
 
-    public List<Erittely> getErittelyt() {
+    /*public List<Erittely> getErittelyt() {
         return erittelyt;
-    }
+    }*/
 
 
-    public void setErittelyt(List<Erittely> erittelyt) {
+    /*public void setErittelyt(List<Erittely> erittelyt) {
         this.erittelyt = erittelyt;
-    }
+    }*/
 
 
     public Kayttaja getKayttaja() {
@@ -93,13 +94,7 @@ public class Maksutapahtuma {
     // ToString ilman erittelyt-listaa
     @Override
     public String toString() {
-        return "Maksutapahtuma [maksutapahtuma_id=" + maksutapahtumaid + ", hintayhteensa=" + hintayhteensa
+        return "Maksutapahtuma [maksutapahtuma_id=" + maksutapahtumaId + ", hintayhteensa=" + hintayhteensa
                 + ", aikaleima=" + aikaleima + ", kayttaja=" + kayttaja + "]";
     }
-
-    
-    
-    
-    
-
 }
