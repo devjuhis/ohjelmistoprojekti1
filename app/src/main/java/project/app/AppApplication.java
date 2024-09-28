@@ -27,28 +27,34 @@ public class AppApplication {
 		SpringApplication.run(AppApplication.class, args);
 	}
 
-
 	@Bean
-	public CommandLineRunner ticketGuruDemo(ErittelyRepository erittelyrepo, HinnastoRepository hintarepo, 
-	KayttajaRepository kayttajarepo, LippuRepository lippurepo, MaksutapahtumaRepository maksurepo, TapahtumaRepository tapahtumarepo) {
+	public CommandLineRunner ticketGuruDemo(ErittelyRepository erittelyrepo, HinnastoRepository hintarepo,
+			KayttajaRepository kayttajarepo, LippuRepository lippurepo, MaksutapahtumaRepository maksurepo,
+			TapahtumaRepository tapahtumarepo) {
 		return (args) -> {
 
-			LocalDate aika = LocalDate.of(2024, 10, 14);
-			LocalDate myynninloppu = LocalDate.of(2024, 12, 14);
+			LocalDate aika = LocalDate.of(2024, 12, 14);
+			LocalDate myynninloppu = LocalDate.of(2024, 12, 13);
 			LocalDateTime aikaleima = LocalDateTime.now();
 
-			tapahtumarepo.save(new Tapahtuma("Uusi tapahtuma", aika, "Olympiastadion", "Hyvä tapahtuma :D", 600, myynninloppu));
-			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaid(1), "opiskelija", 12));
+			tapahtumarepo.save(
+					new Tapahtuma("Uusi tapahtuma", aika, "Olympiastadion", "Hyvä tapahtuma :D", 600, myynninloppu));
+			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "opiskelija", 12));
+			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "elakelainen", 11));
 			kayttajarepo.save(new Kayttaja("matti", "esimerkki", "salasana", "matti123", "ADMIN"));
-			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaid(1), hintarepo.findByHinnastoid(1), 0));
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1), 0, 1));
 
-			//Näissä virhe logiikan kanssa
-			//erittelyrepo.save(new Erittely(1, null, lippurepo.findByLippuid(1)));
-			//maksurepo.save(new Maksutapahtuma(55, aikaleima, erittelyrepo.findByLippu(lippurepo.findByLippuid(1)), kayttajarepo.findByKayttajatunnus("matti123")));
+			// erittelyrepo.save(new Erittely(1, null, lippurepo.findByLippuid(1)));
+			maksurepo.save(new Maksutapahtuma(55, aikaleima, kayttajarepo.findByKayttajatunnus("matti123")));
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
+					maksurepo.findByMaksutapahtumaId(1), 0, 1));
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
+					maksurepo.findByMaksutapahtumaId(1), 0, 1));
 
+			Lippu muutettavaLippu = lippurepo.findByLippuId(1);
+			muutettavaLippu.setMaksutapahtuma(maksurepo.findByMaksutapahtumaId(1));
+			lippurepo.save(muutettavaLippu);
 		};
 	}
-
-
 
 }
