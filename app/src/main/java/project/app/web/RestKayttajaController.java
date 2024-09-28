@@ -42,7 +42,7 @@ public class RestKayttajaController {
         Optional<Kayttaja> kayttaja = repository.findById(id);
 
         return kayttaja.map(ResponseEntity::ok)
-        .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // REST luodaan uusi käyttäjä
@@ -54,41 +54,43 @@ public class RestKayttajaController {
 
     // REST muokataan käyttäjän tietoja
     @PatchMapping("/kayttajat/{id}")
-    public ResponseEntity<Kayttaja> editKayttaja (@PathVariable("id") Long id, @RequestBody Kayttaja ediKayttaja) {
+    public ResponseEntity<Kayttaja> editKayttaja(@PathVariable("id") Long id, @RequestBody Kayttaja ediKayttaja) {
 
         logger.info("Editing kayttaja with id: {}", id);
 
         Optional<Kayttaja> optionalKayttaja = repository.findById(id);
         if (optionalKayttaja.isPresent()) {
             Kayttaja oldkayttaja = optionalKayttaja.get();
-        
 
-        if(ediKayttaja.getEtunimi() != null) {
-            oldkayttaja.setEtunimi(ediKayttaja.getEtunimi());
-        }
-        if(ediKayttaja.getSukunimi() != null) {
-            oldkayttaja.setSukunimi(ediKayttaja.getSukunimi());
-        }
+            if (ediKayttaja.getEtunimi() != null) {
+                oldkayttaja.setEtunimi(ediKayttaja.getEtunimi());
+            }
+            if (ediKayttaja.getSukunimi() != null) {
+                oldkayttaja.setSukunimi(ediKayttaja.getSukunimi());
+            }
 
-        if(ediKayttaja.getSalasana() != null) {
-            oldkayttaja.setSalasana(ediKayttaja.getSalasana());;
-        }
+            if (ediKayttaja.getSalasana() != null) {
+                oldkayttaja.setSalasana(ediKayttaja.getSalasana());
+                ;
+            }
 
-        if(ediKayttaja.getKayttajatunnus() != null) {
-            oldkayttaja.setKayttajatunnus(ediKayttaja.getKayttajatunnus());
-        }
+            if (ediKayttaja.getKayttajatunnus() != null) {
+                oldkayttaja.setKayttajatunnus(ediKayttaja.getKayttajatunnus());
+            }
 
-        if(ediKayttaja.getOikeus() != null) {
-            oldkayttaja.setOikeus(ediKayttaja.getOikeus());;
-        }
+            if (ediKayttaja.getOikeus() != null) {
+                oldkayttaja.setOikeus(ediKayttaja.getOikeus());
+                ;
+            }
 
-        return ResponseEntity.ok(oldkayttaja);
+            repository.save(oldkayttaja);
+            return ResponseEntity.ok(oldkayttaja);
 
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
     // REST poistetaan käyttäjä
     @DeleteMapping("/kayttajat/{id}")
     public ResponseEntity<Void> deleteKayttajaById(@PathVariable("id") Long id) {
@@ -100,8 +102,8 @@ public class RestKayttajaController {
             repository.deleteById(id);
             return ResponseEntity.noContent().build();
         } else {
-              return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
     }
-    
+
 }
