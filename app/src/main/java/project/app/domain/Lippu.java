@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Lippu {
@@ -20,7 +19,7 @@ public class Lippu {
     private Tapahtuma tapahtuma;
 
     @ManyToOne
-    @JoinColumn(name = "hinnasto_id")
+    @JoinColumn(name = "hinnastoId")
     private Hinnasto hinnasto;
 
     @ManyToOne

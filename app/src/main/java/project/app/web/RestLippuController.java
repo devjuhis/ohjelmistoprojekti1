@@ -52,7 +52,7 @@ public class RestLippuController {
         Optional<Tapahtuma> tapahtuma = Trepository.findById(tapahtumaId);
         
         if (tapahtuma.isPresent()) {
-            List<Lippu> liput = Lrepository.findByTapahtuma(tapahtuma.get()); // Hae liput tapahtumalle
+            List<Lippu> liput = Lrepository.findByTapahtuma(tapahtuma.get());
             return liput.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(liput);
         } else {
             return ResponseEntity.notFound().build(); // Palautetaan 404, jos tapahtumaa ei löydy
@@ -63,10 +63,8 @@ public class RestLippuController {
     @DeleteMapping("/liput/{id}")
     public ResponseEntity<Void> deleteLippuById(@PathVariable Long id) {
         logger.info("Deleting lippu with id: {}", id);
-        Optional<Lippu> lippu = Lrepository.findById(id);
-
-        if (lippu.isPresent()) {
-            Lrepository.delete(lippu.get());
+        if (Lrepository.existsById(id)) {
+            Lrepository.deleteById(id);
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
@@ -78,5 +76,22 @@ public class RestLippuController {
     public Lippu createLippu(@RequestBody Lippu lippu) {
         logger.info("Creating new lippu");
         return Lrepository.save(lippu);
+    }
+
+    // REST päivitetään lippu id:llä
+    @PutMapping("/liput/{id}")
+    public ResponseEntity<Lippu> updateLippu(@PathVariable Long id, @RequestBody Lippu updatedLippu) {
+        logger.info("Updating lippu with id: {}", id);
+
+        return Lrepository.findById(id)
+            .map(existingLippu -> {
+                existingLippu.setTapahtuma(updatedLippu.getTapahtuma());
+                existingLippu.setHinnasto(updatedLippu.getHinnasto());
+                existingLippu.setKaytetty(updatedLippu.getKaytetty());
+                existingLippu.setMaara(updatedLippu.getMaara());
+                Lrepository.save(existingLippu);
+                return ResponseEntity.ok(existingLippu);
+            })
+            .orElse(ResponseEntity.notFound().build());
     }
 }
