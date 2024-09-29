@@ -19,11 +19,11 @@ public class RestTapahtumaController {
     private static final Logger logger = LoggerFactory.getLogger(RestTapahtumaController.class);
 
     @Autowired
-    private TapahtumaRepository repository; 
+    private TapahtumaRepository repository;
 
     // REST haetaan kaikki tapahtumat
     @GetMapping("/tapahtumat")
-    public List<Tapahtuma> getAllTapahtumat() {	
+    public List<Tapahtuma> getAllTapahtumat() {
         logger.info("Fetching all tapahtumat");
         return (List<Tapahtuma>) repository.findAll();
     }
@@ -34,7 +34,50 @@ public class RestTapahtumaController {
         logger.info("Fetching tapahtuma with id: {}", id);
         Optional<Tapahtuma> tapahtuma = repository.findById(id);
         return tapahtuma.map(ResponseEntity::ok)
-                        .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // REST luodaan uusi taphtuma
+    @PostMapping("/tapahtumat")
+    public Tapahtuma createTapahtuma(@RequestBody Tapahtuma tapahtuma) {
+        logger.info("Creating new tapahtuma");
+        return repository.save(tapahtuma);
+    }
+
+    // REST päivitetään tapahtuma id:llä
+    @PutMapping("/tapahtumat/{id}")
+    public ResponseEntity<Tapahtuma> updateTapahtuma(@PathVariable Long id, @RequestBody Tapahtuma updatedTapahtuma) {
+        logger.info("Updating tapahtuma with id: {}", id);
+
+        Optional<Tapahtuma> tapahtuma = repository.findById(id);
+
+        if (tapahtuma.isPresent()) {
+            Tapahtuma existingTapahtuma = tapahtuma.get();
+
+            if (updatedTapahtuma.getNimi() != null) {
+                existingTapahtuma.setNimi(updatedTapahtuma.getNimi());
+            }
+            if (updatedTapahtuma.getAika() != null) {
+                existingTapahtuma.setAika(updatedTapahtuma.getAika());
+            }
+            if (updatedTapahtuma.getPaikka() != null) {
+                existingTapahtuma.setPaikka(updatedTapahtuma.getPaikka());
+            }
+            if (updatedTapahtuma.getKuvaus() != null) {
+                existingTapahtuma.setKuvaus(updatedTapahtuma.getKuvaus());
+            }
+            if (updatedTapahtuma.getLippumaara() != 0) {
+                existingTapahtuma.setLippumaara(updatedTapahtuma.getLippumaara());
+            }
+            if (updatedTapahtuma.getEnnakkomyynti() != null) {
+                existingTapahtuma.setEnnakkomyynti(updatedTapahtuma.getEnnakkomyynti());
+            }
+
+            repository.save(existingTapahtuma);
+            return ResponseEntity.ok(existingTapahtuma);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // REST poistetaan tapahtuma id:llä
@@ -50,12 +93,4 @@ public class RestTapahtumaController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    // REST luodaan uusi taphtuma
-    @PostMapping("/tapahtumat")
-    public Tapahtuma createTapahtuma(@RequestBody Tapahtuma tapahtuma) {
-        logger.info("Creating new tapahtuma");
-        return repository.save(tapahtuma);
-    }
 }
-
