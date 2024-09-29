@@ -16,8 +16,8 @@ Päivitä lipun määrä ja / tai kaytetty kenttää.
 
 ```json
 {
-    "kaytetty": [int],
-    "maara": [int]
+    "kaytetty": [ int ],
+    "maara": [ int ]
 }
 ```
 
