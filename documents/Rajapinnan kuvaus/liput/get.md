@@ -68,7 +68,7 @@ Näyttää tiedon yksittäisestä lipusta.
 
 ## Error Responses
 
-**Condition** : Käyttäjää ei ole olemassa annetulla ID:llä.
+**Condition** : Lippua ei ole olemassa annetulla ID:llä.
 
 **Code** : `404 NOT FOUND`
 
