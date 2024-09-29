@@ -78,20 +78,39 @@ public class RestLippuController {
         return Lrepository.save(lippu);
     }
 
-    // REST päivitetään lippu id:llä
+    // REST päivitetään tapahtuma id:llä
     @PutMapping("/liput/{id}")
-    public ResponseEntity<Lippu> updateLippu(@PathVariable Long id, @RequestBody Lippu updatedLippu) {
+    public ResponseEntity<Lippu> updateTapahtuma(@PathVariable Long id, @RequestBody Lippu updatedLippu) {
         logger.info("Updating lippu with id: {}", id);
 
-        return Lrepository.findById(id)
-            .map(existingLippu -> {
+        Optional<Lippu> lippu = Lrepository.findById(id);
+
+        if (lippu.isPresent()) {
+            Lippu existingLippu = lippu.get();
+
+            //voidaan poistaa mahdollisuus muokata tapahtumaa, hinnastoa ja maksutapahtumaa REST API:ssa 
+            //poistamalla ne tästä...
+
+            if (updatedLippu.getTapahtuma() != null) {
                 existingLippu.setTapahtuma(updatedLippu.getTapahtuma());
+            }
+            if (updatedLippu.getHinnasto() != null) {
                 existingLippu.setHinnasto(updatedLippu.getHinnasto());
+            }
+            if (updatedLippu.getMaksutapahtuma() != null) {
+                existingLippu.setMaksutapahtuma(updatedLippu.getMaksutapahtuma());
+            }
+            if (updatedLippu.getKaytetty() != 0) {
                 existingLippu.setKaytetty(updatedLippu.getKaytetty());
+            }
+            if (updatedLippu.getMaara() != 0) {
                 existingLippu.setMaara(updatedLippu.getMaara());
-                Lrepository.save(existingLippu);
-                return ResponseEntity.ok(existingLippu);
-            })
-            .orElse(ResponseEntity.notFound().build());
+            }
+
+            Lrepository.save(existingLippu);
+            return ResponseEntity.ok(existingLippu);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
