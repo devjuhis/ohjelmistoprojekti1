@@ -4,7 +4,7 @@ Poistaa valitun lipun, mikäli toiminnon tekevällä käyttäjällä on ADMIN-ta
 
 **URL** : `/api/liput/{id}`
 
-**URL Parameters** : `{id}`, jossa ID on poistettavan käyttäjän kayttajaId.
+**URL Parameters** : `{id}`, jossa ID on poistettavan lipun lippuId.
 
 **Method** : `DELETE`
 
