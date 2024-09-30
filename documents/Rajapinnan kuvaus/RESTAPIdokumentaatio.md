@@ -31,7 +31,7 @@ Endpointit käyttäjien hallintaan. Ainoastaan admin-tason käyttäjä voi halli
 * [Päivitä käyttäjän yhtä tai useampaa tietoa](kayttajat/patch.md) : `PATCH /api/kayttajat/{id}`
 * [Poista käyttäjä](accounts/delete.md) : `DELETE /api/kayttajat/{id}`
 
-* ### Lippujen hallinta
+### Lippujen hallinta
 
 Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita lippuja, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty.
 
