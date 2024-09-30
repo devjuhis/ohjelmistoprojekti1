@@ -68,6 +68,9 @@ public class RestHinnastoController {
             if (ediHinnasto.getHintaluokka() != null) {
                 oldHinnasto.setHintaluokka((ediHinnasto.getHintaluokka()));
             }
+            if (ediHinnasto.getHinta() != 0) {
+                oldHinnasto.setHinta(ediHinnasto.getHinta());
+            }
             
             hinnastoRepository.save(oldHinnasto);
             return ResponseEntity.ok(oldHinnasto);
@@ -82,9 +85,7 @@ public class RestHinnastoController {
     public ResponseEntity<Void> deleteHinnastoById(@PathVariable("id") Long id) {
         logger.info("Deleting Hinnasto with id: {}", id);
 
-        Optional<Hinnasto> Hinnasto = hinnastoRepository.findById(id);
-
-        if (Hinnasto.isPresent()) {
+        if (hinnastoRepository.existsById(id)) {
             hinnastoRepository.deleteById(id);
             return ResponseEntity.noContent().build();
         } else {
