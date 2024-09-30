@@ -41,3 +41,11 @@ Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita l
 * [Luo uusi lippu](liput/post.md) : `POST /api/liput`
 * [Päivitä lippua](liput/put.md) : `PUT /api/liput/{id}`
 * [Poista lippu](liput/delete.md) : `DELETE /api/liput/{id}`
+
+### Maksutapahtumien hallinta
+
+Endpointit maksutapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi hallita maksutapahtumia, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty.
+
+* [Näytä kaikki maksutapahtumat](maksutapahtumat/getAll.md) : `GET /api/maksutapahtuma`
+* [Näytä yksittäinen maksutapahtuma](maksutapahtumat/get.md) : `GET /api/maksutapahtumat/{id}`
+* [Näytä yksittäisen maksutapahtuman liput](maksutapahtumat/getTickets.md) : `GET /api/maksutapahtumat/{id}/liput`
