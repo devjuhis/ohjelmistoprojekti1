@@ -30,3 +30,14 @@ Endpointit käyttäjien hallintaan. Ainoastaan admin-tason käyttäjä voi halli
 * [Luo uusi käyttäjä](kayttajat/post.md) : `POST /api/kayttajat`
 * [Päivitä käyttäjän yhtä tai useampaa tietoa](kayttajat/patch.md) : `PATCH /api/kayttajat/{id}`
 * [Poista käyttäjä](accounts/delete.md) : `DELETE /api/kayttajat/{id}`
+
+* ### Lippujen hallinta
+
+Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita lippuja, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty.
+
+* [Näytä kaikki liput](liput/getAll.md) : `GET /api/liput`
+* [Näytä yksittäinen lippu](liput/get.md) : `GET /api/liput/{id}`
+* [Näytä yksittäisen tapahtuman liput](liput/getTapahtumaLiput.md) : `GET /api/tapahtumat/{id}/liput`
+* [Luo uusi lippu](liput/post.md) : `POST /api/liput`
+* [Päivitä lippua](liput/put.md) : `PUT /api/liput/{id}`
+* [Poista lippu](liput/delete.md) : `DELETE /api/liput/{id}`
