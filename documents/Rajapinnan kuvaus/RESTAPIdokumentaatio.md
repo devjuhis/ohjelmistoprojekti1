@@ -41,6 +41,16 @@ Endpointit tapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi lisät
 * [Päivitä tapahtuman yhtä tai useampaa tietoa](tapahtumat/put.md) : `PUT /api/tapahtumat/{id}`
 * [Poista tapahtuma](tapahtumat/delete.md) : `DELETE /api/tapahtumat/{id}`
 
+### Hinnastojen hallinta
+
+Endpointit hinnastojen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita hinnastoja, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty.
+
+* [Näytä kaikki hinnastot](hinnastot/getAll.md) : `GET /api/hinnastot`
+* [Näytä yksittäinen hinnasto](hinnastot/get.md) : `GET /api/hinnasto/{id}`
+* [Luo uusi hinnasto](hinnastot/post.md) : `POST /api/hinnastot`
+* [Päivitä hinnastoa](hinnastot/patch.md) : `PATCH /api/hinnastot/{id}`
+* [Poista hinnasto](hinnastot/delete.md) : `DELETE /api/hinnastot/{id}`
+
 ### Lippujen hallinta
 
 Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita lippuja, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty.
