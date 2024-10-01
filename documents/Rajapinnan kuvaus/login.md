@@ -1,4 +1,7 @@
-# Login
+# Login esimerkkipohja
+
+!! Login-toimintoa ja autentikaatiota ei ole vielä toteutettu !!
+
 
 Used to collect a Token for a registered User.
 
