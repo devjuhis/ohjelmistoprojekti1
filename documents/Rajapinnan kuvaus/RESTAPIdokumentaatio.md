@@ -31,6 +31,16 @@ Endpointit käyttäjien hallintaan. Ainoastaan admin-tason käyttäjä voi halli
 * [Päivitä käyttäjän yhtä tai useampaa tietoa](kayttajat/patch.md) : `PATCH /api/kayttajat/{id}`
 * [Poista käyttäjä](kayttajat/delete.md) : `DELETE /api/kayttajat/{id}`
 
+### Tapahtumien hallinta
+
+Endpointit tapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi lisätä, muokata ja poistaa tapahtumia, mutta sekä admin- että user-tasolla voi hakea kaikkien tai yksittäisen tapahtuman tiedot. Kirjautumattomilta käyttäjiltä käyttö on estetty.
+
+* [Näytä kaikki tapahtumat](tapahtumat/getAll.md) : `GET /api/tapahtumat`
+* [Näytä yksittäinen tapahtuma](tapahtumat/get.md) : `GET /api/tapahtumat/{id}`
+* [Luo uusi tapahtuma](tapahtumat/post.md) : `POST /api/tapahtumat`
+* [Päivitä tapahtuman yhtä tai useampaa tietoa](tapahtumat/put.md) : `PUT /api/tapahtumat/{id}`
+* [Poista tapahtuma](tapahtumat/delete.md) : `DELETE /api/tapahtumat/{id}`
+
 ### Lippujen hallinta
 
 Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita lippuja, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty.
@@ -49,14 +59,3 @@ Endpointit maksutapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi h
 * [Näytä kaikki maksutapahtumat](maksutapahtumat/getAll.md) : `GET /api/maksutapahtuma`
 * [Näytä yksittäinen maksutapahtuma](maksutapahtumat/get.md) : `GET /api/maksutapahtumat/{id}`
 * [Näytä yksittäisen maksutapahtuman liput](maksutapahtumat/getTickets.md) : `GET /api/maksutapahtumat/{id}/liput`
-
-
-### Tapahtumien hallinta
-
-Endpointit tapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi lisätä, muokata ja poistaa tapahtumia, mutta sekä admin- että user-tasolla voi hakea kaikkien tai yksittäisen tapahtuman tiedot. Kirjautumattomilta käyttäjiltä käyttö on estetty.
-
-* [Näytä kaikki tapahtumat](tapahtumat/getAll.md) : `GET /api/tapahtumat`
-* [Näytä yksittäinen tapahtuma](tapahtumat/get.md) : `GET /api/tapahtumat/{id}`
-* [Luo uusi tapahtuma](tapahtumat/post.md) : `POST /api/tapahtumat`
-* [Päivitä tapahtuman yhtä tai useampaa tietoa](tapahtumat/put.md) : `PUT /api/tapahtumat/{id}`
-* [Poista tapahtuma](tapahtumat/delete.md) : `DELETE /api/tapahtumat/{id}`
