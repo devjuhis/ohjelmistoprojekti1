@@ -1,37 +1,41 @@
-Lipun poistaminen
-Poistaa valitun käyttäjän, mikäli toiminnon tekevällä käyttäjällä on ADMIN-tason oikeudet.
+# Lipun poistaminen
 
-URL : /api/liput/{id}
+Poistaa valitun lipun, mikäli toiminnon tekevällä käyttäjällä on ADMIN-tason oikeudet.
 
-URL Parameters : {id}, jossa ID on poistettavan lipun lippuId.
+**URL** : `/api/liput/{id}`
 
-Method : DELETE
+**URL Parameters** : `{id}`, jossa ID on poistettavan lipun lippuId.
 
-Auth required : YES
+**Method** : `DELETE`
 
-Permissions required : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet.
+**Auth required** : YES
 
-Data : {}
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet. 
 
-Success Response
-Condition : Poistettava käyttäjä tulee olla olemassa.
+**Data** : `{}`
 
-Code : 204 No Content
+## Success Response
 
-Content : {}
+**Condition** : Poistettava lippu tulee olla olemassa.
 
-Error Responses
-Condition : Jos lippua yritetään poistaa ID:llä, joka ei ole käytössä millään käyttäjällä.
+**Code** : `204 No Content`
 
-Code : 404 NOT FOUND
+**Content** : `{}`
 
-Content : {}
+## Error Responses
 
-Or
+**Condition** : Jos lippua yritetään poistaa ID:llä, joka ei ole käytössä millään lipulla.
+
+**Code** : `404 NOT FOUND`
+
+**Content** : `{}`
+
+### Or
+
 !!Autentikointia ei ole vielä tehty!!
 
-Condition : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
+**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
 
-Code : 403 FORBIDDEN
+**Code** : `403 FORBIDDEN`
 
-Content : {}
+**Content** : `{}`
