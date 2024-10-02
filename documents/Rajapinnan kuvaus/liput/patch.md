@@ -6,7 +6,7 @@ Päivitä lipun määrä ja / tai kaytetty kenttää.
 
 **URL Parameters** : `{id}`, jossa ID on päivitettävän lipun lippuId.
 
-**Method** : `PUT`
+**Method** : `PATCH`
 
 **Auth required** : YES
 
