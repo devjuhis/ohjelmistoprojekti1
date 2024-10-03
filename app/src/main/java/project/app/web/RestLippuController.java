@@ -79,8 +79,8 @@ public class RestLippuController {
     }
 
     // REST päivitetään tapahtuma id:llä
-    @PutMapping("/liput/{id}")
-    public ResponseEntity<Lippu> updateTapahtuma(@PathVariable Long id, @RequestBody Lippu updatedLippu) {
+    @PatchMapping("/liput/{id}")
+    public ResponseEntity<Lippu> updateLippu(@PathVariable Long id, @RequestBody Lippu updatedLippu) {
         logger.info("Updating lippu with id: {}", id);
 
         Optional<Lippu> lippu = Lrepository.findById(id);
