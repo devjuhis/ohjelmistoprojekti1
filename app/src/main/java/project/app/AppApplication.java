@@ -2,6 +2,7 @@ package project.app;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -43,13 +44,23 @@ public class AppApplication {
 			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "elakelainen", 11));
 			kayttajarepo.save(new Kayttaja("matti", "esimerkki", "salasana", "matti123", "ADMIN"));
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1), 0, 1));
-
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
+					maksurepo.findByMaksutapahtumaId(1), 0, 1));
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
+					maksurepo.findByMaksutapahtumaId(1), 0, 1));
 			// erittelyrepo.save(new Erittely(1, null, lippurepo.findByLippuid(1)));
-			maksurepo.save(new Maksutapahtuma(55, aikaleima, kayttajarepo.findByKayttajatunnus("matti123")));
-			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
-					maksurepo.findByMaksutapahtumaId(1), 0, 1));
-			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
-					maksurepo.findByMaksutapahtumaId(1), 0, 1));
+
+			// Hae maksutapahtumaan liittyvät liput
+			List<Lippu> liput = lippurepo.findByMaksutapahtuma(maksurepo.findByMaksutapahtumaId(1));
+
+			// Laske lippujen hinnat yhteen
+			double yhteishinta = liput.stream()
+									.mapToDouble(lippu -> lippu.getHinnasto().getHinta())
+									.sum();
+			maksurepo.save(new Maksutapahtuma(yhteishinta, aikaleima, kayttajarepo.findByKayttajatunnus("matti123")));
+
+			maksurepo.save(new Maksutapahtuma(yhteishinta, aikaleima, kayttajarepo.findByKayttajatunnus("matti123")));
+			
 
 			Lippu muutettavaLippu = lippurepo.findByLippuId(1);
 			muutettavaLippu.setMaksutapahtuma(maksurepo.findByMaksutapahtumaId(1));

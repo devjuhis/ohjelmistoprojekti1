@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import project.app.domain.Lippu;
 import project.app.domain.LippuRepository;
-
+import project.app.domain.Maksutapahtuma;
+import project.app.domain.MaksutapahtumaRepository;
 import project.app.domain.Tapahtuma;
 import project.app.domain.TapahtumaRepository;
 
@@ -26,6 +27,9 @@ public class RestLippuController {
 
     @Autowired
     private TapahtumaRepository Trepository; 
+
+    @Autowired
+    private MaksutapahtumaRepository Mrepository;
 
     // REST haetaan kaikki liput
     @GetMapping("/liput")
@@ -75,8 +79,37 @@ public class RestLippuController {
     @PostMapping("/liput")
     public Lippu createLippu(@RequestBody Lippu lippu) {
         logger.info("Creating new lippu");
-        return Lrepository.save(lippu);
+        // Tallennetaan uusi lippu
+        Lippu savedLippu = Lrepository.save(lippu);
+
+        // Laske hintayhteensä maksutapahtumalle
+        updateMaksutapahtumanHinta(savedLippu.getMaksutapahtuma().getMaksutapahtumaId());
+
+    return savedLippu;
+
     }
+
+ 
+    // Päivitetään maksutapahtuman hintayhteensä
+    private void updateMaksutapahtumanHinta(Long maksutapahtumaId) {
+        // Maksutapahtuma ID:n perusteella
+        Maksutapahtuma maksutapahtuma = Mrepository.findById(maksutapahtumaId).orElseThrow(() -> new RuntimeException("Maksutapahtuma ei löytynyt"));
+
+        // Maksutapahtuman liput
+        List<Lippu> liput = Lrepository.findByMaksutapahtuma(maksutapahtuma);
+
+        // kaikkien lippujen hinnat yhteenlaskettuna
+        double hintayhteensa = liput.stream()
+                                    .mapToDouble(lippu -> lippu.getHinnasto().getHinta())
+                                    .sum();
+
+        // Päivitetään maksutapahtuman hintayhteensä
+        maksutapahtuma.setHintayhteensa(hintayhteensa);
+
+        // Tallennetaan päivitetty maksutapahtuma
+        Mrepository.save(maksutapahtuma);
+    }
+
 
     // REST päivitetään tapahtuma id:llä
     @PatchMapping("/liput/{id}")
