@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,5 +61,12 @@ public class RestMaksuController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+     // REST luodaan uusi maksutapahtuma
+    @PostMapping("/maksutapahtumat")
+    public Maksutapahtuma createMaksutapahtuma(@RequestBody Maksutapahtuma maksutapahtuma) {
+        logger.info("Creating new maksutapahtuma");
+        return maksurepository.save(maksutapahtuma);
     }
 }
