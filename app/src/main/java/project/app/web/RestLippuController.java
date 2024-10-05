@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import project.app.domain.Hinnasto;
+import project.app.domain.HinnastoRepository;
 import project.app.domain.Lippu;
 import project.app.domain.LippuRepository;
 import project.app.domain.Maksutapahtuma;
@@ -30,6 +32,9 @@ public class RestLippuController {
 
     @Autowired
     private MaksutapahtumaRepository Mrepository;
+
+    @Autowired
+    private HinnastoRepository Hrepository;
 
     // REST haetaan kaikki liput
     @GetMapping("/liput")
@@ -79,6 +84,12 @@ public class RestLippuController {
     @PostMapping("/liput")
     public Lippu createLippu(@RequestBody Lippu lippu) {
         logger.info("Creating new lippu");
+
+        //hae vielä hinta lipulle erikseen
+        Hinnasto hinnasto = Hrepository.findById(lippu.getHinnasto().getHinnastoid()).orElseThrow(() -> new RuntimeException("Hinnastoa ei löytynyt"));
+        //lisää hinta
+        lippu.setHinnasto(hinnasto);
+
         // Tallennetaan uusi lippu
         Lippu savedLippu = Lrepository.save(lippu);
 
