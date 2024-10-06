@@ -37,7 +37,7 @@ public class RestTapahtumaController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // REST luodaan uusi taphtuma
+    // REST luodaan uusi tapahtuma
     @PostMapping("/tapahtumat")
     public Tapahtuma createTapahtuma(@RequestBody Tapahtuma tapahtuma) {
         logger.info("Creating new tapahtuma");
@@ -45,7 +45,7 @@ public class RestTapahtumaController {
     }
 
     // REST päivitetään tapahtuma id:llä
-    @PutMapping("/tapahtumat/{id}")
+    @PatchMapping("/tapahtumat/{id}")
     public ResponseEntity<Tapahtuma> updateTapahtuma(@PathVariable Long id, @RequestBody Tapahtuma updatedTapahtuma) {
         logger.info("Updating tapahtuma with id: {}", id);
 
