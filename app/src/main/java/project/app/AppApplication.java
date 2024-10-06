@@ -58,8 +58,6 @@ public class AppApplication {
 									.mapToDouble(lippu -> lippu.getHinnasto().getHinta())
 									.sum();
 			maksurepo.save(new Maksutapahtuma(yhteishinta, aikaleima, kayttajarepo.findByKayttajatunnus("matti123")));
-
-			maksurepo.save(new Maksutapahtuma(yhteishinta, aikaleima, kayttajarepo.findByKayttajatunnus("matti123")));
 			
 
 			Lippu muutettavaLippu = lippurepo.findByLippuId(1);
