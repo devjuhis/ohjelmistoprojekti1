@@ -38,7 +38,7 @@ Endpointit tapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi lisät
 * [Näytä kaikki tapahtumat](tapahtumat/getAll.md) : `GET /api/tapahtumat`
 * [Näytä yksittäinen tapahtuma](tapahtumat/get.md) : `GET /api/tapahtumat/{id}`
 * [Luo uusi tapahtuma](tapahtumat/post.md) : `POST /api/tapahtumat`
-* [Päivitä tapahtuman yhtä tai useampaa tietoa](tapahtumat/put.md) : `PUT /api/tapahtumat/{id}`
+* [Päivitä tapahtuman yhtä tai useampaa tietoa](tapahtumat/patch.md) : `PUT /api/tapahtumat/{id}`
 * [Poista tapahtuma](tapahtumat/delete.md) : `DELETE /api/tapahtumat/{id}`
 
 ### Hinnastojen hallinta

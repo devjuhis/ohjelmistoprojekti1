@@ -6,7 +6,7 @@ Päivitä tapahtuman yhtä tai useampaa tietoa.
 
 **URL Parameters** : `{id}`, jossa ID on päivitettävän tapahtuman tapahtumaId.
 
-**Method** : `PUT`
+**Method** : `PATCH`
 
 **Auth required** : YES
 
