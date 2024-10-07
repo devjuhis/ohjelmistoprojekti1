@@ -64,9 +64,18 @@ Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita l
 
 ### Maksutapahtumien hallinta
 
-Endpointit maksutapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi nähdä kaikki maksutapahtumat, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty. User-tason käyttäjällä oikeus luoda maksutapahtuma sekä nähdä luotu maksutapahtuma.
+Endpointit maksutapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi nähdä kaikki maksutapahtumat, joten user-tason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty. User-tason käyttäjällä oikeus luoda maksutapahtuma sekä nähdä luotu maksutapahtuma.
 
 * [Näytä kaikki maksutapahtumat](maksutapahtumat/getAll.md) : `GET /api/maksutapahtumat`
 * [Näytä yksittäinen maksutapahtuma](maksutapahtumat/get.md) : `GET /api/maksutapahtumat/{id}`
 * [Näytä yksittäisen maksutapahtuman liput](maksutapahtumat/getTickets.md) : `GET /api/maksutapahtumat/{id}/liput`
 * [Luo uusi maksutapahtuma](maksutapahtumat/post.md) : `POST /api/maksutapahtumat`
+
+## Endpointit myyntitapahtuman luomiseen
+
+Endpointit uuden maksutapahtuman luomiseen.
+
+* [Luo uusi maksutapahtuma](maksutapahtumat/post.md) : `POST /api/maksutapahtumat`
+* [Luo uusi lippu](liput/post.md) : `POST /api/liput`
+* [Näytä yksittäinen maksutapahtuma](maksutapahtumat/get.md) : `GET /api/maksutapahtumat/{id}`
+* [Näytä yksittäisen maksutapahtuman liput](maksutapahtumat/getTickets.md) : `GET /api/maksutapahtumat/{id}/liput`
