@@ -36,7 +36,7 @@ public class RestHinnastoController {
     }
 
     // REST haetaan hinnasto id:llä
-    @GetMapping("/hinnasto/{id}")
+    @GetMapping("/hinnastot/{id}")
     public ResponseEntity<Hinnasto> getHinnastoById(@PathVariable("id") Long id) {
         logger.info("Fetching hinnasto with id: {}", id);
         Optional<Hinnasto> hinnasto = hinnastoRepository.findById(id);

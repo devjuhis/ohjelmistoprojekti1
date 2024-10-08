@@ -2,7 +2,7 @@
 
 Näyttää tiedon yksittäisestä hinnastosta.
 
-**URL** : `/api/hinnasto/{id}`
+**URL** : `/api/hinnastot/{id}`
 
 **URL Parameters** : `{id}`, jossa ID on hinnaston hinnastoId.
 
