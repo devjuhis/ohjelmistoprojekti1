@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import project.app.domain.HinnastoRepository;
+import project.app.domain.Hinnasto;
 import project.app.domain.Tapahtuma;
 import project.app.domain.TapahtumaRepository;
 
@@ -21,6 +23,9 @@ public class RestTapahtumaController {
     @Autowired
     private TapahtumaRepository repository;
 
+    @Autowired
+    private HinnastoRepository Hrepository;
+
     // REST haetaan kaikki tapahtumat
     @GetMapping("/tapahtumat")
     public List<Tapahtuma> getAllTapahtumat() {
@@ -35,6 +40,22 @@ public class RestTapahtumaController {
         Optional<Tapahtuma> tapahtuma = repository.findById(id);
         return tapahtuma.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+     // REST haetaan kaikki liput tapahtuma id:llä
+    @GetMapping("/tapahtumat/{tapahtumaId}/hinnastot")
+    public ResponseEntity<List<Hinnasto>> getHinnastotByTapahtumaId(@PathVariable Long tapahtumaId) {
+        logger.info("Fetching liput for tapahtuma with id: {}", tapahtumaId);
+        
+        // Hae tapahtuma ID:llä
+        Optional<Tapahtuma> tapahtuma = repository.findById(tapahtumaId);
+        
+        if (tapahtuma.isPresent()) {
+            List<Hinnasto> hinnastot = Hrepository.findByTapahtuma(tapahtuma.get());
+            return hinnastot.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(hinnastot);
+        } else {
+            return ResponseEntity.notFound().build(); // Palautetaan 404, jos tapahtumaa ei löydy
+        }
     }
 
     // REST luodaan uusi tapahtuma
