@@ -8,13 +8,13 @@ Näyttää kaikki tiedot kaikista lipuista.
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
 
 **Data constraints** : `{}`
 
 ## Success Responses
 
-**Condition** : Admin-tason käyttäjä näkee kaikki ohjelman liput.
+**Condition** : USER-tason käyttäjä näkee kaikki ohjelman liput.
 
 **Code** : `200 OK`
 
@@ -59,8 +59,9 @@ Näyttää kaikki tiedot kaikista lipuista.
         "kayttajaid": 1
       }
     },
-    "kaytetty": 0,
-    "maara": 1
+    "kaytetty": false,
+    "maara": 1,
+    "removed": false
   },
   {
     "lippuId": 2,
@@ -101,17 +102,9 @@ Näyttää kaikki tiedot kaikista lipuista.
       }
     },
     "kaytetty": 0,
-    "maara": 1
+    "maara": 1,
+    "removed": false
   }
 ]
 ```
 
-### Or
-
-!!Autentikointia ei ole vielä tehty!!
-
-**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
-
-**Code** : `403 FORBIDDEN`
-
-**Content** : `{}`
