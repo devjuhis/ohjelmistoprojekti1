@@ -10,13 +10,13 @@ Näyttää tiedon yksittäisestä lipusta.
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
 
 **Data**: `{}`
 
 ## Success Response
 
-**Condition** : Lippu on olemassa, ja pyynnön tekevällä käyttäjällä on ADMIN-tason oikeudet.
+**Condition** : Lippu on olemassa, ja pyynnön tekevällä käyttäjällä on USER-tason oikeudet.
 
 **Code** : `200 OK`
 
@@ -24,45 +24,46 @@ Näyttää tiedon yksittäisestä lipusta.
 
 ```json
 {
-  "lippuId": 1,
-  "tapahtuma": {
-    "tapahtumaId": 1,
-    "nimi": "Uusi tapahtuma",
-    "aika": "2024-12-14",
-    "paikka": "Olympiastadion",
-    "kuvaus": "Hyvä tapahtuma :D",
-    "lippumaara": 600,
-    "ennakkomyynti": "2024-12-13"
-  },
-  "hinnasto": {
+    "lippuId": 1,
     "tapahtuma": {
-      "tapahtumaId": 1,
-      "nimi": "Uusi tapahtuma",
-      "aika": "2024-12-14",
-      "paikka": "Olympiastadion",
-      "kuvaus": "Hyvä tapahtuma :D",
-      "lippumaara": 600,
-      "ennakkomyynti": "2024-12-13"
+        "tapahtumaId": 1,
+        "nimi": "Uusi tapahtuma",
+        "aika": "2024-12-14",
+        "paikka": "Olympiastadion",
+        "kuvaus": "Hyvä tapahtuma :D",
+        "lippumaara": 600,
+        "ennakkomyynti": "2024-12-13"
     },
-    "hintaluokka": "opiskelija",
-    "hinta": 12,
-    "hinnastoid": 1
-  },
-  "maksutapahtuma": {
-    "maksutapahtumaId": 1,
-    "hintayhteensa": 55,
-    "aikaleima": "2024-09-29T17:08:25.062653",
-    "kayttaja": {
-      "etunimi": "matti",
-      "sukunimi": "esimerkki",
-      "salasana": "salasana",
-      "kayttajatunnus": "matti123",
-      "oikeus": "ADMIN",
-      "kayttajaid": 1
-    }
-  },
-  "kaytetty": 0,
-  "maara": 1
+    "hinnasto": {
+        "tapahtuma": {
+            "tapahtumaId": 1,
+            "nimi": "Uusi tapahtuma",
+            "aika": "2024-12-14",
+            "paikka": "Olympiastadion",
+            "kuvaus": "Hyvä tapahtuma :D",
+            "lippumaara": 600,
+            "ennakkomyynti": "2024-12-13"
+        },
+        "hintaluokka": "opiskelija",
+        "hinta": 12.0,
+        "hinnastoid": 1
+    },
+    "maksutapahtuma": {
+        "maksutapahtumaId": 1,
+        "hintayhteensa": 36.0,
+        "aikaleima": "2024-10-15T13:39:26.044925",
+        "kayttaja": {
+            "etunimi": "matti",
+            "sukunimi": "esimerkki",
+            "salasana": "salasana",
+            "kayttajatunnus": "matti123",
+            "oikeus": "ADMIN",
+            "kayttajaid": 1
+        }
+    },
+    "kaytetty": false,
+    "maara": 1,
+    "removed": false
 }
 ```
 
@@ -76,10 +77,8 @@ Näyttää tiedon yksittäisestä lipusta.
 
 ### Or
 
-!!Autentikointia ei ole vielä tehty!!
+**Condition** : Lippu on poistettu soft deletellä
 
-**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
-
-**Code** : `403 FORBIDDEN`
+**Code** : `410 Gone`
 
 **Content** : `{}`
