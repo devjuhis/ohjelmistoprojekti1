@@ -85,10 +85,16 @@ public class RestLippuController {
     public Lippu createLippu(@RequestBody Lippu lippu) {
         logger.info("Creating new lippu");
 
+        Tapahtuma tapahtuma = Trepository.findById(lippu.getTapahtuma().getTapahtumaId()).orElseThrow(() -> new RuntimeException("Tapahtumaa ei löydy"));
+        lippu.setTapahtuma(tapahtuma);
+
         //hae vielä hinta lipulle erikseen
         Hinnasto hinnasto = Hrepository.findById(lippu.getHinnasto().getHinnastoid()).orElseThrow(() -> new RuntimeException("Hinnastoa ei löytynyt"));
         //lisää hinta
         lippu.setHinnasto(hinnasto);
+
+        Maksutapahtuma maksutapahtuma = Mrepository.findById(lippu.getMaksutapahtuma().getMaksutapahtumaId()).orElseThrow(() -> new RuntimeException("Maksutapahtumaa ei löytynyt"));
+        lippu.setMaksutapahtuma(maksutapahtuma);
 
         // Tallennetaan uusi lippu
         Lippu savedLippu = Lrepository.save(lippu);
@@ -96,7 +102,7 @@ public class RestLippuController {
         // Laske hintayhteensä maksutapahtumalle
         updateMaksutapahtumanHinta(savedLippu.getMaksutapahtuma().getMaksutapahtumaId());
 
-    return savedLippu;
+        return savedLippu;
 
     }
 
