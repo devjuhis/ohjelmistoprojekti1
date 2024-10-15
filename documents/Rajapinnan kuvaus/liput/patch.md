@@ -1,6 +1,6 @@
 # Lipun päivittäminen
 
-Päivitä lipun määrä ja / tai kaytetty kenttää.
+Päivitä lipun määrä, kaytetty ja removed kenttää.
 
 **URL** : `/api/liput/{id}`
 
@@ -10,29 +10,30 @@ Päivitä lipun määrä ja / tai kaytetty kenttää.
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
 
 **Data constraints**
 
 ```json
 {
-    "kaytetty": [ int ],
-    "maara": [ int ]
+    "kaytetty": [ Boolean ],
+    "maara": [ int ] (-1 -> käytetty, 1 -> ei käytetty)
 }
 ```
 
-**Data example** Kaikkia kenttiä ei tarvitse täyttää, vain ainoastaan ne kentät päivittyvät, jotka annetaan bodyssä mukana. Käyttäjän ID:tä ei saa päivittää. Kyseisessä esimerkissä päivitetään käyttäjän etu- ja sukunimi.
+**Data example** Kaikkia kenttiä ei tarvitse täyttää, vain ainoastaan ne kentät päivittyvät, jotka annetaan bodyssä mukana.
 
 ```json
 {
-    "kaytetty": 1,
-    "maara": -1
+    "kaytetty": true,
+    "maara": 1,
+    "removed": false
 }
 ```
 
 ## Success Responses
 
-**Condition** : Päivitys tulee tehdä ADMIN-tason käyttäjällä olemassaolevalle käyttäjälle.
+**Condition** : Päivitys tulee tehdä USER-tason käyttäjänä.
 
 **Code** : `200 OK`
 
@@ -64,21 +65,10 @@ Päivitä lipun määrä ja / tai kaytetty kenttää.
         "hinta": 12.0,
         "hinnastoid": 1
     },
-    "maksutapahtuma": {
-        "maksutapahtumaId": 1,
-        "hintayhteensa": 55.0,
-        "aikaleima": "2024-09-29T19:00:07.862604",
-        "kayttaja": {
-            "etunimi": "matti",
-            "sukunimi": "esimerkki",
-            "salasana": "salasana",
-            "kayttajatunnus": "matti123",
-            "oikeus": "ADMIN",
-            "kayttajaid": 1
-        }
-    },
-    "kaytetty": 1,
-    "maara": -1
+    "maksutapahtuma": null,
+    "kaytetty": false,
+    "maara": 1,
+    "removed": false
 }
 ```
 
