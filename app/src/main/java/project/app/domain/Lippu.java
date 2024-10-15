@@ -1,6 +1,5 @@
 package project.app.domain;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,31 +18,31 @@ public class Lippu {
     private Tapahtuma tapahtuma;
 
     @ManyToOne
-    @JoinColumn(name = "hinnastoId")
+    @JoinColumn(name = "hinnastoId", nullable = false)
     private Hinnasto hinnasto;
 
     @ManyToOne
     @JoinColumn(name = "maksutapahtumaId")
     private Maksutapahtuma maksutapahtuma;
 
-    @Column(nullable = true)
-    private int kaytetty = 0;
+    // jos käytetty true -> käyttämätön false
+    private Boolean kaytetty = false;
 
-    @Column(nullable = true)
-    //palautettu = -1 vai ei = 1
+    //palautettu = -1 -> ei = 1
     private int maara = 1;
+
+    
+    private Boolean removed = false;
 
     public Lippu() {
     }
 
-    public Lippu(Tapahtuma tapahtuma, Hinnasto hinnasto, int kaytetty, int maara) {
+    public Lippu(Tapahtuma tapahtuma, Hinnasto hinnasto) {
         this.tapahtuma = tapahtuma;
         this.hinnasto = hinnasto;
-        this.kaytetty = kaytetty;
-        this.maara = maara;
     }
 
-    public Lippu(Tapahtuma tapahtuma, Hinnasto hinnasto, Maksutapahtuma maksutapahtuma, int kaytetty, int maara) {
+    public Lippu(Tapahtuma tapahtuma, Hinnasto hinnasto, Maksutapahtuma maksutapahtuma, Boolean kaytetty, int maara, Boolean removed) {
         this.tapahtuma = tapahtuma;
         this.hinnasto = hinnasto;
         this.maksutapahtuma = maksutapahtuma;
@@ -84,11 +83,11 @@ public class Lippu {
         this.maksutapahtuma = maksutapahtuma;
     }
 
-    public int getKaytetty() {
+    public Boolean getKaytetty() {
         return kaytetty;
     }
 
-    public void setKaytetty(int kaytetty) {
+    public void setKaytetty(Boolean kaytetty) {
         this.kaytetty = kaytetty;
     }
 
@@ -97,7 +96,19 @@ public class Lippu {
     }
 
     public void setMaara(int maara) {
-        this.maara = maara;
+        if (maara == 1 || maara == -1) {
+            this.maara = maara; // Aseta arvo vain, jos se on 1 tai -1
+        } else {
+            throw new IllegalArgumentException("Maara voi olla vain 1 tai -1");
+        }
+    }
+
+    public Boolean getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(Boolean removed) {
+        this.removed = removed;
     }
 
     @Override

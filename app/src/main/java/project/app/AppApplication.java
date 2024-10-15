@@ -43,11 +43,11 @@ public class AppApplication {
 			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "opiskelija", 12));
 			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "elakelainen", 11));
 			kayttajarepo.save(new Kayttaja("matti", "esimerkki", "salasana", "matti123", "ADMIN"));
-			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1), 0, 1));
+			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1)));
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
-					maksurepo.findByMaksutapahtumaId(1), 0, 1));
+					maksurepo.findByMaksutapahtumaId(1), false, 1, false));
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
-					maksurepo.findByMaksutapahtumaId(1), 0, 1));
+					maksurepo.findByMaksutapahtumaId(1), false, 1, false));
 			// erittelyrepo.save(new Erittely(1, null, lippurepo.findByLippuid(1)));
 
 			// Hae maksutapahtumaan liittyvät liput

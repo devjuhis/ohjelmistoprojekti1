@@ -10,4 +10,5 @@ public interface LippuRepository extends CrudRepository<Lippu, Long> {
     Lippu findByLippuId(long lippuid);
     List<Lippu> findByTapahtuma(Tapahtuma tapahtuma);
     List<Lippu> findByMaksutapahtuma(Maksutapahtuma maksutapahtuma);
+    List<Lippu> findByRemovedFalse();
 }
