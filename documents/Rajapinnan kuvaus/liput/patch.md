@@ -18,6 +18,7 @@ Päivitä lipun määrä, kaytetty ja removed kenttää.
 {
     "kaytetty": [ Boolean ],
     "maara": [ int ] (-1 -> käytetty, 1 -> ei käytetty)
+    "removed": [ Boolean ]
 }
 ```
 
