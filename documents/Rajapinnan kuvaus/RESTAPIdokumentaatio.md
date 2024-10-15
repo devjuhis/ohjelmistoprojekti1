@@ -58,9 +58,11 @@ Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita l
 * [Näytä kaikki liput](liput/getAll.md) : `GET /api/liput`
 * [Näytä yksittäinen lippu](liput/get.md) : `GET /api/liput/{id}`
 * [Näytä yksittäisen tapahtuman liput](liput/getTapahtumaLiput.md) : `GET /api/tapahtumat/{id}/liput`
+* [Näytä yksittäisen tapahtuman poistetut liput](liput/getTapahtumaRemovedLiput.md) : `GET /api/tapahtumat/{id}/poistetutliput`
 * [Luo uusi lippu](liput/post.md) : `POST /api/liput`
 * [Päivitä lippua](liput/put.md) : `PUT /api/liput/{id}`
 * [Poista lippu](liput/delete.md) : `DELETE /api/liput/{id}`
+* [Soft delete lippu](liput/softDelete.md) : `DELETE /api/liput/softdelete/{id}`
 
 ### Maksutapahtumien hallinta
 
