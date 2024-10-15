@@ -8,7 +8,7 @@ Luo uuden lipun.
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
 
 **Data constraints**
 
@@ -19,9 +19,7 @@ käytetty ->1 tai ei käytetty -> 0 ja määrä 1 tai -1 (palautettu).
 {
     "tapahtumaId": "[long]",
     "hinnastoId": "[long]",
-    "maksutapahtumaId": "[long]",
-    "kaytetty": "[int]",
-    "maara": "[int]"
+    "maksutapahtumaId": "[long]"
 }
 ```
 
@@ -37,9 +35,7 @@ käytetty ->1 tai ei käytetty -> 0 ja määrä 1 tai -1 (palautettu).
     },
     "maksutapahtuma": {
         "maksutapahtumaId": 1
-    },
-    "kaytetty": 0,
-    "maara": 1
+    }
 }
 ```
 
@@ -75,8 +71,9 @@ käytetty ->1 tai ei käytetty -> 0 ja määrä 1 tai -1 (palautettu).
         "aikaleima": null,
         "kayttaja": null
     },
-    "kaytetty": 0,
-    "maara": 1
+    "kaytetty": false,
+    "maara": 1,
+    "removed": false
 }
 ```
 
@@ -86,14 +83,4 @@ käytetty ->1 tai ei käytetty -> 0 ja määrä 1 tai -1 (palautettu).
 
 **Code** : `400 BAD REQUEST`
 
-**Content example**: `{}`
-
-### Or
-
-!!Autentikointia ei ole vielä tehty!!
-
-**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
-
-**Code** : `403 FORBIDDEN`
-
-**Content** : `{}`
+**Content example**: `{Tapahtumaa ei löydy id: x}`
