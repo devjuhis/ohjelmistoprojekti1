@@ -10,17 +10,17 @@ Näyttää tiedot tapahtuman lipuista.
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
 
 **Data**: `{}`
 
 ## Success Response
 
-**Condition** : Lippu on olemassa, ja pyynnön tekevällä käyttäjällä on ADMIN-tason oikeudet.
+**Condition** : Lippu on olemassa, ja pyynnön tekevällä käyttäjällä on USER-tason oikeudet.
 
 **Code** : `200 OK`
 
-**Content** : Tässä esimerkissä ADMIN tason käyttäjä näkee tapahtuman 1 kaikki liput
+**Content** : Tässä esimerkissä käyttäjä näkee tapahtuman 1 kaikki liput
 
 ```json
 [
@@ -63,7 +63,8 @@ Näyttää tiedot tapahtuman lipuista.
             }
         },
         "kaytetty": 0,
-        "maara": 1
+        "maara": 1,
+        "removed": false
     },
     {
         "lippuId": 2,
@@ -104,7 +105,8 @@ Näyttää tiedot tapahtuman lipuista.
             }
         },
         "kaytetty": 0,
-        "maara": 1
+        "maara": 1,
+        "removed": false
     },
     {
         "lippuId": 3,
@@ -145,7 +147,8 @@ Näyttää tiedot tapahtuman lipuista.
             }
         },
         "kaytetty": 0,
-        "maara": 1
+        "maara": 1,
+        "removed": false
     }
 ]
 ```
@@ -158,12 +161,3 @@ Näyttää tiedot tapahtuman lipuista.
 
 **Content** : `{}`
 
-### Or
-
-!!Autentikointia ei ole vielä tehty!!
-
-**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
-
-**Code** : `403 FORBIDDEN`
-
-**Content** : `{}`
