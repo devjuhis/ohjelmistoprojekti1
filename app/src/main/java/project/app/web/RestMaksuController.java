@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.app.domain.Kayttaja;
+import project.app.domain.KayttajaRepository;
 import project.app.domain.Lippu;
 import project.app.domain.LippuRepository;
 import project.app.domain.Maksutapahtuma;
@@ -30,6 +33,9 @@ public class RestMaksuController {
 
     @Autowired
     private LippuRepository lippurepository;
+
+    @Autowired
+    private KayttajaRepository kayttajarepository;
 
     // REST haetaan kaikki maksutapahtumat
     @GetMapping("/maksutapahtumat")
@@ -65,8 +71,23 @@ public class RestMaksuController {
 
      // REST luodaan uusi maksutapahtuma
     @PostMapping("/maksutapahtumat")
-    public Maksutapahtuma createMaksutapahtuma(@RequestBody Maksutapahtuma maksutapahtuma) {
+    public ResponseEntity<?> createMaksutapahtuma(@RequestBody Maksutapahtuma maksutapahtuma) {
         logger.info("Creating new maksutapahtuma");
-        return maksurepository.save(maksutapahtuma);
+
+        try {
+            Kayttaja kayttaja = kayttajarepository.findById(maksutapahtuma.getKayttaja().getKayttajaid())
+                .orElseThrow(() -> new RuntimeException("Käyttäjää ei löydy"));
+            maksutapahtuma.setKayttaja(kayttaja);
+            return ResponseEntity.status(HttpStatus.CREATED).body(maksurepository.save(maksutapahtuma));
+        } catch (RuntimeException e) {
+            logger.error("Error creating maksutapahtuma: {}", e.getMessage());
+            // Palautetaan 400 Bad Request ja virheviesti
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+        } catch (Exception e) {
+            logger.error("Unexpected error: {}", e.getMessage());
+            // Palautetaan 500 Internal Server Error yleisten virheiden osalta
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
+        }
     }
 }
