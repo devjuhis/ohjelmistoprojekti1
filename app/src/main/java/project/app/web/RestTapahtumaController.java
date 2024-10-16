@@ -42,7 +42,7 @@ public class RestTapahtumaController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-     // REST haetaan kaikki liput tapahtuma id:llä
+     // REST haetaan kaikki hinnastot tapahtuma id:llä
     @GetMapping("/tapahtumat/{tapahtumaId}/hinnastot")
     public ResponseEntity<List<Hinnasto>> getHinnastotByTapahtumaId(@PathVariable Long tapahtumaId) {
         logger.info("Fetching liput for tapahtuma with id: {}", tapahtumaId);
