@@ -147,7 +147,7 @@ public class RestLippuController {
         }
     }
 
-    // REST päivitetään tapahtuma id:llä
+    // REST päivitetään lippu id:llä
     @PatchMapping("/liput/{id}")
     public ResponseEntity<Lippu> updateLippu(@PathVariable Long id, @RequestBody Lippu updatedLippu) {
         logger.info("Updating lippu with id: {}", id);
