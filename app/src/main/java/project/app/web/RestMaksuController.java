@@ -2,7 +2,7 @@ package project.app.web;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +79,8 @@ public class RestMaksuController {
             Kayttaja kayttaja = kayttajarepository.findById(maksutapahtuma.getKayttaja().getKayttajaid())
                 .orElseThrow(() -> new RuntimeException("Käyttäjää ei löydy"));
             maksutapahtuma.setKayttaja(kayttaja);
+            LocalDateTime aikaleima = LocalDateTime.now();
+            maksutapahtuma.setAikaleima(aikaleima);
             return ResponseEntity.status(HttpStatus.CREATED).body(maksurepository.save(maksutapahtuma));
         } catch (RuntimeException e) {
             logger.error("Error creating maksutapahtuma: {}", e.getMessage());
@@ -101,9 +103,10 @@ public class RestMaksuController {
         Optional<Maksutapahtuma> maksutapahtuma = maksurepository.findById(id);
 
         if (maksutapahtuma.isPresent()) {
+            // haetaan jos maksutapahtumaa ei ole merkitty poistetuksi
             if(!maksutapahtuma.get().getRemoved()) {
                 Maksutapahtuma maksutapahtumaOk = maksutapahtuma.get();
-
+                // asetetaan maksutapahtuma poistetuksi
                 maksutapahtumaOk.setRemoved(true);
 
                 maksurepository.save(maksutapahtumaOk);
