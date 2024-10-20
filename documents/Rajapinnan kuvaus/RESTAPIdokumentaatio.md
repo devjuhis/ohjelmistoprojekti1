@@ -72,6 +72,7 @@ Endpointit maksutapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi n
 * [Näytä yksittäinen maksutapahtuma](maksutapahtumat/get.md) : `GET /api/maksutapahtumat/{id}`
 * [Näytä yksittäisen maksutapahtuman liput](maksutapahtumat/getTickets.md) : `GET /api/maksutapahtumat/{id}/liput`
 * [Luo uusi maksutapahtuma](maksutapahtumat/post.md) : `POST /api/maksutapahtumat`
+* [Maksutapahtuman soft delete](maksutapahtumat/patchSoftDelete.md) : `PATCH /api/maksutapahtumat/{id}`
 
 ## Endpointit myyntitapahtuman luomiseen
 
@@ -81,3 +82,4 @@ Endpointit uuden maksutapahtuman luomiseen.
 * [Luo uusi lippu](liput/post.md) : `POST /api/liput`
 * [Näytä yksittäinen maksutapahtuma](maksutapahtumat/get.md) : `GET /api/maksutapahtumat/{id}`
 * [Näytä yksittäisen maksutapahtuman liput](maksutapahtumat/getTickets.md) : `GET /api/maksutapahtumat/{id}/liput`
+* [Näytä yksittäisen tapahtuman hinnastot]: `GET /api/tapahtumat/{id}/hinnastot`
