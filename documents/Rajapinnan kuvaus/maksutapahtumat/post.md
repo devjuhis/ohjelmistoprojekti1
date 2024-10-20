@@ -12,11 +12,10 @@ Luo uuden maksutapahtuman.
 
 **Data constraints**
 
-Bodyssa on lähetettävä aikaleima sekä käyttäjän ID. Hintayhteensa lasketaan erikseen lippujen lisäyksen yhteydessä.
+Bodyssa on lähetettävä käyttäjän ID. Hintayhteensa lasketaan erikseen lippujen lisäyksen yhteydessä.
 
 ```json
 {
-    "aikaleima": "[timestamp]",
     "kayttaja": "[Long]"
 }
 ```
@@ -25,8 +24,7 @@ Bodyssa on lähetettävä aikaleima sekä käyttäjän ID. Hintayhteensa lasketa
 
 ```json
 {
-    "aikaleima": "2024-10-04T11:54:11.701583",
-    "kayttaja": {
+     "kayttaja": {
         "kayttajaid": 1
     }
 }
@@ -36,23 +34,24 @@ Bodyssa on lähetettävä aikaleima sekä käyttäjän ID. Hintayhteensa lasketa
 
 **Condition** : Käyttäjä on olemassa sekä tieto on oikeassa muodossa 
 
-**Code** : `200 OK`
+**Code** : `201 CREATED`
 
 **Content example**
 
 ```json
 {
-    "maksutapahtumaId": 3,
+    "maksutapahtumaId": 2,
     "hintayhteensa": 0.0,
-    "aikaleima": "2024-10-04T11:54:11.701583",
+    "aikaleima": "2024-10-20T13:13:54.4530782",
     "kayttaja": {
-        "etunimi": null,
-        "sukunimi": null,
-        "salasana": null,
-        "kayttajatunnus": null,
-        "oikeus": null,
+        "etunimi": "matti",
+        "sukunimi": "esimerkki",
+        "salasana": "salasana",
+        "kayttajatunnus": "matti123",
+        "oikeus": "ADMIN",
         "kayttajaid": 1
-    }
+    },
+    "removed": false
 }
 ```
 

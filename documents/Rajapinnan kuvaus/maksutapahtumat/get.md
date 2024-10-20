@@ -10,13 +10,13 @@ Näyttää tiedon yksittäisestä maksutapahtumasta.
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
 
 **Data**: `{}`
 
 ## Success Response
 
-**Condition** : Maksutapahtuman tulee olla olemassa ja pyynnön tekevällä käyttäjällä on ADMIN-tason oikeudet.
+**Condition** : Maksutapahtuman tulee olla olemassa ja pyynnön tekevällä käyttäjällä on USER-tason oikeudet.
 
 **Code** : `200 OK`
 
@@ -24,9 +24,18 @@ Näyttää tiedon yksittäisestä maksutapahtumasta.
 
 ```json
 {
-    "hintayhteensa": 215.15,
-    "aikaleima": "2024-09-28 12:48:44.020719",
-    "kayttajaid": 1
+    "maksutapahtumaId": 1,
+    "hintayhteensa": 36.0,
+    "aikaleima": "2024-10-20T13:10:19.27427",
+    "kayttaja": {
+        "etunimi": "matti",
+        "sukunimi": "esimerkki",
+        "salasana": "salasana",
+        "kayttajatunnus": "matti123",
+        "oikeus": "ADMIN",
+        "kayttajaid": 1
+    },
+    "removed": false
 }
 ```
 

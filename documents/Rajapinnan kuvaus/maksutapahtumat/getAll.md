@@ -23,14 +23,32 @@ Näyttää tiedot kaikista maksutapahtumista.
 ```json
 [
     {
-        "hintayhteensa": 215.15,
-        "aikaleima": "2024-09-28 12:48:44.020719",
-        "kayttajaid": 1
+        "maksutapahtumaId": 1,
+        "hintayhteensa": 36.0,
+        "aikaleima": "2024-10-20T13:10:19.27427",
+        "kayttaja": {
+            "etunimi": "matti",
+            "sukunimi": "esimerkki",
+            "salasana": "salasana",
+            "kayttajatunnus": "matti123",
+            "oikeus": "ADMIN",
+            "kayttajaid": 1
+        },
+        "removed": false
     },
     {
-        "hintayhteensa": 55.00,
-        "aikaleima": "2024-09-28 12:48:44.020719",
-        "kayttajaid": 2
+        "maksutapahtumaId": 2,
+        "hintayhteensa": 0.0,
+        "aikaleima": "2024-10-20T13:13:54.453078",
+        "kayttaja": {
+            "etunimi": "matti",
+            "sukunimi": "esimerkki",
+            "salasana": "salasana",
+            "kayttajatunnus": "matti123",
+            "oikeus": "ADMIN",
+            "kayttajaid": 1
+        },
+        "removed": false
     }
 ]
 ```

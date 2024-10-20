@@ -4,6 +4,8 @@ Merkitään maksutapahtuma poistetuksi päivittämällä removed-kenttää.
 
 **URL** : `/api/maksutapahtumat/{id}`
 
+**URL Parameters** : `{id}`, jossa ID on maksutapahtuman maksutapahtumaId.
+
 **Method** : `PATCH`
 
 **Auth required** : YES
