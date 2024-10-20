@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Lippu {
@@ -15,10 +16,12 @@ public class Lippu {
 
     @ManyToOne
     @JoinColumn(name = "tapahtumaid", nullable = false)
+    @NotNull(message="tapahtuma ei saa olla null")
     private Tapahtuma tapahtuma;
 
     @ManyToOne
     @JoinColumn(name = "hinnastoId", nullable = false)
+    @NotNull(message="hinnasto ei saa olla null")
     private Hinnasto hinnasto;
 
     @ManyToOne
@@ -26,6 +29,7 @@ public class Lippu {
     private Maksutapahtuma maksutapahtuma;
 
     // jos käytetty true -> käyttämätön false
+    @NotNull(message="käytetty ei voi olla null")
     private Boolean kaytetty = false;
 
     //palautettu = -1 -> ei = 1
