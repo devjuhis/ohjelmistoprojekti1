@@ -27,6 +27,9 @@ public class Maksutapahtuma {
     @JoinColumn(name = "kayttajaId")
     private Kayttaja kayttaja;
 
+    // Poistettu true/false
+    private Boolean removed = false;
+
     // Parametriton konstruktori
     public Maksutapahtuma() {
     }
@@ -87,6 +90,15 @@ public class Maksutapahtuma {
 
     public void setKayttaja(Kayttaja kayttaja) {
         this.kayttaja = kayttaja;
+    }
+
+
+    public Boolean getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(Boolean removed) {
+        this.removed = removed;
     }
 
     // ToString ilman erittelyt-listaa

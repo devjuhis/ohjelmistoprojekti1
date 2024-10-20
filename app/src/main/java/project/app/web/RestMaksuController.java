@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -88,6 +89,30 @@ public class RestMaksuController {
             logger.error("Unexpected error: {}", e.getMessage());
             // Palautetaan 500 Internal Server Error yleisten virheiden osalta
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
+        }
+    }
+
+    // REST soft delete maksutapahtuma
+    @PatchMapping("/maksutapahtumat/{id}")
+    public ResponseEntity<Maksutapahtuma> softDeleteMaksutapahtuma(@PathVariable Long id) {
+        logger.info("Soft deleting maksutapahtuma with id: {}", id);
+
+        // Haetaan maksutapahtumat ID:llä
+        Optional<Maksutapahtuma> maksutapahtuma = maksurepository.findById(id);
+
+        if (maksutapahtuma.isPresent()) {
+            if(!maksutapahtuma.get().getRemoved()) {
+                Maksutapahtuma maksutapahtumaOk = maksutapahtuma.get();
+
+                maksutapahtumaOk.setRemoved(true);
+
+                maksurepository.save(maksutapahtumaOk);
+                return ResponseEntity.ok(maksutapahtumaOk);
+            } else {
+                return ResponseEntity.status(HttpStatus.GONE).build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
