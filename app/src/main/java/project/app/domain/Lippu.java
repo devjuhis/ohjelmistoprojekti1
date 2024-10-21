@@ -132,10 +132,9 @@ public class Lippu {
     }
 
     public void setRemoved(Boolean removed) {
-        if (kaytetty == true || maara == -1  && removed == true) {
+        if (removed == true && (kaytetty == true || maara == -1)) {
             throw new BadRequestException("Lippua ei voi asettaa 'poistettu', jos se on jo käytetty tai palautettu.");
-        }
-        else {
+        } else {
             this.removed = removed;
         }
     }
