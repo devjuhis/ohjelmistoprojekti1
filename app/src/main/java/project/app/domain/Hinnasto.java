@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Hinnasto {
@@ -18,11 +20,15 @@ public class Hinnasto {
     //FK erittely_id
     @ManyToOne
     @JoinColumn(name = "tapahtumaId", nullable = false)
+    @NotNull(message="tapahtuma ei saa olla null")
     private Tapahtuma tapahtuma;
 
     @Column (length = 30)
+    @NotNull(message="hintaluokka ei saa olla null")
     private String hintaluokka;
 
+    @Min(value = 0 , message = "hinta ei voi olla negatiivinen" )
+    @NotNull(message="hinta ei saa olla null")
     private double hinta;
 
     public Hinnasto() {
