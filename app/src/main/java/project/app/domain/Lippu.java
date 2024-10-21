@@ -1,11 +1,15 @@
 package project.app.domain;
 
+import exceptions.BadRequestException;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -33,9 +37,11 @@ public class Lippu {
     private Boolean kaytetty = false;
 
     //palautettu = -1 -> ei = 1
+    @Min(value = -1, message = "maara voi olla vain -1 (palautettu) tai 1 (ei palautettu)")
+    @Max(value = 1, message = "maara voi olla vain 1 (ei palautettu) tai -1 (palautettu)")
     private int maara = 1;
 
-    
+    @NotNull(message="removed ei voi olla null")
     private Boolean removed = false;
 
     public Lippu() {
@@ -92,18 +98,32 @@ public class Lippu {
     }
 
     public void setKaytetty(Boolean kaytetty) {
-        this.kaytetty = kaytetty;
-    }
+
+        if (kaytetty == true && removed == true) {
+            throw new BadRequestException("Lippua ei voida asettaa käytetyksi, koska se on poistettu.");
+        } 
+        else if (kaytetty == true && maara == -1) {
+            throw new BadRequestException("Lippua ei voida asettaa käytetyksi, koska se on palautettu.");
+        } 
+        else {
+            this.kaytetty = kaytetty;
+        }
+}  
 
     public int getMaara() {
         return maara;
     }
 
     public void setMaara(int maara) {
+        
+        if (maara == -1 && (removed || kaytetty)) {
+            throw new BadRequestException("Maara ei voi olla -1 (palautettu), jos lippu on poistettu tai käytetty.");
+        }
+    
         if (maara == 1 || maara == -1) {
-            this.maara = maara; // Aseta arvo vain, jos se on 1 tai -1
+            this.maara = maara;
         } else {
-            throw new IllegalArgumentException("Maara voi olla vain 1 tai -1");
+            throw new BadRequestException("Maara voi olla vain 1 tai -1");
         }
     }
 
@@ -112,7 +132,12 @@ public class Lippu {
     }
 
     public void setRemoved(Boolean removed) {
-        this.removed = removed;
+        if (kaytetty == true || maara == -1  && removed == true) {
+            throw new BadRequestException("Lippua ei voi asettaa 'poistettu', jos se on jo käytetty tai palautettu.");
+        }
+        else {
+            this.removed = removed;
+        }
     }
 
     @Override

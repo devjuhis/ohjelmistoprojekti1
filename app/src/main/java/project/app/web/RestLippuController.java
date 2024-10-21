@@ -160,7 +160,7 @@ public class RestLippuController {
             //voidaan poistaa mahdollisuus muokata tapahtumaa, hinnastoa ja maksutapahtumaa REST API:ssa 
             //poistamalla ne tästä...
 
-            if (updatedLippu.getTapahtuma() != null) {
+            /*if (updatedLippu.getTapahtuma() != null) {
                 existingLippu.setTapahtuma(updatedLippu.getTapahtuma());
             }
             if (updatedLippu.getHinnasto() != null) {
@@ -168,12 +168,15 @@ public class RestLippuController {
             }
             if (updatedLippu.getMaksutapahtuma() != null) {
                 existingLippu.setMaksutapahtuma(updatedLippu.getMaksutapahtuma());
-            }
+            }*/
             if (updatedLippu.getKaytetty() != null) {
                 existingLippu.setKaytetty(updatedLippu.getKaytetty());
             }
             if (updatedLippu.getMaara() != 0) {
                 existingLippu.setMaara(updatedLippu.getMaara());
+            }
+            if (updatedLippu.getRemoved() != null) {
+                existingLippu.setRemoved(updatedLippu.getRemoved());
             }
 
             Lrepository.save(existingLippu);
