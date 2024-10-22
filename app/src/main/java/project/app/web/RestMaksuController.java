@@ -76,7 +76,7 @@ public class RestMaksuController {
         logger.info("Creating new maksutapahtuma");
 
         try {
-            Kayttaja kayttaja = kayttajarepository.findById(maksutapahtuma.getKayttaja().getKayttajaid())
+            Kayttaja kayttaja = kayttajarepository.findById(maksutapahtuma.getKayttaja().getKayttajaId())
                 .orElseThrow(() -> new RuntimeException("Käyttäjää ei löydy"));
             maksutapahtuma.setKayttaja(kayttaja);
             LocalDateTime aikaleima = LocalDateTime.now();
