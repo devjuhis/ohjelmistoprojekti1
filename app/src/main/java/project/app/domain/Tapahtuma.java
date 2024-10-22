@@ -2,8 +2,6 @@ package project.app.domain;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
