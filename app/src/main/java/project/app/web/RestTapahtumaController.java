@@ -3,6 +3,10 @@ package project.app.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +17,7 @@ import project.app.domain.TapahtumaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -38,31 +43,46 @@ public class RestTapahtumaController {
     public ResponseEntity<Tapahtuma> getTapahtumaById(@PathVariable Long id) {
         logger.info("Fetching tapahtuma with id: {}", id);
         Optional<Tapahtuma> tapahtuma = repository.findById(id);
+
         return tapahtuma.map(ResponseEntity::ok)
+                // Vastauskoodi 404, jos tapahtumaa ei löydy id:llä
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-     // REST haetaan kaikki hinnastot tapahtuma id:llä
+    // REST haetaan kaikki hinnastot tapahtuma id:llä
     @GetMapping("/tapahtumat/{tapahtumaId}/hinnastot")
     public ResponseEntity<List<Hinnasto>> getHinnastotByTapahtumaId(@PathVariable Long tapahtumaId) {
         logger.info("Fetching liput for tapahtuma with id: {}", tapahtumaId);
-        
+
         // Hae tapahtuma ID:llä
         Optional<Tapahtuma> tapahtuma = repository.findById(tapahtumaId);
-        
+
         if (tapahtuma.isPresent()) {
             List<Hinnasto> hinnastot = Hrepository.findByTapahtuma(tapahtuma.get());
             return hinnastot.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(hinnastot);
         } else {
-            return ResponseEntity.notFound().build(); // Palautetaan 404, jos tapahtumaa ei löydy
+            return ResponseEntity.notFound().build(); // Vastauskoodi 404, jos tapahtumaa ei löydy
         }
     }
 
     // REST luodaan uusi tapahtuma
     @PostMapping("/tapahtumat")
-    public Tapahtuma createTapahtuma(@RequestBody Tapahtuma tapahtuma) {
+    public ResponseEntity<?> createTapahtuma(@Valid @RequestBody Tapahtuma tapahtuma, BindingResult bindingResult) {
         logger.info("Creating new tapahtuma");
-        return repository.save(tapahtuma);
+
+        // Jos validoinnissa on virheitä...
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getFieldErrors()
+                    .stream()
+                    .map(FieldError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            // ...validointivirheet listataan vastaukseen:
+            return ResponseEntity.badRequest().body(errors);
+        } else {
+            // Tallennetaan uusi tapahtuma, jos validointi on onnistunut
+            // Vastauskoodi 201 Created
+            return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tapahtuma));
+        }
     }
 
     // REST päivitetään tapahtuma id:llä
@@ -95,8 +115,10 @@ public class RestTapahtumaController {
             }
 
             repository.save(existingTapahtuma);
+            // Palautetaan 200 OK, jos tiedot on päivitetty onnistuneesti
             return ResponseEntity.ok(existingTapahtuma);
         } else {
+            // Palautetaan 404 Not Found, jos tapahtumaa ei löydy
             return ResponseEntity.notFound().build();
         }
     }
@@ -109,8 +131,10 @@ public class RestTapahtumaController {
 
         if (tapahtuma.isPresent()) {
             repository.delete(tapahtuma.get());
+            // Palautetaan 204 No Content, kun tapahtuma on onnistuneesti poistettu
             return ResponseEntity.noContent().build();
         } else {
+            // Palautetaan 404 Not Found, jos tapahtumaa ei löydy
             return ResponseEntity.notFound().build();
         }
     }
