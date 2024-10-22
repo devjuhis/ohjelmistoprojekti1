@@ -2,16 +2,16 @@ package project.app.web;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 import project.app.domain.Kayttaja;
 import project.app.domain.KayttajaRepository;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -47,10 +47,24 @@ public class RestKayttajaController {
 
     // REST luodaan uusi käyttäjä
     @PostMapping("/kayttajat")
-    public Kayttaja createKayttaja(@RequestBody Kayttaja newKayttaja) {
-        logger.info("Creating new kayttaja");
-        return repository.save(newKayttaja);
+    public ResponseEntity<?> createKayttaja(@Valid @RequestBody Kayttaja newKayttaja) {
+    logger.info("Creating new kayttaja");
+
+    // Testataan onko käyttäjätunnus olemassa
+    Optional<Kayttaja> existingKayttaja = Optional.ofNullable(repository.findByKayttajatunnus(newKayttaja.getKayttajatunnus()));
+    
+    if (existingKayttaja.isPresent()) {
+        // Jos käyttäjätunnus on olemassa palautetaan koodi 400
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Error: Username already exists");
     }
+    
+    // Tallennetaan käyttäjä, jos käyttäjätunnus on uniikki
+    Kayttaja savedKayttaja = repository.save(newKayttaja);
+    
+    return ResponseEntity.status(HttpStatus.CREATED).body(savedKayttaja);
+}
 
     // REST muokataan käyttäjän tietoja
     @PatchMapping("/kayttajat/{id}")
@@ -71,7 +85,6 @@ public class RestKayttajaController {
 
             if (ediKayttaja.getSalasana() != null) {
                 oldkayttaja.setSalasana(ediKayttaja.getSalasana());
-                ;
             }
 
             if (ediKayttaja.getKayttajatunnus() != null) {
@@ -80,7 +93,6 @@ public class RestKayttajaController {
 
             if (ediKayttaja.getOikeus() != null) {
                 oldkayttaja.setOikeus(ediKayttaja.getOikeus());
-                ;
             }
 
             repository.save(oldkayttaja);
@@ -101,6 +113,32 @@ public class RestKayttajaController {
         if (kayttaja.isPresent()) {
             repository.deleteById(id);
             return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // REST soft delete käyttäjälle
+
+    @PatchMapping("/kayttajat/softdelete/{id}")
+    public ResponseEntity<Kayttaja> softDeleteMaksutapahtuma(@PathVariable Long id) {
+        logger.info("Soft deleting kayttaja with id: {}", id);
+
+        // Haetaan maksutapahtumat ID:llä
+        Optional<Kayttaja> kayttaja = repository.findById(id);
+
+        if (kayttaja.isPresent()) {
+            // haetaan aktiivinen käyttäjä
+            if(kayttaja.get().getAktiivisuus()) {
+                Kayttaja kayttaja2 = kayttaja.get();
+                // asetetaan käyttäjä epäaktiiviseksi
+                kayttaja2.setAktiivisuus(false);
+
+                repository.save(kayttaja2);
+                return ResponseEntity.ok(kayttaja2);
+            } else {
+                return ResponseEntity.status(HttpStatus.GONE).build();
+            }
         } else {
             return ResponseEntity.notFound().build();
         }
