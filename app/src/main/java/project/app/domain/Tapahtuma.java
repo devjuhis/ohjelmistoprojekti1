@@ -2,6 +2,8 @@ package project.app.domain;
 
 import java.time.LocalDate;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Tapahtuma {
@@ -11,24 +13,31 @@ public class Tapahtuma {
     private long tapahtumaId;
 
     @Column(length = 60)
+    @NotNull(message = "Nimi ei voi olla null")
     private String nimi;
 
+    @NotNull(message = "Aika ei voi olla null")
     private LocalDate aika;
 
     @Column(length = 60)
+    @NotNull(message = "Paikka ei voi olla null")
     private String paikka;
 
     @Column(length = 500)
     private String kuvaus;
 
+    @NotNull(message = "Lippumaara ei voi olla null")
+    @Min(value = 0, message = "Lippumaara ei voi olla negatiivinen")
     private int lippumaara;
 
+    @NotNull(message = "Ennakkomyynti ei voi olla null")
     private LocalDate ennakkomyynti;
 
     public Tapahtuma() {
     }
 
-    public Tapahtuma(String nimi, LocalDate aika, String paikka, String kuvaus, int lippumaara, LocalDate ennakkomyynti) {
+    public Tapahtuma(String nimi, LocalDate aika, String paikka, String kuvaus, int lippumaara,
+            LocalDate ennakkomyynti) {
         this.nimi = nimi;
         this.aika = aika;
         this.paikka = paikka;
