@@ -1,9 +1,13 @@
 package project.app.domain;
 
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.NumberFormat;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Tapahtuma {
@@ -12,24 +16,32 @@ public class Tapahtuma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long tapahtumaId;
 
+    // Tapahtuman nimi
     @Column(length = 60)
     @NotNull(message = "Nimi ei voi olla null")
     private String nimi;
 
+    // Tapahtuman ajankohta
+    @FutureOrPresent(message = "Tapahtuman aika ei voi olla menneisyydessä")
     @NotNull(message = "Aika ei voi olla null")
     private LocalDate aika;
 
+    // Paikka, jossa tapahtuma järjestetään
     @Column(length = 60)
     @NotNull(message = "Paikka ei voi olla null")
     private String paikka;
 
+    // Tapahtuman kuvaus
     @Column(length = 500)
     private String kuvaus;
 
+    // Tapahtumaan myytävien lippujen määrä
     @NotNull(message = "Lippumaara ei voi olla null")
-    @Min(value = 0, message = "Lippumaara ei voi olla negatiivinen")
+    @PositiveOrZero(message = "Lippumaara ei voi olla negatiivinen")
     private int lippumaara;
 
+    // Ennakkomyynnin loppumisen ajankohta
+    @FutureOrPresent(message = "Ajankohta ei voi olla menneisyydessä")
     @NotNull(message = "Ennakkomyynti ei voi olla null")
     private LocalDate ennakkomyynti;
 
