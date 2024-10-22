@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
@@ -15,7 +17,11 @@ public class Maksutapahtuma {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long maksutapahtumaId;
+
+    @NotNull(message = "Hinta yhteensä ei saa olla null")
+    @Min(value=0, message = "Hinta yhteensä ei voi olla alle 0")
     private double hintayhteensa;
+    @NotNull(message = "Aikaleima ei saa olla null")
     private LocalDateTime aikaleima;
     
     //FK erittely_id
@@ -25,9 +31,11 @@ public class Maksutapahtuma {
     //FK kayttaja_id
     @ManyToOne
     @JoinColumn(name = "kayttajaId")
+    @NotNull(message = "käyttäjä ei saa olla null")
     private Kayttaja kayttaja;
 
     // Poistettu true/false
+    @NotNull(message = "poistettu-tila/removed ei saa olla null")
     private Boolean removed = false;
 
     // Parametriton konstruktori
