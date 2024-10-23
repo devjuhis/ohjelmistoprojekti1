@@ -10,8 +10,8 @@ public class AuthResponse {
         this.jwt = jwt;
     }
 
-    // JWT-tokenin palautus, settereitä ei ole syytä olla ettei tokenia sillä generoitua tokenia ei ole syytä muokata
-    
+    // JWT-tokenin palautus, settereitä ei ole syytä sillä generoitua tokenia ei tule muokata
+
     public String getJwt() {
         return jwt;
     }
