@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
@@ -26,10 +28,14 @@ public class RestKayttajaController {
     private static final Logger logger = LoggerFactory.getLogger(RestKayttajaController.class);
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private KayttajaRepository repository;
 
     // REST haetaan kaikki käyttäjät
     @GetMapping("/kayttajat")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Kayttaja> getAllKayttajat() {
         logger.info("Fetching all kayttajat");
         return (List<Kayttaja>) repository.findAll();
@@ -60,8 +66,10 @@ public class RestKayttajaController {
                 .body("Error: Username already exists");
     }
     
-    // Tallennetaan käyttäjä, jos käyttäjätunnus on uniikki
-    Kayttaja savedKayttaja = repository.save(newKayttaja);
+    // Tallennetaan käyttäjä ja kryptataan salasana, jos käyttäjätunnus on uniikki
+    Kayttaja savedKayttaja = newKayttaja;
+    savedKayttaja.setSalasana(passwordEncoder.encode(newKayttaja.getSalasana()));
+    repository.save(savedKayttaja);
     
     return ResponseEntity.status(HttpStatus.CREATED).body(savedKayttaja);
 }
@@ -84,7 +92,7 @@ public class RestKayttajaController {
             }
 
             if (ediKayttaja.getSalasana() != null) {
-                oldkayttaja.setSalasana(ediKayttaja.getSalasana());
+                oldkayttaja.setSalasana(passwordEncoder.encode(ediKayttaja.getSalasana()));
             }
 
             if (ediKayttaja.getKayttajatunnus() != null) {

@@ -3,10 +3,13 @@ package project.app;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import project.app.domain.Erittely;
 import project.app.domain.ErittelyRepository;
@@ -23,6 +26,9 @@ import project.app.domain.TapahtumaRepository;
 
 @SpringBootApplication
 public class AppApplication {
+
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppApplication.class, args);
@@ -42,7 +48,8 @@ public class AppApplication {
 					new Tapahtuma("Uusi tapahtuma", aika, "Olympiastadion", "Hyvä tapahtuma :D", 600, myynninloppu));
 			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "opiskelija", 12));
 			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "elakelainen", 11));
-			kayttajarepo.save(new Kayttaja("matti", "esimerkki", "salasana", "matti123", "ADMIN"));
+
+			kayttajarepo.save(new Kayttaja("matti", "esimerkki", passwordEncoder.encode("salasana"), "matti123", "ADMIN"));
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1)));
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
 					maksurepo.findByMaksutapahtumaId(1), false, 1, false));
