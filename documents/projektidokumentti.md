@@ -47,6 +47,7 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > tapahtuma_id | int PK | Tapahtuman id
+> nimi | varchar(60) | Tapahtuman nimi
 > aika | date | Tapahtuman päivämäärä
 > paikka | varchar(60) | Tapahtuman sijainti
 > kuvaus | varchar(500) | Tapahtuman kuvaus
