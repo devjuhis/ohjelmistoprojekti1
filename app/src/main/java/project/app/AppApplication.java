@@ -50,6 +50,8 @@ public class AppApplication {
 			hintarepo.save(new Hinnasto(tapahtumarepo.findByTapahtumaId(1), "elakelainen", 11));
 
 			kayttajarepo.save(new Kayttaja("matti", "esimerkki", passwordEncoder.encode("salasana"), "matti123", "ADMIN"));
+			kayttajarepo.save(new Kayttaja("matti2", "esimerkki2", passwordEncoder.encode("salasana"), "matti321", "USER"));
+
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1)));
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
 					maksurepo.findByMaksutapahtumaId(1), false, 1, false));

@@ -9,11 +9,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import project.app.domain.AuthRequest;
-import project.app.domain.AuthResponse;
+import project.app.dto.AuthRequest;
+import project.app.dto.AuthResponse;
+import project.app.security.JwtTokenUtil;
+import project.app.service.UserService;
 
 
 @RestController
+@RequestMapping("/api")
 public class AutentikointiController {
 
     @Autowired

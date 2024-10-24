@@ -1,4 +1,4 @@
-package project.app.web;
+package project.app.security;
 
 import java.security.Key;
 import java.util.Date;

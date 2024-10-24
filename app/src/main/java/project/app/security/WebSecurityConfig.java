@@ -1,4 +1,4 @@
-package project.app.web;
+package project.app.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import project.app.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,7 +21,7 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class WebSecurityConfig {
 
     @Autowired
@@ -29,8 +32,7 @@ public class WebSecurityConfig {
 
     private static final AntPathRequestMatcher[] WHITE_LIST_URLS = {
     new AntPathRequestMatcher("/h2-console/**"),
-    new AntPathRequestMatcher("/login"),
-    new AntPathRequestMatcher("/login/**")
+    new AntPathRequestMatcher("/api/login"),
     };
 
     @Bean
@@ -38,7 +40,7 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(
                 authorize -> authorize
                         .requestMatchers(WHITE_LIST_URLS).permitAll() // Sallitaan listatut urlit
-                        .requestMatchers(antMatcher("/kayttajat/**")).hasRole("ADMIN") // Asetetaan käyttäjien muokkaukseen vain ADMIN-tason käyttäjät
+                        // EI TOIMI .requestMatchers(antMatcher("/api/kayttajat/**")).hasRole("ADMIN") // Asetetaan käyttäjien muokkaukseen vain ADMIN-tason käyttäjät
                         .anyRequest().authenticated())
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .csrf(csrf -> csrf.disable())

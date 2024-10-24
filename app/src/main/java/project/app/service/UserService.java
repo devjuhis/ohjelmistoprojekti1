@@ -1,4 +1,4 @@
-package project.app.web;
+package project.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -21,12 +21,8 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Kayttaja kirjautunutkayttaja = repository.findByKayttajatunnus(username);
         if (kirjautunutkayttaja == null) {
-            System.out.println("Käyttäjää ei löytynyt: " + username);
             throw new UsernameNotFoundException("Käyttäjää ei löytynyt: " + username);
         }
-
-         // Tulosta käyttäjätiedot debugia varten
-        System.out.println("Käyttäjä löytyi: " + kirjautunutkayttaja);
 
         return new org.springframework.security.core.userdetails.User(kirjautunutkayttaja.getKayttajatunnus(), kirjautunutkayttaja.getSalasana(), 
                         AuthorityUtils.createAuthorityList(kirjautunutkayttaja.getOikeus()));

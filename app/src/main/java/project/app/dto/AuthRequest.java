@@ -1,4 +1,4 @@
-package project.app.domain;
+package project.app.dto;
 
 public class AuthRequest {
     
