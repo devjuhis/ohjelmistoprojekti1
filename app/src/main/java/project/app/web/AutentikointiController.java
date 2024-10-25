@@ -9,6 +9,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import exceptions.CustomErrorResponse;
+
 import project.app.dto.AuthRequest;
 import project.app.dto.AuthResponse;
 import project.app.security.JwtTokenUtil;
@@ -36,7 +38,9 @@ public class AutentikointiController {
                 new UsernamePasswordAuthenticationToken(authRequest.getKayttajatunnus(), authRequest.getSalasana())
             );
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Virheelliset tunnukset");
+            return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(new CustomErrorResponse("Virheelliset tunnukset", HttpStatus.UNAUTHORIZED.value()));
         }
 
         // Generoidaan JWT-token

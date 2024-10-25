@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import exceptions.CustomErrorResponse;
 import project.app.domain.Kayttaja;
 import project.app.domain.KayttajaRepository;
 import project.app.domain.Lippu;
@@ -85,12 +86,12 @@ public class RestMaksuController {
         } catch (RuntimeException e) {
             logger.error("Error creating maksutapahtuma: {}", e.getMessage());
             // Palautetaan 400 Bad Request ja virheviesti
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
 
         } catch (Exception e) {
             logger.error("Unexpected error: {}", e.getMessage());
             // Palautetaan 500 Internal Server Error yleisten virheiden osalta
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CustomErrorResponse("Unexpected error", HttpStatus.INTERNAL_SERVER_ERROR.value()));
         }
     }
 

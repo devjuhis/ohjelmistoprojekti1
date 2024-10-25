@@ -11,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import exceptions.CustomErrorResponse;
 import jakarta.validation.Valid;
 import project.app.domain.Kayttaja;
 import project.app.domain.KayttajaRepository;
@@ -63,7 +65,7 @@ public class RestKayttajaController {
         // Jos käyttäjätunnus on olemassa palautetaan koodi 400
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body("Error: Username already exists");
+                .body(new CustomErrorResponse("Error: Username already exists", HttpStatus.BAD_REQUEST.value()));
     }
     
     // Tallennetaan käyttäjä ja kryptataan salasana, jos käyttäjätunnus on uniikki

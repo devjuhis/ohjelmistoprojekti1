@@ -1,7 +1,5 @@
 package project.app.domain;
 
-import exceptions.BadRequestException;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -60,12 +58,12 @@ public class Lippu {
         this.maara = maara;
     }
 
-    // getterit ja setterit
+    // Getterit ja setterit
     public long getLippuId() {
         return lippuId;
     }
 
-    public void setLippuId(int lippuId) {
+    public void setLippuId(long lippuId) {
         this.lippuId = lippuId;
     }
 
@@ -98,33 +96,15 @@ public class Lippu {
     }
 
     public void setKaytetty(Boolean kaytetty) {
-
-        if (kaytetty == true && removed == true) {
-            throw new BadRequestException("Lippua ei voida asettaa käytetyksi, koska se on poistettu.");
-        } 
-        else if (kaytetty == true && maara == -1) {
-            throw new BadRequestException("Lippua ei voida asettaa käytetyksi, koska se on palautettu.");
-        } 
-        else {
-            this.kaytetty = kaytetty;
-        }
-}  
+        this.kaytetty = kaytetty;
+    }
 
     public int getMaara() {
         return maara;
     }
 
     public void setMaara(int maara) {
-        
-        if (maara == -1 && (removed || kaytetty)) {
-            throw new BadRequestException("Maara ei voi olla -1 (palautettu), jos lippu on poistettu tai käytetty.");
-        }
-    
-        if (maara == 1 || maara == -1) {
-            this.maara = maara;
-        } else {
-            throw new BadRequestException("Maara voi olla vain 1 tai -1");
-        }
+        this.maara = maara;
     }
 
     public Boolean getRemoved() {
@@ -132,11 +112,7 @@ public class Lippu {
     }
 
     public void setRemoved(Boolean removed) {
-        if (removed == true && (kaytetty == true || maara == -1)) {
-            throw new BadRequestException("Lippua ei voi asettaa 'poistettu', jos se on jo käytetty tai palautettu.");
-        } else {
-            this.removed = removed;
-        }
+        this.removed = removed;
     }
 
     @Override

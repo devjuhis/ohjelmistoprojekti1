@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import exceptions.CustomErrorResponse;
 import project.app.domain.Hinnasto;
 import project.app.domain.HinnastoRepository;
 import project.app.domain.Tapahtuma;
@@ -65,7 +66,7 @@ public class RestHinnastoController {
             // annetun hinnan tarkistus
             if (newHinnasto.getHinta() <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Hinta pitää olla positiivinen tai suurempi kuin 0.");
+                        .body(new CustomErrorResponse("Hinta pitää olla positiivinen tai suurempi kuin 0.", HttpStatus.BAD_REQUEST.value()));
             }
 
             Hinnasto savedHinnasto = hinnastoRepository.save(newHinnasto);
@@ -75,11 +76,11 @@ public class RestHinnastoController {
         } catch (RuntimeException e) {
             logger.error("Error creating Hinnasto: {}", e.getMessage());
             // Palautetaan 400 Bad Request ja virheviesti
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
         } catch (Exception e) {
             logger.error("Unexpected error: {}", e.getMessage());
             // Palautetaan 500 Internal Server Error yleisten virheiden osalta
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CustomErrorResponse("An unexpected error occurred.", HttpStatus.INTERNAL_SERVER_ERROR.value()));
         }
     }
 
@@ -102,7 +103,7 @@ public class RestHinnastoController {
             if (ediHinnasto.getHinta() > 0) {
                 oldHinnasto.setHinta(ediHinnasto.getHinta());
             } else {
-                return ResponseEntity.badRequest().body( "Hinta pitää olla positiivinen tai suurempi kuin 0.");
+                return ResponseEntity.badRequest().body(new CustomErrorResponse("Hinta pitää olla positiivinen tai suurempi kuin 0.", HttpStatus.BAD_REQUEST.value()));
             }
             
             hinnastoRepository.save(oldHinnasto);
