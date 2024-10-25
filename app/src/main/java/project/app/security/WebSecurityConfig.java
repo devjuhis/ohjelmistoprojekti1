@@ -16,6 +16,7 @@ import project.app.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
@@ -40,7 +41,25 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(
                 authorize -> authorize
                         .requestMatchers(WHITE_LIST_URLS).permitAll() // Sallitaan listatut urlit
-                        .requestMatchers(antMatcher("/api/kayttajat/**")).hasAuthority("ADMIN") // Asetetaan käyttäjien muokkaukseen vain ADMIN-tason käyttäjät
+
+                        // Käyttäjät / vain ADMIN-tason käyttäjät
+                        .requestMatchers(antMatcher("/api/kayttajat/**")).hasAuthority("ADMIN") 
+                        
+                        // Maksutapahtuma
+                        .requestMatchers(HttpMethod.GET, "/api/maksutapahtumat/**").hasAnyAuthority("USER", "ADMIN")
+                        // Vain userit voivat muokata maksutapahtumia (POST, PATCH/softdelete -pyynnöt)
+                        .requestMatchers(HttpMethod.POST, "/api/maksutapahtumat/**").hasAuthority("USER")
+                        .requestMatchers(HttpMethod.PATCH, "/api/maksutapahtumat/**").hasAuthority("USER")
+
+                        // Tapahtuma
+                        .requestMatchers(HttpMethod.GET, "/api/tapahtumat/**").hasAnyAuthority("USER", "ADMIN")
+                        // Vain adminit voivat muokata tapahtumia (POST, PATCH, DELETE -pyynnöt)
+                        .requestMatchers(HttpMethod.POST, "/api/tapahtumat/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/tapahtumat/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/tapahtumat/**").hasAuthority("ADMIN")
+                        
+            
+
                         .anyRequest().authenticated())
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .csrf(csrf -> csrf.disable())
