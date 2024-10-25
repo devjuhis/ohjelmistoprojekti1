@@ -40,7 +40,7 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(
                 authorize -> authorize
                         .requestMatchers(WHITE_LIST_URLS).permitAll() // Sallitaan listatut urlit
-                        // EI TOIMI .requestMatchers(antMatcher("/api/kayttajat/**")).hasRole("ADMIN") // Asetetaan käyttäjien muokkaukseen vain ADMIN-tason käyttäjät
+                        .requestMatchers(antMatcher("/api/kayttajat/**")).hasAuthority("ADMIN") // Asetetaan käyttäjien muokkaukseen vain ADMIN-tason käyttäjät
                         .anyRequest().authenticated())
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .csrf(csrf -> csrf.disable())

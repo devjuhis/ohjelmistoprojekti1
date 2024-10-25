@@ -32,12 +32,12 @@ public class JwtTokenUtil {
 
     // Tokenista käyttäjänimen haku
     public String getUsernameFromToken(String token) {
-        return Jwts.parser().setSigningKey(AVAIN).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parserBuilder().setSigningKey(AVAIN).build().parseClaimsJws(token).getBody().getSubject();
     }
 
     // Tarkista, onko token vanhentunut
     private Boolean isTokenExpired(String token) {
-        final Date expiration = Jwts.parser().setSigningKey(AVAIN).parseClaimsJws(token).getBody().getExpiration();
+        final Date expiration = Jwts.parserBuilder().setSigningKey(AVAIN).build().parseClaimsJws(token).getBody().getExpiration();
         return expiration.before(new Date());
     }
 
