@@ -56,7 +56,7 @@ public class Maksutapahtuma {
     }
 
 
-    public void setMaksutapahtuma_id(long maksutapahtumaId) {
+    public void setMaksutapahtumaId(long maksutapahtumaId) {
         this.maksutapahtumaId = maksutapahtumaId;
     }
 
