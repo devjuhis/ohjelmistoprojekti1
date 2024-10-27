@@ -11,8 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import project.app.domain.Erittely;
-import project.app.domain.ErittelyRepository;
+
 import project.app.domain.Hinnasto;
 import project.app.domain.HinnastoRepository;
 import project.app.domain.Kayttaja;
@@ -35,7 +34,7 @@ public class AppApplication {
 	}
 
 	@Bean
-	public CommandLineRunner ticketGuruDemo(ErittelyRepository erittelyrepo, HinnastoRepository hintarepo,
+	public CommandLineRunner ticketGuruDemo(HinnastoRepository hintarepo,
 			KayttajaRepository kayttajarepo, LippuRepository lippurepo, MaksutapahtumaRepository maksurepo,
 			TapahtumaRepository tapahtumarepo) {
 		return (args) -> {
@@ -57,7 +56,7 @@ public class AppApplication {
 					maksurepo.findByMaksutapahtumaId(1), false, 1, false));
 			lippurepo.save(new Lippu(tapahtumarepo.findByTapahtumaId(1), hintarepo.findByHinnastoId(1),
 					maksurepo.findByMaksutapahtumaId(1), false, 1, false));
-			// erittelyrepo.save(new Erittely(1, null, lippurepo.findByLippuid(1)));
+			
 
 			// Hae maksutapahtumaan liittyvät liput
 			List<Lippu> liput = lippurepo.findByMaksutapahtuma(maksurepo.findByMaksutapahtumaId(1));

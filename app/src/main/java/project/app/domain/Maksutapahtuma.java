@@ -23,10 +23,6 @@ public class Maksutapahtuma {
     private double hintayhteensa;
     @NotNull(message = "Aikaleima ei saa olla null")
     private LocalDateTime aikaleima;
-    
-    //FK erittely_id
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "maksutapahtuma")
-    //private List<Erittely> erittelyt;
 
     //FK kayttaja_id
     @ManyToOne
@@ -43,10 +39,9 @@ public class Maksutapahtuma {
     }
 
     // Parametrillinen konstruktori
-    public Maksutapahtuma(double hintayhteensa, LocalDateTime aikaleima, /*List<Erittely> erittelyt,*/ Kayttaja kayttaja) {
+    public Maksutapahtuma(double hintayhteensa, LocalDateTime aikaleima, Kayttaja kayttaja) {
         this.hintayhteensa = hintayhteensa;
         this.aikaleima = aikaleima;
-        //this.erittelyt = erittelyt;
         this.kayttaja = kayttaja;
     }
 
@@ -79,16 +74,6 @@ public class Maksutapahtuma {
     public void setAikaleima(LocalDateTime aikaleima) {
         this.aikaleima = aikaleima;
     }
-
-
-    /*public List<Erittely> getErittelyt() {
-        return erittelyt;
-    }*/
-
-
-    /*public void setErittelyt(List<Erittely> erittelyt) {
-        this.erittelyt = erittelyt;
-    }*/
 
 
     public Kayttaja getKayttaja() {
