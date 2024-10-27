@@ -16,7 +16,9 @@ Bodyssa on lähetettävä käyttäjän ID. Hintayhteensa lasketaan erikseen lipp
 
 ```json
 {
-    "kayttaja": "[Long]"
+     "kayttaja": {
+        "kayttajaid": "[Long]"
+    }
 }
 ```
 
@@ -61,11 +63,16 @@ Bodyssa on lähetettävä käyttäjän ID. Hintayhteensa lasketaan erikseen lipp
 
 **Code** : `400 BAD REQUEST`
 
-**Content example**: `{}`
+**Content example**:
+
+ ```json
+ {
+    "message": "Käyttäjää ei löydy",
+    "statusCode": 400,
+    "timestamp": "2024-10-27T18:12:22.2896226"
+}```
 
 ### Or
-
-!!Autentikointia ei ole vielä tehty!!
 
 **Condition** : Endpointia käyttävällä käyttäjällä ei ole USER-tason oikeuksia.
 

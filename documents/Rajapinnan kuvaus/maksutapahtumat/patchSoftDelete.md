@@ -56,8 +56,6 @@ Merkitään maksutapahtuma poistetuksi päivittämällä removed-kenttää.
 
 ### Or
 
-!!Autentikointia ei ole vielä tehty!!
-
 **Condition** : Endpointia käyttävällä käyttäjällä ei ole USER-tason oikeuksia.
 
 **Code** : `403 FORBIDDEN`

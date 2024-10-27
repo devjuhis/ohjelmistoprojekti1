@@ -10,13 +10,13 @@ Näyttää tiedon yksittäisestä maksutapahtumasta.
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER- tai ADMIN-tason oikeudet. 
 
 **Data**: `{}`
 
 ## Success Response
 
-**Condition** : Maksutapahtuman tulee olla olemassa ja pyynnön tekevällä käyttäjällä on USER-tason oikeudet.
+**Condition** : Maksutapahtuman tulee olla olemassa ja pyynnön tekevällä käyttäjällä on USER- tai ADMIN-tason oikeudet.
 
 **Code** : `200 OK`
 
@@ -49,9 +49,7 @@ Näyttää tiedon yksittäisestä maksutapahtumasta.
 
 ### Or
 
-!!Autentikointia ei ole vielä tehty!!
-
-**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
+**Condition** : Endpointia käyttävällä käyttäjällä ei ole USER- tai ADMIN-tason oikeuksia.
 
 **Code** : `403 FORBIDDEN`
 
