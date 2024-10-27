@@ -55,25 +55,15 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 > ennakkomyynti | date | Päivämäärä, jolloin lippujen ennakkomyynti loppuu
 
 > ### _Maksutapahtuma_
-> _Maksutapahtuma-taulu sisältää käyttäjätilit. Maksutapahtumalla voi olla monta erittelyä. Erittely kuuluu aina vain yhdelle maksutapahtumalle. Maksutapahtumalla voi olla yksi käyttäjä. Käyttäjällä voi olla useita maksutapahtumia._
+> _Maksutapahtuma-taulu sisältää maksutapahtumat. Maksutapahtumalla voi olla yksi käyttäjä. Käyttäjällä voi olla useita maksutapahtumia._
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > maksutapahtuma_id | int PK | Maksutapahtuman id
-> hintayhteensa | double |  Lippujen summa
+> hintayhteensa | double |  Lippujen hinnat yhteensä
 > aikaleima | date | Maksutapahtuman aika
 > kayttaja_id | int FK | Viittaus käyttäjään [käyttäjä](#Kayttaja)-taulussa
-> erittely_id | int FK | Viittaus erittelyyn [erittely](#Erittely)-taulussa
-
-> ### _Erittely_
-> _Erittely-taulu sisältää lippujen erittelyn. Erittelyllä voi olla yksi maksutapahtuma. Maksutapahtumalla voi olla monta erittelyä. Erittelyllä voi olla yksi lippu. Lipulla voi olla yksi erittely._
->
-> Kenttä | Tyyppi | Kuvaus
-> ------ | ------ | ------
-> erittely_id | int PK | Erittelyn id
-> maksutapahtuma_id | int FK | Viittaus maksutapahtumaan [maksutapahtuma](#Maksutapahtuma)-taulussa
-> lippu_id | int FK | Viittaus lippuun [lippu](#Lippu)-taulussa
-> maara | int | Lipun määrä 1 tai -1
+> removed | boolean | Maksutapahtuman soft delete, oletuksena false (true/false)
 
 > ### _Hinnasto_
 > _Hinnasto-taulu sisältää tapahtuman hinnastoluokat. Tapahtumalla voi olla useita hintaluokkia, mutta hintaluokka voi kuulua vain yhteen tapahtumaan._
