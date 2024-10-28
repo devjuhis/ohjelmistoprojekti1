@@ -1,9 +1,12 @@
-# Login esimerkkipohja
+# Login
 
-!! Login-toimintoa ja autentikaatiota ei ole vielä toteutettu !!
+Käyttäjän kirjautuminen, autentikaatio ja autentikointi.
 
+Käyttäjän on kirjauduttava järjestelmään ja saatava JSON Web Token (JWT) jokaisen istunnon alussa.
+Tämä JWT-token sisältää tiedot käyttäjän tunnistamisesta, oikeustasosta ja tokenin voimassaoloajasta. 
 
-Used to collect a Token for a registered User.
+JWT tokeni on sisällytettävä kaikkiin pyyntöihin mukaan `Authorization`-otsikkoon "`Bearer <token>`" muodossa.
+Token tarkistetaan jokaisen pyynnön yhteydessä ja sen voimassaolo, oikeellisuus, sekä käyttäjän oikeustason varmistetaan.
 
 **URL** : `/api/login/`
 
@@ -11,23 +14,17 @@ Used to collect a Token for a registered User.
 
 **Auth required** : NO
 
-**Data constraints**
-
-```json
-{
-    "username": "[valid email address]",
-    "password": "[password in plain text]"
-}
-```
+**Data constraints** : Käyttäjätunnus ja salasana on lähetettävä __JSON__-muodossa
 
 **Data example**
 
 ```json
 {
-    "username": "iloveauth@example.com",
-    "password": "abcd1234"
+	"kayttajatunnus":"iloveauth",
+	"salasana": "abcd1234!yXz?"
 }
 ```
+
 
 ## Success Response
 
@@ -37,22 +34,22 @@ Used to collect a Token for a registered User.
 
 ```json
 {
-    "token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d"
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTY3ODkwLCJleHAiOjE2MDA4ODgwMDB9.qZxvv9zJkTbhfR6KZDuvU0tyR8qk_YkJqZ0Iu9qXZ1U"
 }
 ```
 
 ## Error Response
 
-**Condition** : If 'username' and 'password' combination is wrong.
+**Condition** : Jos käyttäjätunnus tai salasana on väärin.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `401 Unauthorized`
 
 **Content** :
 
 ```json
 {
-    "non_field_errors": [
-        "Unable to login with provided credentials."
-    ]
+    "message": "Virheelliset tunnukset",
+    "statusCode": 401,
+    "timestamp": "2024-10-28T12:28:58.8050539"
 }
 ```
