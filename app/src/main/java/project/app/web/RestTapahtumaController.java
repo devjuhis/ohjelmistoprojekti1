@@ -16,7 +16,6 @@ import project.app.domain.Tapahtuma;
 import project.app.domain.TapahtumaRepository;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
