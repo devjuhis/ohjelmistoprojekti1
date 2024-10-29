@@ -23,20 +23,22 @@ Näyttää kaikki tiedot kaikista käyttäjistä.
 ```json
 [
     {
+        "kayttajaId": 1,
         "etunimi": "matti",
         "sukunimi": "esimerkki",
-        "salasana": "salasana",
+        "salasana": "$2a$10$4wtEm5kqOB8/vfGsjlxpf.HKPIvyr4AWb1tz66GRRm8ZIwRyRsnCK",
         "kayttajatunnus": "matti123",
         "oikeus": "ADMIN",
-        "kayttajaid": 1
+        "aktiivisuus": true
     },
     {
-        "etunimi": "minna",
-        "sukunimi": "esimerkki",
-        "salasana": "salasana",
-        "kayttajatunnus": "minna123",
+        "kayttajaId": 2,
+        "etunimi": "matti2",
+        "sukunimi": "esimerkki2",
+        "salasana": "$2a$10$TJaqm9Bo0f97xouTCJiE0OnYIbFITHH53LlAc8R3QpcAO82p2etLq",
+        "kayttajatunnus": "matti321",
         "oikeus": "USER",
-        "kayttajaid": 2
+        "aktiivisuus": true
     }
 ]
 ```

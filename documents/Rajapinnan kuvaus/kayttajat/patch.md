@@ -43,12 +43,13 @@ Päivitä käyttäjän yhtä tai useampaa tietoa.
 
 ```json
 {
+    "kayttajaId": 1,
     "etunimi": "uusimatti",
     "sukunimi": "uusiesimerkki",
-    "salasana": "salasana",
+    "salasana": "$2a$10$4wtEm5kqOB8/vfGsjlxpf.HKPIvyr4AWb1tz66GRRm8ZIwRyRsnCK",
     "kayttajatunnus": "matti123",
     "oikeus": "ADMIN",
-    "kayttajaid": 1
+    "aktiivisuus": true
 }
 ```
 
