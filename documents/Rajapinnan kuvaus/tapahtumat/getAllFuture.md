@@ -1,8 +1,8 @@
-# Kaikkien tapahtumien tiedot
+# Kaikkien tulevien tapahtumien tiedot
 
-Näyttää kaikki tiedot kaikista tapahtumista.
+Näyttää kaikki tiedot tulevista tapahtumista.
 
-**URL** : `/api/tapahtumat`
+**URL** : `/api/tapahtumat/tulevat`
 
 **Method** : `GET`
 
@@ -14,11 +14,11 @@ Näyttää kaikki tiedot kaikista tapahtumista.
 
 ## Success Responses
 
-**Condition** : Admin- ja User -tason käyttäjät näkevät kaikki ohjelmaan syötetyt tapahtumat.
+**Condition** : Admin- ja User -tason käyttäjät näkevät ohjelmaan syötetyt tapahtumat.
 
 **Code** : `200 OK`
 
-**Content** : Tässä esimerkissä haetaan kaikki tapahtumat ja API-kutsun vastauksena näytetään kaikki kaksi tapahtumaa.
+**Content** : Tässä esimerkissä haetaan kaikki tulevat tapahtumat ja API-kutsun vastauksena näytetään kaikki kaksi tapahtumaa, joiden ajankohta on tulevaisuudessa.
 
 ```json
 [
@@ -45,9 +45,7 @@ Näyttää kaikki tiedot kaikista tapahtumista.
 
 ### Or
 
-!!Autentikointia ei ole vielä tehty!!
-
-**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
+**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN- tai USER-tason oikeuksia.
 
 **Code** : `403 FORBIDDEN`
 
