@@ -32,9 +32,7 @@ Poistaa valitun käyttäjän, mikäli toiminnon tekevällä käyttäjällä on A
 
 ### Or
 
-!!Autentikointia ei ole vielä tehty!!
-
-**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
+**Condition** : Pyynnössä ei ole mukana toimivaa JWT-tokenia tai endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
 
 **Code** : `403 FORBIDDEN`
 
