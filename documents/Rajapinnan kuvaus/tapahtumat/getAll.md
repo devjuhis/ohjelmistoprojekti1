@@ -1,6 +1,6 @@
-# Kaikkien käyttäjien tiedot
+# Kaikkien tapahtumien tiedot
 
-Näyttää kaikki tiedot kaikista käyttäjistä.
+Näyttää kaikki tiedot kaikista tapahtumista.
 
 **URL** : `/api/tapahtumat`
 
