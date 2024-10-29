@@ -37,7 +37,6 @@ public class RestKayttajaController {
 
     // REST haetaan kaikki käyttäjät
     @GetMapping("/kayttajat")
-    @PreAuthorize("hasRole('ADMIN')")
     public List<Kayttaja> getAllKayttajat() {
         logger.info("Fetching all kayttajat");
         return (List<Kayttaja>) repository.findAll();
