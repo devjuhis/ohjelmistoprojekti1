@@ -36,7 +36,7 @@ Endpointit käyttäjien hallintaan. Ainoastaan admin-tason käyttäjä voi halli
 Endpointit tapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi lisätä, muokata ja poistaa tapahtumia, mutta sekä admin- että user-tasolla voi hakea kaikkien tai yksittäisen tapahtuman tiedot. Kirjautumattomilta käyttäjiltä käyttö on estetty.
 
 * [Näytä kaikki tapahtumat](tapahtumat/getAll.md) : `GET /api/tapahtumat`
-* [Näytä kaikki tapahtumat](tapahtumat/getAllFuture.md) : `GET /api/tapahtumat/tulevat`
+* [Näytä tulevat tapahtumat](tapahtumat/getAllFuture.md) : `GET /api/tapahtumat/tulevat`
 * [Näytä yksittäinen tapahtuma](tapahtumat/get.md) : `GET /api/tapahtumat/{id}`
 * [Luo uusi tapahtuma](tapahtumat/post.md) : `POST /api/tapahtumat`
 * [Päivitä tapahtuman yhtä tai useampaa tietoa](tapahtumat/patch.md) : `PATCH /api/tapahtumat/{id}`
