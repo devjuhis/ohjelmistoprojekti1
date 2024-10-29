@@ -15,9 +15,12 @@ import project.app.domain.Hinnasto;
 import project.app.domain.Tapahtuma;
 import project.app.domain.TapahtumaRepository;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api")
@@ -36,6 +39,18 @@ public class RestTapahtumaController {
     public List<Tapahtuma> getAllTapahtumat() {
         logger.info("Fetching all tapahtumat");
         return (List<Tapahtuma>) repository.findAll();
+    }
+
+    // REST haetaan kaikki tulevat tapahtumat
+    @GetMapping("/tapahtumat/tulevat")
+    public List<Tapahtuma> getAllFutureTapahtumat() {
+        logger.info("Fetching all future tapahtumat");
+
+        LocalDate currentDate = LocalDate.now();
+
+        return ((List<Tapahtuma>) repository.findAll()).stream()
+                .filter(tapahtuma -> tapahtuma.getAika().isAfter(currentDate))
+                .collect(Collectors.toList());
     }
 
     // REST haetaan tapahtumat id:llä
