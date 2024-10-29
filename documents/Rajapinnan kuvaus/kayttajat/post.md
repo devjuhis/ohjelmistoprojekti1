@@ -46,12 +46,13 @@ Käyttäjän ID-generoituu automaattisesti. Bodyssa on lähetettävä etunimi, s
 
 ```json
 {
+    "kayttajaId": 3,
     "etunimi": "minna",
     "sukunimi": "esimerkki",
-    "salasana": "salasana",
+    "salasana": "$2a$10$/kE5X6t2EtjqQr745yxCbODxcKR9JcOWK6PflZ4yiMZAMxPeCJNoO",
     "kayttajatunnus": "minna123",
     "oikeus": "USER",
-    "kayttajaid": 2
+    "aktiivisuus": true
 }
 ```
 

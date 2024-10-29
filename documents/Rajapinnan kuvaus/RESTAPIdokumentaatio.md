@@ -30,6 +30,7 @@ Endpointit käyttäjien hallintaan. Ainoastaan admin-tason käyttäjä voi halli
 * [Luo uusi käyttäjä](kayttajat/post.md) : `POST /api/kayttajat`
 * [Päivitä käyttäjän yhtä tai useampaa tietoa](kayttajat/patch.md) : `PATCH /api/kayttajat/{id}`
 * [Poista käyttäjä](kayttajat/delete.md) : `DELETE /api/kayttajat/{id}`
+* [Softdelete käyttäjälle](kayttajat/softdelete.md) : `PATCH /api/softdelete/{id}`
 
 ### Tapahtumien hallinta
 
