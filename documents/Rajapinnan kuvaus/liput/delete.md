@@ -1,6 +1,6 @@
 # Lipun poistaminen
 
-Poistaa valitun lipun, mikäli toiminnon tekevällä käyttäjällä on ADMIN-tason oikeudet.
+Poistaa valitun lipun, mikäli toiminnon tekevällä käyttäjällä on USER-tason oikeudet.
 
 **URL** : `/api/liput/{id}`
 
@@ -10,7 +10,7 @@ Poistaa valitun lipun, mikäli toiminnon tekevällä käyttäjällä on ADMIN-ta
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava ADMIN-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
 
 **Data** : `{}`
 
@@ -32,9 +32,8 @@ Poistaa valitun lipun, mikäli toiminnon tekevällä käyttäjällä on ADMIN-ta
 
 ### Or
 
-!!Autentikointia ei ole vielä tehty!!
 
-**Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
+**Condition** : Endpointia käyttävällä käyttäjällä ei ole USER-tason oikeuksia.
 
 **Code** : `403 FORBIDDEN`
 
