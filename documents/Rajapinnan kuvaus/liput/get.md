@@ -82,3 +82,11 @@ Näyttää tiedon yksittäisestä lipusta.
 **Code** : `410 Gone`
 
 **Content** : `{}`
+
+### OR
+
+**Condition** : Käyttäjällä ei ole USER-tason oikeuksia
+
+**Code** : `403 FORBIDDEN`
+
+**Content** : `{}`
