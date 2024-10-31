@@ -1,6 +1,6 @@
-FROM eclipse-temurin:17-jdk-focal as builder
+FROM eclipse-temurin:17-jdk-focal AS builder
 WORKDIR /opt/app
-COPY ./mvn/wrapper /mvn/wrapper
+COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 RUN chmod +x ./mvnw
 RUN ./mvnw dependency:go-offline
