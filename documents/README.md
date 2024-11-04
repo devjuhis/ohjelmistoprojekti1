@@ -1,4 +1,4 @@
-# Ohjelmistoprojekti 1
+# Projektidokumentaatio
 
 ### Tiimi: 
 Hiltunen Ilona, Järvinen Juho, Keinänen Aleksi, Klenberg Eriika, Nevala Sanni
