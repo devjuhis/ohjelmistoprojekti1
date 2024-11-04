@@ -46,7 +46,7 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
-> tapahtuma_id | int PK | Tapahtuman id
+> tapahtumaId | int PK | Tapahtuman id
 > nimi | varchar(60) | Tapahtuman nimi
 > aika | date | Tapahtuman päivämäärä
 > paikka | varchar(60) | Tapahtuman sijainti
@@ -59,10 +59,10 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
-> maksutapahtuma_id | int PK | Maksutapahtuman id
+> maksutapahtumaId | int PK | Maksutapahtuman id
 > hintayhteensa | double |  Lippujen hinnat yhteensä
 > aikaleima | date | Maksutapahtuman aika
-> kayttaja_id | int FK | Viittaus käyttäjään [Käyttäjä](#Käyttäjä)-taulussa
+> kayttajaId | int FK | Viittaus käyttäjään [Käyttäjä](#Käyttäjä)-taulussa
 > removed | boolean | Maksutapahtuman soft delete, oletuksena false (true/false)
 
 > ### _Hinnasto_
@@ -70,8 +70,8 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
-> hinnasto_id | int PK | Hinnaston id
-> tapahtuma_id | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
+> hinnastoId | int PK | Hinnaston id
+> tapahtumaId | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
 > hintaluokka | varchar(30) | Hintaluokka esim. opiskelija
 > hinta | double | Hinta
 
@@ -80,17 +80,20 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
-> lippu_id | int PK | Lipun id
-> tapahtuma_id | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
-> hinnasto_id | int FK | Viittaus hinnastoon [Hinnasto](#Hinnasto)-taulussa
-> kaytetty | int | Lippu on joko käyttämätön -> 0 tai käytetty ->1
+> lippuId | int PK | Lipun id
+> tapahtumaId | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
+> hinnastoId | int FK | Viittaus hinnastoon [Hinnasto](#Hinnasto)-taulussa
+> maksutapahtumaId | int FK | Viittaus maksutapahtumaan [Maksutapahtuma](#Maksutapahtuma)-taulussa
+> kaytetty | boolean | Lippu on joko käyttämätön -> false tai käytetty -> true, oletuksena false
+> maara | int | Määrä on joko 1 (ei palautettu) tai -1 (palautettu)
+> removed | boolean | Lipun soft delete, oletuksena false
 
 >  ### _Käyttäjä_
 > _Käyttäjä-taulu sisältää ohjelman käyttäjien tiedot. Ohjelman käyttäjiä ovat esimerkiksi myyjä ja manageri._
 >
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
-> kayttaja_id | int PK | Käyttäjän id
+> kayttajaId | int PK | Käyttäjän id
 > etunimi | varchar(30) | Ohjelmaa käyttävän henkilön etunimi
 > sukunimi | varchar(30) | Ohjelmaa käyttävän henkilön sukunimi
 > salasana | varchar(256) | Ohjelmaa käyttävän henkilön tunnuksen salasana
