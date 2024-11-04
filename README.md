@@ -39,7 +39,7 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 ## Tietokanta
 
 ### Luokkakaavio
-[Luokkakaavio](ticketguru_luokkakaavo.pdf)
+[Luokkakaavio](documents/ticketguru_luokkakaavio.pdf)
 
 > ### _Tapahtuma_
 > _Tapahtuma-taulu sisältää myynnissä olevat tapahtumat. Tapahtumaan voi olla monia myytyjä lippuja, mutta lipun tapahtumia voi olla vain yksi. Manager/admin luo uusia tapahtumia myytäväksi._
@@ -62,7 +62,7 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 > maksutapahtuma_id | int PK | Maksutapahtuman id
 > hintayhteensa | double |  Lippujen hinnat yhteensä
 > aikaleima | date | Maksutapahtuman aika
-> kayttaja_id | int FK | Viittaus käyttäjään [käyttäjä](#Kayttaja)-taulussa
+> kayttaja_id | int FK | Viittaus käyttäjään [Käyttäjä](#Käyttäjä)-taulussa
 > removed | boolean | Maksutapahtuman soft delete, oletuksena false (true/false)
 
 > ### _Hinnasto_
@@ -71,7 +71,7 @@ Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 > Kenttä | Tyyppi | Kuvaus
 > ------ | ------ | ------
 > hinnasto_id | int PK | Hinnaston id
-> tapahtuma_id | int FK | Viittaus tapahtumaan [tapahtuma](#Tapahtuma)-taulussa
+> tapahtuma_id | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
 > hintaluokka | varchar(30) | Hintaluokka esim. opiskelija
 > hinta | double | Hinta
 
