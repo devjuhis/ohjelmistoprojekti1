@@ -22,7 +22,7 @@ Järjestelmässä on perustason käyttäjiä sekä admin-tason käyttäjiä. Lip
 
 ### Käyttötapauskaavio 
 
-![Käyttötapauskaavio](kayttajaroolit.png)
+![Käyttötapauskaavio](documents/kayttajaroolit.png)
 
 ### Käyttötapausten kuvaus
 
