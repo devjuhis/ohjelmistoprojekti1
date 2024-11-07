@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import project.app.service.UserService;
 
@@ -20,10 +22,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
-
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig {
+public class WebSecurityConfig implements WebMvcConfigurer {
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
@@ -32,8 +33,8 @@ public class WebSecurityConfig {
     private UserService userService;
 
     private static final AntPathRequestMatcher[] WHITE_LIST_URLS = {
-    new AntPathRequestMatcher("/h2-console/**"),
-    new AntPathRequestMatcher("/api/login"),
+            new AntPathRequestMatcher("/h2-console/**"),
+            new AntPathRequestMatcher("/api/login"),
     };
 
     @Bean
@@ -43,8 +44,8 @@ public class WebSecurityConfig {
                         .requestMatchers(WHITE_LIST_URLS).permitAll() // Sallitaan listatut urlit
 
                         // Käyttäjät / vain ADMIN-tason käyttäjät
-                        .requestMatchers(antMatcher("/api/kayttajat/**")).hasAuthority("ADMIN") 
-                        
+                        .requestMatchers(antMatcher("/api/kayttajat/**")).hasAuthority("ADMIN")
+
                         // Maksutapahtuma
                         .requestMatchers(HttpMethod.GET, "/api/maksutapahtumat/**").hasAnyAuthority("USER", "ADMIN")
                         // Vain userit voivat muokata maksutapahtumia (POST, PATCH/softdelete -pyynnöt)
@@ -57,15 +58,26 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/tapahtumat/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/tapahtumat/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/tapahtumat/**").hasAuthority("ADMIN")
-                        
-            
 
                         .anyRequest().authenticated())
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
+                .cors(cors -> cors.configurationSource(request -> {
+                    // Konfiguroi CORS suoraan
+                    CorsConfiguration corsConfig = new CorsConfiguration();
+                    corsConfig.addAllowedOrigin("*");
+                    corsConfig.addAllowedMethod("GET");
+                    corsConfig.addAllowedMethod("POST");
+                    corsConfig.addAllowedMethod("PATCH");
+                    corsConfig.addAllowedMethod("DELETE");
+                    corsConfig.addAllowedHeader("Authorization");
+                    corsConfig.addAllowedHeader("Content-Type");
+                    corsConfig.setAllowCredentials(false);
+                    return corsConfig;
+                }))
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    
+
         return http.build();
     }
 
@@ -85,7 +97,7 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
-            .authenticationProvider(authProvider())
-            .build();
+                .authenticationProvider(authProvider())
+                .build();
     }
 }
