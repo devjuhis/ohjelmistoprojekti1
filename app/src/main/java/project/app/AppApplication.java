@@ -33,7 +33,7 @@ public class AppApplication {
 		SpringApplication.run(AppApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	public CommandLineRunner ticketGuruDemo(HinnastoRepository hintarepo,
 			KayttajaRepository kayttajarepo, LippuRepository lippurepo, MaksutapahtumaRepository maksurepo,
 			TapahtumaRepository tapahtumarepo) {
@@ -72,6 +72,6 @@ public class AppApplication {
 			muutettavaLippu.setMaksutapahtuma(maksurepo.findByMaksutapahtumaId(1));
 			lippurepo.save(muutettavaLippu);
 		};
-	}*/
+	}
 
 }
