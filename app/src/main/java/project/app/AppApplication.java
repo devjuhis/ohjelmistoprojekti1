@@ -33,6 +33,7 @@ public class AppApplication {
 		SpringApplication.run(AppApplication.class, args);
 	}
 
+	/* */
 	@Bean
 	public CommandLineRunner ticketGuruDemo(HinnastoRepository hintarepo,
 			KayttajaRepository kayttajarepo, LippuRepository lippurepo, MaksutapahtumaRepository maksurepo,

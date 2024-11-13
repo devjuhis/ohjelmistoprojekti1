@@ -68,6 +68,28 @@ public class RestLippuController {
         }
     }
 
+    @GetMapping("/liput/koodi/{koodi}")
+    public ResponseEntity<?> getLippuByKoodi(@PathVariable String koodi) {
+        logger.info("Fetching lippu with koodi: {}", koodi);
+
+        Optional<Lippu> lippu = Lrepository.findByKoodi(koodi);
+
+        if (lippu.isPresent()) {
+            if (lippu.get().getRemoved()) {
+                // Palautetaan 410, jos lippu on poistettu
+                CustomErrorResponse errorResponse = new CustomErrorResponse("Kyseinen lippu on poistettu", HttpStatus.GONE.value());
+                return ResponseEntity.status(HttpStatus.GONE).body(errorResponse);
+            } else {
+                return ResponseEntity.ok(lippu.get());
+            }
+        } else {
+            // Palautetaan 404, jos lippua ei löydy
+            CustomErrorResponse errorResponse = new CustomErrorResponse("Lippua ei löytynyt annetulla koodilla", HttpStatus.NOT_FOUND.value());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+    }
+
+
 
     // REST haetaan kaikki liput tapahtuma id:llä
     @GetMapping("/tapahtumat/{tapahtumaId}/liput")

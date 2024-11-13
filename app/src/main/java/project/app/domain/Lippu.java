@@ -1,11 +1,15 @@
 package project.app.domain;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -41,6 +45,12 @@ public class Lippu {
 
     @NotNull(message="removed ei voi olla null")
     private Boolean removed = false;
+
+    // Uusi koodi, joka luodaan ennen tallentamista
+    private String koodi;
+
+    // Luontiaika, joka asettaa ajankohdan ennen tallentamista
+    private LocalDateTime luontiaika;
 
     public Lippu() {
     }
@@ -113,6 +123,25 @@ public class Lippu {
 
     public void setRemoved(Boolean removed) {
         this.removed = removed;
+    }
+
+    @PrePersist
+    public void prePersist() {
+
+        this.koodi = UUID.randomUUID().toString();
+        this.luontiaika = LocalDateTime.now();
+    }
+
+    public String getKoodi() {
+        return koodi;
+    }
+
+    public void setKoodi(String koodi) {
+        this.koodi = koodi;
+    }
+
+    public LocalDateTime getLuontiaika() {
+        return luontiaika;
     }
 
     @Override
