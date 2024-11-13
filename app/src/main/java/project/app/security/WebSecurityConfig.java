@@ -12,7 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import project.app.service.UserService;
 
@@ -35,6 +34,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     private static final AntPathRequestMatcher[] WHITE_LIST_URLS = {
             new AntPathRequestMatcher("/h2-console/**"),
             new AntPathRequestMatcher("/api/login"),
+            new AntPathRequestMatcher("/api/test"),
     };
 
     @Bean
