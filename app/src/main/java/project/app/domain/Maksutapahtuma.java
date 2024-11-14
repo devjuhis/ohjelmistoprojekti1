@@ -1,6 +1,8 @@
 package project.app.domain;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +30,7 @@ public class Maksutapahtuma {
     @ManyToOne
     @JoinColumn(name = "kayttajaId")
     @NotNull(message = "käyttäjä ei saa olla null")
+    @JsonIgnoreProperties({"salasana", "etunimi", "sukunimi", "oikeus", "aktiivisuus", "kayttajatunnus"})
     private Kayttaja kayttaja;
 
     // Poistettu true/false
