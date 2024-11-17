@@ -17,7 +17,7 @@ Bodyssa on lähetettävä käyttäjän ID. Hintayhteensa lasketaan erikseen lipp
 ```json
 {
      "kayttaja": {
-        "kayttajaid": "[Long]"
+        "kayttajaId": "[Long]"
     }
 }
 ```
@@ -27,7 +27,7 @@ Bodyssa on lähetettävä käyttäjän ID. Hintayhteensa lasketaan erikseen lipp
 ```json
 {
      "kayttaja": {
-        "kayttajaid": 1
+        "kayttajaId": 1
     }
 }
 ```
