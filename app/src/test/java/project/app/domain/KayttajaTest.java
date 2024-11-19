@@ -1,4 +1,4 @@
-package project.app;
+package project.app.domain;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
