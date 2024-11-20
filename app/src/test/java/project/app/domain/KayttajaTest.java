@@ -19,8 +19,6 @@ import jakarta.validation.ConstraintViolation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import project.app.domain.Kayttaja;
-import project.app.domain.KayttajaRepository;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
