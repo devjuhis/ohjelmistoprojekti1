@@ -5,11 +5,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import project.app.service.UserService;
 
 @Component
 public class JwtTokenUtil {
@@ -18,9 +22,18 @@ public class JwtTokenUtil {
 
     private static final long JWT_TOKEN_VALIDITY = 10 * 60 * 60;
 
+    @Autowired
+    private UserService userService;
+
     // Tokenin luonti käyttäjänimellä
     public String generateToken(String username) {
+        UserDetails userDetails = this.userService.loadUserByUsername(username);
+        String role = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("USER");
         Map<String, Object> claims = new HashMap<>();
+        claims.put("role", role);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
@@ -37,7 +50,8 @@ public class JwtTokenUtil {
 
     // Tarkista, onko token vanhentunut
     private Boolean isTokenExpired(String token) {
-        final Date expiration = Jwts.parserBuilder().setSigningKey(AVAIN).build().parseClaimsJws(token).getBody().getExpiration();
+        final Date expiration = Jwts.parserBuilder().setSigningKey(AVAIN).build().parseClaimsJws(token).getBody()
+                .getExpiration();
         return expiration.before(new Date());
     }
 
@@ -47,4 +61,3 @@ public class JwtTokenUtil {
         return (extractedUsername.equals(username) && !isTokenExpired(token));
     }
 }
-

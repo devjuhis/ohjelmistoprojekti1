@@ -49,9 +49,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
                         // Maksutapahtuma
                         .requestMatchers(HttpMethod.GET, "/api/maksutapahtumat/**").hasAnyAuthority("USER", "ADMIN")
-                        // Vain userit voivat muokata maksutapahtumia (POST, PATCH/softdelete -pyynnöt)
-                        .requestMatchers(HttpMethod.POST, "/api/maksutapahtumat/**").hasAuthority("USER")
-                        .requestMatchers(HttpMethod.PATCH, "/api/maksutapahtumat/**").hasAuthority("USER")
+                        .requestMatchers(HttpMethod.POST, "/api/maksutapahtumat/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/maksutapahtumat/**").hasAnyAuthority("USER", "ADMIN")
 
                         // Tapahtuma
                         .requestMatchers(HttpMethod.GET, "/api/tapahtumat/**").hasAnyAuthority("USER", "ADMIN")
