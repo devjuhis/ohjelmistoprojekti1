@@ -21,7 +21,6 @@ public class Maksutapahtuma {
     private long maksutapahtumaId;
 
     @NotNull(message = "Hinta yhteensä ei saa olla null")
-    @Min(value=0, message = "Hinta yhteensä ei voi olla alle 0")
     private double hintayhteensa;
     @NotNull(message = "Aikaleima ei saa olla null")
     private LocalDateTime aikaleima;
@@ -33,7 +32,7 @@ public class Maksutapahtuma {
     @JsonIgnoreProperties({"salasana", "etunimi", "sukunimi", "oikeus", "aktiivisuus", "kayttajatunnus"})
     private Kayttaja kayttaja;
 
-    // Poistettu true/false
+    // Removed-kenttä maksutapahtuman palautusta varten, true = palautettu
     @NotNull(message = "poistettu-tila/removed ei saa olla null")
     private Boolean removed = false;
 
