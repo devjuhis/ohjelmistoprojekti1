@@ -64,21 +64,21 @@ public class RestMaksuController {
         Optional<Maksutapahtuma> maksutapahtuma = maksurepository.findById(id);
 
         if (maksutapahtuma.isPresent()) {
-            List<Lippu> liput = lippurepository.findByMaksutapahtuma(maksutapahtuma.get()); 
+            List<Lippu> liput = lippurepository.findByMaksutapahtuma(maksutapahtuma.get());
             return liput.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(liput);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-     // REST luodaan uusi maksutapahtuma
+    // REST luodaan uusi maksutapahtuma
     @PostMapping("/maksutapahtumat")
     public ResponseEntity<?> createMaksutapahtuma(@RequestBody Maksutapahtuma maksutapahtuma) {
         logger.info("Creating new maksutapahtuma");
 
         try {
             Kayttaja kayttaja = kayttajarepository.findById(maksutapahtuma.getKayttaja().getKayttajaId())
-                .orElseThrow(() -> new RuntimeException("Käyttäjää ei löydy"));
+                    .orElseThrow(() -> new RuntimeException("Käyttäjää ei löydy"));
             maksutapahtuma.setKayttaja(kayttaja);
             LocalDateTime aikaleima = LocalDateTime.now();
             maksutapahtuma.setAikaleima(aikaleima);
@@ -86,12 +86,14 @@ public class RestMaksuController {
         } catch (RuntimeException e) {
             logger.error("Error creating maksutapahtuma: {}", e.getMessage());
             // Palautetaan 400 Bad Request ja virheviesti
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new CustomErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
 
         } catch (Exception e) {
             logger.error("Unexpected error: {}", e.getMessage());
             // Palautetaan 500 Internal Server Error yleisten virheiden osalta
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new CustomErrorResponse("Unexpected error", HttpStatus.INTERNAL_SERVER_ERROR.value()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new CustomErrorResponse("Unexpected error", HttpStatus.INTERNAL_SERVER_ERROR.value()));
         }
     }
 
@@ -105,10 +107,14 @@ public class RestMaksuController {
 
         if (maksutapahtuma.isPresent()) {
             // haetaan jos maksutapahtumaa ei ole merkitty poistetuksi
-            if(!maksutapahtuma.get().getRemoved()) {
+            if (!maksutapahtuma.get().getRemoved()) {
                 Maksutapahtuma maksutapahtumaOk = maksutapahtuma.get();
                 // asetetaan maksutapahtuma poistetuksi
                 maksutapahtumaOk.setRemoved(true);
+                // muutetaan hintayhteensa miinusluvuksi
+                if (maksutapahtumaOk.getHintayhteensa() > 0) {
+                    maksutapahtumaOk.setHintayhteensa(-maksutapahtumaOk.getHintayhteensa());
+                }
 
                 maksurepository.save(maksutapahtumaOk);
                 return ResponseEntity.ok(maksutapahtumaOk);
