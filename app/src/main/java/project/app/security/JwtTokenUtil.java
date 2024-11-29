@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import project.app.domain.Kayttaja;
+import project.app.domain.KayttajaRepository;
 import project.app.service.UserService;
 
 @Component
@@ -25,15 +27,18 @@ public class JwtTokenUtil {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private KayttajaRepository repository;
+
     // Tokenin luonti käyttäjänimellä
     public String generateToken(String username) {
-        UserDetails userDetails = this.userService.loadUserByUsername(username);
-        String role = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .findFirst()
-                .orElse("USER");
+        Kayttaja kirjautunutkayttaja = repository.findByKayttajatunnus(username);
+
+        String role = kirjautunutkayttaja.getOikeus();
+        Long id = kirjautunutkayttaja.getKayttajaId();
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
+        claims.put("id", id);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
