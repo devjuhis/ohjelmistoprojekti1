@@ -111,11 +111,6 @@ public class RestMaksuController {
                 Maksutapahtuma maksutapahtumaOk = maksutapahtuma.get();
                 // asetetaan maksutapahtuma poistetuksi
                 maksutapahtumaOk.setRemoved(true);
-                // muutetaan hintayhteensa miinusluvuksi
-                if (maksutapahtumaOk.getHintayhteensa() > 0) {
-                    maksutapahtumaOk.setHintayhteensa(maksutapahtumaOk.getHintayhteensa() * -1);
-                }
-
                 maksurepository.save(maksutapahtumaOk);
                 return ResponseEntity.ok(maksutapahtumaOk);
             } else {
