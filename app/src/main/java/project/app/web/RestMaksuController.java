@@ -113,7 +113,7 @@ public class RestMaksuController {
                 maksutapahtumaOk.setRemoved(true);
                 // muutetaan hintayhteensa miinusluvuksi
                 if (maksutapahtumaOk.getHintayhteensa() > 0) {
-                    maksutapahtumaOk.setHintayhteensa(-maksutapahtumaOk.getHintayhteensa());
+                    maksutapahtumaOk.setHintayhteensa(maksutapahtumaOk.getHintayhteensa() * -1);
                 }
 
                 maksurepository.save(maksutapahtumaOk);
