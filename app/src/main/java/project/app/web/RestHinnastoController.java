@@ -64,7 +64,7 @@ public class RestHinnastoController {
             newHinnasto.setTapahtuma(tapahtuma);
 
             // annetun hinnan tarkistus
-            if (newHinnasto.getHinta() <= 0) {
+            if (newHinnasto.getHinta() < 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new CustomErrorResponse("Hinta pitää olla positiivinen tai suurempi kuin 0.", HttpStatus.BAD_REQUEST.value()));
             }
@@ -100,10 +100,10 @@ public class RestHinnastoController {
             if (ediHinnasto.getHintaluokka() != null) {
                 oldHinnasto.setHintaluokka((ediHinnasto.getHintaluokka()));
             }
-            if (ediHinnasto.getHinta() > 0) {
+            if (ediHinnasto.getHinta() >= 0) {
                 oldHinnasto.setHinta(ediHinnasto.getHinta());
             } else {
-                return ResponseEntity.badRequest().body(new CustomErrorResponse("Hinta pitää olla positiivinen tai suurempi kuin 0.", HttpStatus.BAD_REQUEST.value()));
+                return ResponseEntity.badRequest().body(new CustomErrorResponse("Hinta ei saa olla negatiivinen.", HttpStatus.BAD_REQUEST.value()));
             }
             
             hinnastoRepository.save(oldHinnasto);
