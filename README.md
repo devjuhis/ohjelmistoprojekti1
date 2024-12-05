@@ -1,72 +1,154 @@
-# Scrum-ohje
+# Projektidokumentaatio
 
+### Tiimi: 
+Hiltunen Ilona, Järvinen Juho, Keinänen Aleksi, Klenberg Eriika, Nevala Sanni
 
-## Scrum-syklin yleiskuvaus
+## Johdanto
 
-Scrum on ketterä projektinhallintamenetelmä, joka perustuu iteratiiviseen ja inkrementaaliseen lähestymistapaan. Scrum-sykli koostuu useista toistuvista ajanjaksoista, joita kutsutaan **sprintiksi**. Jokaisen sprintin aikana tiimi pyrkii saavuttamaan selkeästi määritellyn tavoitteen ja tuottamaan arvokasta, toimivaa tuotetta.
+Kyseessä on Haaga-Helia ammattikorkeakoulun Ohjelmistoprojekti 1-kurssitoteutuksen projektityö, jonka tarkoituksena on luoda kuvitteellisen asiakkaan vaatima järjestelmä.
 
-Scrum-sykliin kuuluu seuraavat vaiheet:
+### Järjestelmä
+Asiakkaana toimii lipputoimisto, joka tarvitsee lipunmyyntijärjestelmän myyntipisteeseen. Lipputoimiston myyjä myy ja tulostaa asiakkailleen liput tapahtumiin lipunmyyntijärjestelmästä. Lipputoimisto voi lisätä ja muokata lipunmyyntijärjestelmässä tapahtumia ja myytävien lippujen tietoja sekä nähdä koostetusti myyntitapahtumat ja myyntiraportit. Lipuissa on koodit, jotta liput voidaan merkitä käytetyksi asiakkaan saapuessa tapahtumaan. 
 
-1. **Sprint Planning (sprintin suunnittelu):** Sprintti alkaa suunnittelukokouksella, jossa tiimi määrittää sprintin tavoitteet ja valitsee tehtävät, jotka otetaan työn alle. Tehtävät valitaan tuotejonosta (product backlog) priorisoinnin perusteella.
+### Toteutus- ja toimintaympäristö
+Projektissa tulemme käyttämään GitHubia versionhallintaan ja kehitystyöhön. Toimintaympäristömme pohjautuu Java-teknologioihin. Hyödynnämme Spring Boot-sovelluskehystä sekä palvelinpuolella toteutamme REST API-rajapinnan.
+Käyttöliittymäteknologioista hyödynnämme React-kirjastoa. 
 
-2. **Daily Scrum (päivittäinen scrum):** Päivittäin pidettävä lyhyt kokous, jossa tiimi käy läpi edistymisensä, suunnittelee seuraavat toimenpiteet ja tunnistaa mahdolliset esteet. Kokouksen tavoitteena on varmistaa, että tiimi pysyy sprintin suunnitelmassa ja etenee kohti tavoitetta.
+## Järjestelmän määrittely
 
-3. **Development Work (kehitystyö):** Sprintin aikana tiimi toteuttaa valitut tehtävät ja kehittää toimivaa, toimituskelpoista tuotetta. Tiimi tekee työtä yhteistyössä, jakaa tietoa ja ratkaisee mahdolliset ongelmat.
+### Käyttäjäryhmät 
 
-4. **Sprint Review (sprintin katselmus):** Sprintin lopussa pidettävä katselmuskokous, jossa tiimi esittelee sprintin aikana tehdyt tulokset sidosryhmille ja kerää palautetta. Katselmuksen tarkoituksena on arvioida edistymistä ja tehdä tarvittavat muutokset seuraaviin sprintteihin.
+Järjestelmässä on perustason käyttäjiä sekä admin-tason käyttäjiä. Lipunmyynnissä työskentelevillä myyjillä on peruskäyttäjän oikeudet, joilla voi hoitaa ja peruuttaa myyntitapahtumia, tulostaa lippuja sekä tarkastella ennakkomyyntien ajankohtia. Myymäläpäälliköllä sekä yrityksen johtoryhmän jäsenillä on admin-tason oikeudet, joilla voi peruskäyttäjän oikeuksien lisäksi lisätä uusia tapahtumia, hallinnoida ja tarkastella tapahtuman tietoja sekä tarkastella myyntiraportteja.
 
-5. **Sprint Retrospective (sprintin retrospektiivi):** Sprintin päättävä kokous, jossa tiimi arvioi omaa työskentelyään, tunnistaa onnistumiset ja parannuskohteet, ja sopii konkreettisista toimenpiteistä tulevia sprinttejä varten.
+### Käyttötapauskaavio 
 
-Scrum-sykli toistuu jokaisessa sprintissä, ja jokainen sykli tuottaa valmista ja arvoa tuottavaa tuotetta tai ominaisuutta. Scrum-menetelmä tukee tiimin ketteryyttä ja sopeutumiskykyä, mikä mahdollistaa jatkuvan parantamisen ja tehokkaan arvontuottamisen.
+![Käyttötapauskaavio](documents/kayttajaroolit.png)
 
+### Käyttötapausten kuvaus
 
-## Sprintit
+Järjestelmän olennaisin tehtävä on myydä sekä tulostaa asiakkaalle lippuja. Myyntitapahtuman ollakseen onnistunut tarvitsee tähän tietenkin tukevia toimintoja, kuten virheellisten myyntitapahtumien peruutuksen ja hinnan hakemisen tietokannasta. Lisäksi, jotta ylimääräiset liput saadaan myytyä tulee ne voida tulostaa tapahtumassa ovelta myytäväksi. Jotta on lippuja mitä myydä tapahtumia tulee tietenkin myös voida luoda tapahtumia järjestelmään.
 
-Sprintit ovat lyhyitä enintään kuukauden mittaisia ajanjaksoja, jolloin suoritetaan Scrum-tiimin sprintin aloituskokouksessa ennalta määrittämiä tehtäviä. Sprinttien määritelty pituus säilyy samana koko projektin ajan. Sprintin aikana pidetään lyhyt, enintään viidentoista minuutin mittainen Scrum-palaveri päivittäin. Sprintti päättyy Scrum-tiimin loppukokoukseen, jonka jälkeen alkaa taas uusi sprintti. Loppukokokouksessa tarkastellaan sprinttiä retrospektiivisesti ja käydään läpi onnistumiset ja epäonnistumiset. Sprinttejä toistetaan koko projektin ajan. 
+Yritystoimintaa ylläpitäville tahoille on tärkeää saada tietoa tapahtumista esimerkiksi yrityksen talouden hoitamisen vuoksi, joten järjestelmästä tulee pystyä näkemään tapahtumien tietoja kuten myytyjen lippujen määrää. Lisäksi mahdollisissa muutostilanteissa tulee tapahtuman tietoja pystyä muokkaamaan, jotta järjestelmän tieto ei ole virheellistä.
 
-Sprintissä suoritettavat tehtävät valitaan työjonosta. Sprintissä suoritettavat tehtävät tulisi olla tarpeeksi pilkottuja, niin, että ne voidaan suorittaa yhden sprintin aikana, sillä sprinteissä on tavoitteena saada aikaan toimivia, potentiaalisesti julkaisukelpoisia ominaisuuksia. Kesken jääneet tehtävät eivät olet toivottuja, sillä kesken jäänyt tehtävä hylätään sprintin loppukokouksessa. Myöskään sprintin tavoitteita ei tule vaihtaa kesken sprintin. 
+## Käyttöliittymä
 
-## Työjonot
-**Tuotteen kehitysjono** on järjestetty lista siitä, mitä tarvitaan tuotteen parantamiseksi. Työjono koostuu kohteista, joita Scrum-tiimin tulee tehdä valmiiksi yhden Sprintin aikana. Kohteiden tulee olla sen suuruisia, että ne voidaan saavuttaa. Tuotteen kehitysjonossa korkealle järjestetyt kohdat ovat yleensä selkeämpiä ja yksityiskohtaisempia kuin matalammalle järjestetyt kohdat.
+Esitetään käyttöliittymän tärkeimmät (vain ne!) näkymät sekä niiden väliset siirtymät käyttöliittymäkaaviona. 
 
-**Sprintin kehitysjono** koostuu sprinttiin valituista tuotteen kehitysjonon kohdista sekä suunnitelmasta niiden toteuttamiseksi. Kehitystiimi muokkaa sprintin kehitysjonoa koko sprintin ajan oppiessaan lisää siitä, mitä tarvitaan sprintin tavoitteen saavuttamiseksi.
+Jos näkymän tarkoitus ei ole itsestään selvä, se pitää kuvata lyhyesti.
 
-## Roolit
-Scrum-tiimi sisältää seuraavat roolit:<br>
-* Kehittäjät<br>
-* Tuoteomistaja<br>
-* Scrum Master
+## Tietokanta
 
-## Kokoukset
+### Luokkakaavio
+[Luokkakaavio](documents/ticketguru_luokkakaavio.pdf)
 
-Scrum-kokousten tarkoitus on parantaa tiimin yhteistyötä, tuottaa arvoa asiakkaalle ja pitää kaikki samalla sivulla. Tehokkaat kokoukset ovat lyhyitä, säännöllisiä ja keskittyvät olennaiseen.
+> ### _Tapahtuma_
+> _Tapahtuma-taulu sisältää myynnissä olevat tapahtumat. Tapahtumaan voi olla monia myytyjä lippuja, mutta lipun tapahtumia voi olla vain yksi. Manager/admin luo uusia tapahtumia myytäväksi._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> tapahtumaId | int PK | Tapahtuman id
+> nimi | varchar(60) | Tapahtuman nimi
+> aika | date | Tapahtuman päivämäärä
+> paikka | varchar(60) | Tapahtuman sijainti
+> kuvaus | varchar(500) | Tapahtuman kuvaus
+> lippumaara | int | Kuinka paljon lippuja on myynnissä
+> ennakkomyynti | date | Päivämäärä, jolloin lippujen ennakkomyynti loppuu
 
-**Onnistuneen kokouksen tunnusmerkkejä:**
+> ### _Maksutapahtuma_
+> _Maksutapahtuma-taulu sisältää maksutapahtumat. Maksutapahtumalla voi olla yksi käyttäjä. Käyttäjällä voi olla useita maksutapahtumia._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> maksutapahtumaId | int PK | Maksutapahtuman id
+> hintayhteensa | double |  Lippujen hinnat yhteensä
+> aikaleima | date | Maksutapahtuman aika
+> kayttajaId | int FK | Viittaus käyttäjään [Käyttäjä](#Käyttäjä)-taulussa
+> removed | boolean | Maksutapahtuman soft delete, oletuksena false (true/false)
 
-*   **Selkeät järjestelyt:** Aika, paikka ja aihe on sovittu etukäteen.
-    
-*   **Osallistujat mukana:** Kaikki tarvittavat henkilöt ovat kutsuttu ja valmistautuneet.
-    
-*   **Tarkka aikataulu:** Kokoukset pysyvät aikataulussa ja käsitellään asiat järjestyksessä.
-    
-*   **Aktiivinen osallistuminen:** Kaikkien mielipide otetaan huomioon ja päätökset tehdään yhdessä.
-    
-*   **Visuaalisuus:** Visuaaliset apuvälineet selkeyttävät keskustelua ja päätöksiä.
-    
+> ### _Hinnasto_
+> _Hinnasto-taulu sisältää tapahtuman hinnastoluokat. Tapahtumalla voi olla useita hintaluokkia, mutta hintaluokka voi kuulua vain yhteen tapahtumaan._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> hinnastoId | int PK | Hinnaston id
+> tapahtumaId | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
+> hintaluokka | varchar(30) | Hintaluokka esim. opiskelija
+> hinta | double | Hinta
 
-**Hyvin toteutetut kokoukset:**
+>  ### _Lippu_
+> _Lippu-taulu sisältää lipun tiedot. Lippu taulu yhdistyy Tapahtuma ja Hinnasto tauluihin. Yhdellä lipulla on yksi hinta ja yksi tapahtuma._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> lippuId | int PK | Lipun id
+> tapahtumaId | int FK | Viittaus tapahtumaan [Tapahtuma](#Tapahtuma)-taulussa
+> hinnastoId | int FK | Viittaus hinnastoon [Hinnasto](#Hinnasto)-taulussa
+> maksutapahtumaId | int FK | Viittaus maksutapahtumaan [Maksutapahtuma](#Maksutapahtuma)-taulussa
+> kaytetty | boolean | Lippu on joko käyttämätön -> false tai käytetty -> true, oletuksena false
+> maara | int | Määrä on joko 1 (ei palautettu) tai -1 (palautettu)
+> removed | boolean | Lipun soft delete, oletuksena false
 
-*   **Lisäävät läpinäkyvyyttä:** Jokainen tietää, missä mennään ja mikä on seuraava askel.
-    
-*   **Vahvistavat tiimityötä:** Yhteinen ymmärrys tavoitteista ja tehtävistä lisää yhteistyötä.
-    
-*   **Tehostavat työskentelyä:** Selkeät päätökset ja roolit vähentävät epäselvyyttä ja turhia keskusteluja.
+>  ### _Käyttäjä_
+> _Käyttäjä-taulu sisältää ohjelman käyttäjien tiedot. Ohjelman käyttäjiä ovat esimerkiksi myyjä ja manageri._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> kayttajaId | int PK | Käyttäjän id
+> etunimi | varchar(30) | Ohjelmaa käyttävän henkilön etunimi
+> sukunimi | varchar(30) | Ohjelmaa käyttävän henkilön sukunimi
+> salasana | varchar(256) | Ohjelmaa käyttävän henkilön tunnuksen salasana
+> kayttajatunnus | varchar(30) | Ohjelmaa käyttävän henkilön tunnuksen käyttäjätunnus
+> oikeus | varchar(30) | Ohjelmaa käyttävän henkilön oikeudet, peruskäyttäjä tai admin
 
+## Tekninen kuvaus
 
-## Miksi Scrum toimii?
+Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset
+ratkaisut, esim.
 
-Scrum on joustava ja tehokas projektinhallintamenetelmä, joka sopii erityisesti nopeasti muuttuvassa toimintaympäristössä. Scrum jakaa projektit lyhyisiin iteraatioihin, jolloin tuloksia saadaan aikaan nopeasti ja muutoksiin voidaan reagoida joustavasti. Tiimityö, jatkuva parantaminen ja selkeät tavoitteet ovat Scrumin kulmakivet. Menetelmä on helppo ottaa käyttöön ja se soveltuu monenlaisiin projekteihin. Scrum mahdollistaa sen, että tuote kehittyy vähitellen ja asiakas saa nähdä työn tuloksia säännöllisesti, mikä lisää projektin läpinäkyvyyttä ja vähentää riskejä.
+-   Missä mikäkin järjestelmän komponentti ajetaan (tietokone, palvelinohjelma)
+    ja komponenttien väliset yhteydet (vaikkapa tähän tyyliin:
+    https://security.ufl.edu/it-workers/risk-assessment/creating-an-information-systemdata-flow-diagram/)
+-   Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
+-   Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää
+    UML-sekvenssikaavioilla.
+-   Toteutuksen yleisiä ratkaisuja, esim. turvallisuus.
 
-Scrum on osoittautunut erittäin tehokkaaksi projektinhallintamenetelmäksi myös tilanteissa, joissa kehittäjät työskentelevät etänä tai omissa ympäristöissä. Sen joustavuus ja painotus säännölliseen kommunikaatioon tekevät siitä erinomaisen valinnan hajautetuille tiimeille.
+Tämän lisäksi
 
+-   ohjelmakoodin tulee olla kommentoitua
+-   luokkien, metodien ja muuttujien tulee olla kuvaavasti nimettyjä ja noudattaa
+    johdonmukaisia nimeämiskäytäntöjä
+-   ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toistolta
+    vältytään
 
+## Testaus
+
+Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan
+testaamalla projektin aikana: millaisia testauksia tehdään ja missä vaiheessa.
+Testauksen tarkemmat sisällöt ja testisuoritusten tulosten raportit kirjataan
+erillisiin dokumentteihin.
+
+Tänne kirjataan myös lopuksi järjestelmän tunnetut ongelmat, joita ei ole korjattu.
+
+## Asennustiedot
+
+Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta:
+
+-   järjestelmän kehitysympäristö: miten järjestelmän kehitysympäristön saisi
+    rakennettua johonkin toiseen koneeseen
+
+-   järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi
+    asennettua johonkin uuteen ympäristöön.
+
+Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja
+käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta,
+käyttäjätunnus, salasana, tietokannan luonti yms.).
+
+## Käynnistys- ja käyttöohje
+
+Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä
+mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän
+käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä.
+
+Usko tai älä, tulet tarvitsemaan tätä itsekin, kun tauon jälkeen palaat
+järjestelmän pariin !
