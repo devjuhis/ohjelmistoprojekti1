@@ -34,7 +34,7 @@ Yritystoimintaa ylläpitäville tahoille on tärkeää saada tietoa tapahtumista
 
 ## Käyttöliittymä
 
-Käyttöliittymän tärkeimmät näkymät ja niiden väliset siirtymät on esitelty käyttöliittymäkaavioina projektin käyttöliittymän repositoriossa  [op1-client](https://github.com/AbuAk1/op1-client?tab=readme-ov-file#k%C3%A4ytt%C3%B6liittym%C3%A4n-keskeiset-toiminnot)
+Käyttöliittymän tärkeimmät näkymät ja niiden väliset siirtymät on esitelty käyttöliittymäkaavioina projektin käyttöliittymän repositoriossa  [op1-client](https://github.com/AbuAk1/op1-client?tab=readme-ov-file#k%C3%A4ytt%C3%B6liittym%C3%A4n-keskeiset-toiminnot).
 
 ## Tietokanta
 
@@ -154,6 +154,9 @@ käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimi
 Usko tai älä, tulet tarvitsemaan tätä itsekin, kun tauon jälkeen palaat
 järjestelmän pariin!"
 
-Käyttöliittymä löytyy Rahti2-palvelimelta osoitteessa [https://op1-client-front-ohjelmistoprojekti.2.rahtiapp.fi/](https://op1-client-front-ohjelmistoprojekti.2.rahtiapp.fi/)
+Käyttöliittymä löytyy Rahti2-palvelimelta osoitteessa [https://op1-client-front-ohjelmistoprojekti.2.rahtiapp.fi/](https://op1-client-front-ohjelmistoprojekti.2.rahtiapp.fi/).
 
-Käyttäjätunnukset:
+### Käyttäjätunnukset:
+
+* **Admin**: matti123 / 
+* **User**: matti321 /
