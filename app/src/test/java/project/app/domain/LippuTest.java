@@ -1,9 +1,15 @@
 package project.app.domain;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import project.app.domain.Hinnasto;
+import project.app.domain.Lippu;
+import project.app.domain.Maksutapahtuma;
+import project.app.domain.Tapahtuma;
 
 public class LippuTest {
 

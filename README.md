@@ -104,33 +104,153 @@ Käyttöliittymän tärkeimmät näkymät ja niiden väliset siirtymät on esite
 
 ## Tekninen kuvaus
 
-Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset
-ratkaisut, esim.
 
--   Missä mikäkin järjestelmän komponentti ajetaan (tietokone, palvelinohjelma)
-    ja komponenttien väliset yhteydet (vaikkapa tähän tyyliin:
-    https://security.ufl.edu/it-workers/risk-assessment/creating-an-information-systemdata-flow-diagram/)
--   Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
--   Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää
-    UML-sekvenssikaavioilla.
--   Toteutuksen yleisiä ratkaisuja, esim. turvallisuus.
+### Teknologiat
+- Java
+- Spring Boot: Java-pohjainen kehys
+- Spring Security: Autentikointi ja auktorisointi
+- Spring data JPA: Tietokantakäsittely ja integrointi
+- Tietokanta
+    - H2: kehityksessä ja testeissä
+    - MySQL: tuotannossa
+- JSON Web Tokens: Käyttäjien autentikointi ja oikeudet
+- Spring Boot DevTools
+- Spring Boot Starter Test: yksikkö ja integraatiotestaus
+    - JUnit 5
+    - Mockito
+- Bean Validation: Tietojen validointi
+- Spring Boot Starter Web: RESTful API:n rakentaminen
+- Spring Security Test: Spring Security:n testaus
 
-Tämän lisäksi
+### Julkaisu
+Sovellus on julkaistu CSC Rahti-palvelussa. Sovellus on konfiguroitu käyttämään Dockerfile-tiedostoa sekä tuotantoympäristöön tarkoitettua application-prod.properties-tiedostoa tietokannan asetuksille. Alle on liitetty mainittujen tiedostojen sisällöt.
 
--   ohjelmakoodin tulee olla kommentoitua
--   luokkien, metodien ja muuttujien tulee olla kuvaavasti nimettyjä ja noudattaa
-    johdonmukaisia nimeämiskäytäntöjä
--   ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toistolta
-    vältytään
+- Dockerfile
+```
+FROM eclipse-temurin:17-jdk-focal AS builder
+WORKDIR /opt/app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN chmod +x ./mvnw
+RUN ./mvnw dependency:go-offline
+COPY ./src ./src
+RUN ./mvnw clean install -DskipTests 
+RUN find ./target -type f -name '*.jar' -exec cp {} /opt/app/app.jar \; -quit
+
+FROM eclipse-temurin:17-jre-alpine
+COPY --from=builder /opt/app/*.jar /opt/app/
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/opt/app/app.jar" ]
+```
+- MySQL-tietokannan konfigurointi
+    - application-prod.properties
+```
+spring.jpa.show-sql=true
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+spring.datasource.initialization-mode=create-drop
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.ddl-auto=update
+```
+
+### Rajapintojen kuvaukset
+[Rajapintojen kuvaukset](documents/Rajapinnankuvaus/RESTAPIdokumentaatio.md) ovat erillisessä tiedostossa. 
+
+UML-sekvenssikaavio 
+
+```
+Client              REST API                    Server                   MySQL
+  |                    |                          |                       |
+  |  POST /api/login   |                          |                       |
+  | ---------------->  |                          |                       |
+  |                    |      Validate user       |                       |
+  |                    |   ------------------>    |                       |
+  |                    |                          |                       |
+  |                    |   Generate JWT Token     |                       |
+  |                    |   <-------------------   |                       |
+  | 200 OK, JWT Token  |                          |                       |
+  | <----------------  |                          |                       |
+  |                    |                          |                       |
+  |   GET /api/data    |                          |                       |
+  |     with JWT       |                          |                       |
+  | ---------------->  |    Validate JWT Token    |                       |
+  |                    |    ---------------->     |                       |
+  |                    |    Query data from DB    |                       |
+  |                    |    ---------------->     |                       |
+  |                    |                          |                       |
+  |                    |                          |  Return data from DB  |
+  |                    |                          |   <---------------    |
+  |                    |    Return data to API    |                       |
+  |                    |    <-----------------    |                       |
+  |    200 OK, Data    |                          |                       |
+  | <----------------  |                          |                       |
+  |                    |                          |                       |
+
+```
+
+### Turvallisuus
+Salasana:
+- Kun käyttäjä luo tilin, salasana salataan Spring Securityn tarjoamalla PasswordEncoder-rajapinnalla, jonka ansiosta salasanat eivät tallennu selväkielisenä tietokantaan.
+
+JWT token:
+
+- Kun käyttäjä kirjautuu sisään login-endpointissa, palvelin luo JWT-tokenin, joka sisältää käyttäjän tunnistetiedot (käyttäjätunnus ja rooli) sekä tokenin voimassaoloajan. Token palautetaan käyttäjälle ja tämä lisätään kaikkiin seuraaviin HTTP-pyyntöihin, jotka vaativat autentikointia.
+- Token tallennetaan selaimen localStorageen, joka varmistaa, että käyttäjän ei tarvitse kirjautua aina, kun tekee pyynnön. Kun käyttäjä tekee pyynnön suojattuihin endpointteihin, token lähetetään pyynnön mukana.
+    - Palvelin tarkistaa tokenin aitouden ja varmistaa, että se ei ole vanhentunut. Jos token on voimassa ja oikea, käyttäjä voidaan tunnistaa ja hänelle voidaan antaa pääsy pyydetylle resurssille.
+    - Tokenissa on käyttäjän roolitiedot, joiden perusteella sovellus päättää, mitä resursseja käyttäjä voi käyttää. Esimerkiksi admin-käyttäjällä on pääsy hallintaan, mutta tavallisella käyttäjällä ei.
+- JWT-tokenit sisältävät voimassaoloajan. Kun token vanhenee, käyttäjän täytyy kirjautua sisään uudelleen.
+- Sovelluksesta uloskirjautuminen varmistaa, että käyttäjä voi turvallisesti kirjautua ulos kaikista istunnoista sekä JWT-token samalla mitätöidään.
+
+Suojaukset: 
+- CSRF (Cross-Site Request Forgery): Käytämme CSRF-suojausta estämään haitallisten sivustojen tekemät pyynnöt sovellukseen. Tämä varmistaa, että vain aito käyttäjä voi tehdä toimintoja, jotka edellyttävät autentikointia. Kehitysvaiheessa suojaus pois päältä.
+- CORS (Cross-Origin Resource Sharing): Käytämme CORS-politiikkaa rajoittamaan, mitkä verkkosivustot voivat käyttää API:a. Tämä estää ulkopuolisia palvelimia tekemästä ei-toivottuja pyyntöjä sovellukseen, mikä vähentää mahdollisten hyökkäysten riskiä. Kehitysvaiheessa annettu lupa kaikilta tehdä pyyntöjä.
+
 
 ## Testaus
 
-Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan
-testaamalla projektin aikana: millaisia testauksia tehdään ja missä vaiheessa.
-Testauksen tarkemmat sisällöt ja testisuoritusten tulosten raportit kirjataan
-erillisiin dokumentteihin.
+Ohjelmistokehityksen aikana suoritetaan yksikkötestejä kehittäjien toimesta, 
+jotta voidaan testata yksittäisten komponenttien toimivuutta.
+Komponentteja yhdistäessä niitä voidaan testata integraatiotesteillä, jotta nähdään,
+että ne toimivat odotetusti yhdessä. 
+Järjestelmän valmistuessa voidaan testata järjestelmän toimivuutta 
+järjestelmätestauksilla, joilla voidaan testata toiminnallisuuksien 
+lisäksi suorituskykyä sekä turvallisuutta. 
 
-Tänne kirjataan myös lopuksi järjestelmän tunnetut ongelmat, joita ei ole korjattu.
+Kehitysvaiheessa kehittäjät suorittavat manuaalista testausta varmistaakseen, että luotu komponentti toimii odotetusti.
+- Kehittäjät lisäävät lokitietoja tarkistaakseen komponenttien oikean toiminnan ja muuttujien arvot.
+- Sovellusta ajetaan paikallisesti ja sen toimintaa tarkastellaan käyttöliittymän tai sovelluksen logiikan näkökulmasta.
+- Mahdolliset virheilmoitukset analysoidaan ja korjataan välittömästi.
+
+Yllä mainittujen lisäksi projektissamme oli käytössä H2-tietokanta, joka mahdollisti entiteetti-luokkien yhteistoiminnan tarkastelun nopeasti ilman ulkoista tietokantapalvelinta. Lisäksi rajapintojen oikeat statuskoodit ja toiminnallisuudet testattiin Postmanin avulla.
+
+Projektissamme on kehitysvaiheessa testattu palvelin puolelta komponenttien 
+toimivuutta myös yksikkötesteillä sekä integraatiotesteillä. Palvelimen ja tietokannan konfiguroinnin sekä julkaisun jälkeen aloitimme React-sovelluksen kehittämisen. Sovelluksen kehitysvaiheessa testasimme lipun tarkastustoiminnallisuutta suorittamalla päästä päähän -testausta käyttäen Robot Frameworkia. Tämä lähestymistapa varmisti, että järjestelmän kaikki osat, mukaan lukien käyttöliittymä, palvelin ja tietokanta, toimivat saumattomasti yhdessä käyttäjän näkökulmasta.
+
+### Yksikkö- ja integraatiotestaus
+JUnit-testikehystä hyödyntäen testasimme Lippu-luokan toiminnallisuutta eristettynä muista luokista. Testauksessa mockattiin tarvittavat tiedot ja riippuvuudet, jotta voitiin keskittyä pelkästään Lippu-luokan metodien ja logiikan oikeellisuuden varmistamiseen.
+[Testausdokumentti](documents/Testaus/yksikkotestaus.md)
+
+JUnit-testikehystä hyödyntäen testasimme, että jokainen entiteetti-luokka ja niiden repositoryt toimivat odotetusti. Testit suunniteltiin yksittäisten ominaisuuksien näkökulmasta varmistaen muun muassa entiteettien tallennus, päivitys ja repositoryjen metodien palauttamat tiedot sekä virhetilanteet.
+[Testausdokumentti](documents/Testaus/integraatiotestaus.md)
+
+Testasimme rajapintojen toimivuutta JUnit-testikehystä käyttäen. MockMvc:n avulla
+pystyi simuloimaan HTTP-pyyntöjä sekä tarkistamaan oikeat statuskoodit. Testauksen avulla voimme varmistaa, että rajapinta toimii kuten pitääkin.
+[Testausdokumentti](documents/Testaus/apitestaus.md)
+
+
+
+### End to end-testaus
+Hyödynsimme Robot Frameworkia päästä päähän-testauksessa varmistaaksemme, että sovellus toimii odotetusti kaikilla tasoilla. Robot Frameworkin avulla pystyimme testaamaan sovelluksen toimivuutta käyttöliittymän kautta simuloimalla käyttäjän toimintoja.
+
+Käytimme Selenium-kirjastoa testataksemme sovelluksen käyttöliittymää. Seleniumin avulla pystyimme syöttää oleellisia testitapauksia kuten kirjautumisen, lomakkeiden täytön sekä painikkeiden klikkauksen. Näin varmistimme, että sovelluksen logiikka toimi oikein käyttäjän näkökulmasta ja että sovellus reagoi odotetusti erilaisiin tilanteisiin.
+
+End to end-testauksen ajoimme lipun tarkastukselle jo client:in kehitysvaiheessa. [Testausdokumentti](documents/Testaus/firstendtoend.md)
+
+Ennen sovelluksen julkaisua, end to end-testaus ajettiin kolmesta eri käyttäjätarinasta testidatan avulla. [Testausdokumentti](documents/Testaus/E-to-e-testaus.md)
+
 
 ## Asennustiedot
 
