@@ -55,17 +55,6 @@ Käyttöliittymän tärkeimmät näkymät ja niiden väliset siirtymät on esite
 > lippumaara | int | Kuinka paljon lippuja on myynnissä
 > ennakkomyynti | date | Päivämäärä, jolloin lippujen ennakkomyynti loppuu
 
-> ### _Maksutapahtuma_
-> _Maksutapahtuma-taulu sisältää maksutapahtumat. Maksutapahtumalla voi olla yksi käyttäjä. Käyttäjällä voi olla useita maksutapahtumia. Lippuja voi myydä sekä Admin- että User-rooleissa._
->
-> Kenttä | Tyyppi | Kuvaus
-> ------ | ------ | ------
-> maksutapahtumaId | int PK | Maksutapahtuman id
-> kayttajaId | int FK | Viittaus käyttäjään [Käyttäjä](#Käyttäjä)-taulussa
-> hintayhteensa | double |  Lippujen hinnat yhteensä
-> aikaleima | date | Maksutapahtuman aikaleima
-> removed | boolean | Maksutapahtuman soft delete, oletuksena false (true/false)
-
 > ### _Hinnasto_
 > _Hinnasto-taulu sisältää tapahtuman hinnastoluokat. Tapahtumalla voi olla useita hintaluokkia, mutta hintaluokka voi kuulua vain yhteen tapahtumaan. Hinnastoja voi luoda vain Admin-roolissa._
 >
@@ -101,6 +90,17 @@ Käyttöliittymän tärkeimmät näkymät ja niiden väliset siirtymät on esite
 > kayttajatunnus | varchar(30) | Ohjelmaa käyttävän henkilön tunnuksen käyttäjätunnus
 > oikeus | varchar(30) | Ohjelmaa käyttävän henkilön oikeudet, user tai admin
 > aktiivisuus | boolean | Oletuksena true, muutetaan false, jos ei enää työskentele yrityksessä
+
+> ### _Maksutapahtuma_
+> _Maksutapahtuma-taulu sisältää maksutapahtumat. Maksutapahtumalla voi olla yksi käyttäjä. Käyttäjällä voi olla useita maksutapahtumia. Lippuja voi myydä sekä Admin- että User-rooleissa._
+>
+> Kenttä | Tyyppi | Kuvaus
+> ------ | ------ | ------
+> maksutapahtumaId | int PK | Maksutapahtuman id
+> kayttajaId | int FK | Viittaus käyttäjään [Käyttäjä](#Käyttäjä)-taulussa
+> hintayhteensa | double |  Lippujen hinnat yhteensä
+> aikaleima | date | Maksutapahtuman aikaleima
+> removed | boolean | Maksutapahtuman soft delete, oletuksena false (true/false)
 
 ## Tekninen kuvaus
 
