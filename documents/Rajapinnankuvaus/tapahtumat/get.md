@@ -44,8 +44,6 @@ Näyttää yksittäisen tapahtuman tiedot.
 
 ### Or
 
-!!Autentikointia ei ole vielä tehty!!
-
 **Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN- tai USER -tason oikeuksia.
 
 **Code** : `403 FORBIDDEN`
