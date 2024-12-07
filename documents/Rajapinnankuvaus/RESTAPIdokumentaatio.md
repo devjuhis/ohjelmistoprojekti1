@@ -1,25 +1,19 @@
 # Rajapinnan kuvaus
 
-Lopullisen toimivan palvelun base-URL tulee olemaan 'http://ticketguru.com'.
+Tässä dokumentissa kuvataan kaikki endpointit meidän ryhmän REST API:ssa 
+
+## Base-url
+https://op1-client-front-ohjelmistoprojekti.2.rahtiapp.fi/
 
 ## Avoimet endpointit
 
-Kaikille avoin endpoint kirjautumiseen. HUOM. kirjautumistoimintoa ei vielä tehty.
+Kaikille avoin endpoint on REST API:n testakseen käytettävä alla oleva endpoint, joka kertoo onko sovellus pystyssä ja mitä profiilia se käyttää
 
 * [Login](login.md) : `POST /api/login/`
 
 ## Endpointit jotka vaativat autentikaation
 
-Käyttäjä-taulun REST-rajapinnan käyttö vaatii kirjautumista, sekä admin-tason käyttäjän oikeuksia. HUOM. kirjautumistoimintoa ei vielä tehty.
-
-### Kirjautuneen käyttäjän tiedot
-
-!! KIRJAUTUMISTOIMINTOA EI VIELÄ TEHTY !!
-Each endpoint manipulates or displays information related to the User whose
-Token is provided with the request:
-
-* [Show info](user/get.md) : `GET /api/user/`
-* [Update info](user/put.md) : `PUT /api/user/`
+Kaikki meidän REST API:n endpointit vaativat autentikaation, poislukien api/test kuten yllä mainittu.
 
 ### Käyttäjien hallinta
 
@@ -45,7 +39,7 @@ Endpointit tapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi lisät
 
 ### Hinnastojen hallinta
 
-Endpointit hinnastojen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita hinnastoja, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty.
+Endpointit hinnastojen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita hinnastoja. Perus tason käyttäjä pystyy kuitenkin tarkastelemaan hinnastoja. Kirjautumattomilta nämä kaikki on estetty.
 
 * [Näytä kaikki hinnastot](hinnastot/getAll.md) : `GET /api/hinnastot`
 * [Näytä yksittäinen hinnasto](hinnastot/get.md) : `GET /api/hinnasto/{id}`
@@ -55,7 +49,7 @@ Endpointit hinnastojen hallintaan. Ainoastaan admin-tason käyttäjä voi hallit
 
 ### Lippujen hallinta
 
-Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita lippuja, joten perustason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty.
+Endpointit lippujen hallintaan. Admin ja perustason käyttäjät voivat katsoa, muokata, lisätä ja poistaa lippuja. Kirjautumattomilta nämä kaikki on estetty.
 
 * [Näytä kaikki liput](liput/getAll.md) : `GET /api/liput`
 * [Näytä yksittäinen lippu](liput/get.md) : `GET /api/liput/{id}`
@@ -65,10 +59,11 @@ Endpointit lippujen hallintaan. Ainoastaan admin-tason käyttäjä voi hallita l
 * [Päivitä lippua](liput/put.md) : `PUT /api/liput/{id}`
 * [Poista lippu](liput/delete.md) : `DELETE /api/liput/{id}`
 * [Soft delete lippu](liput/softDelete.md) : `DELETE /api/liput/softdelete/{id}`
+* [Hae lippu koodilla](liput/getLippuByKoodi.md) : `GET /api/liput/koodi/{koodi}`
 
 ### Maksutapahtumien hallinta
 
-Endpointit maksutapahtumien hallintaan. Ainoastaan admin-tason käyttäjä voi nähdä kaikki maksutapahtumat, joten user-tason käyttäjiltä sekä kirjautumattomilta käyttäjiltä käyttö on estetty. User-tason käyttäjällä oikeus luoda maksutapahtuma sekä nähdä luotu maksutapahtuma.
+Endpointit maksutapahtumien hallintaan. Admin ja perustason käyttäjät voivat luoda, poistaa, muokata ja nähdä maksutapahtumia. Kirjautumattomilta nämä kaikki on estetty.
 
 * [Näytä kaikki maksutapahtumat](maksutapahtumat/getAll.md) : `GET /api/maksutapahtumat`
 * [Näytä yksittäinen maksutapahtuma](maksutapahtumat/get.md) : `GET /api/maksutapahtumat/{id}`
