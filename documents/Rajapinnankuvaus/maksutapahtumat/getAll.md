@@ -60,3 +60,11 @@ Näyttää tiedot kaikista maksutapahtumista.
 **Code** : `403 FORBIDDEN`
 
 **Content** : `{}`
+
+### OR
+
+**Condition** : Maksutapahtumia ei ole.
+
+**Code** : `404 NOT FOUND`
+
+**Content** : `{}`
