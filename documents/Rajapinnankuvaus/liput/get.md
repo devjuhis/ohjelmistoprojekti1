@@ -4,7 +4,7 @@ Näyttää tiedon yksittäisestä lipusta.
 
 **URL** : `/api/liput/{id}`
 
-**URL Parameters** : `{id}`, jossa ID on käyttäjän lippuId.
+**URL Parameters** : `{id}`, jossa ID on lipun lippuId.
 
 **Method** : `GET`
 
@@ -53,11 +53,6 @@ Näyttää tiedon yksittäisestä lipusta.
         "hintayhteensa": 36.0,
         "aikaleima": "2024-10-15T13:39:26.044925",
         "kayttaja": {
-            "etunimi": "matti",
-            "sukunimi": "esimerkki",
-            "salasana": "salasana",
-            "kayttajatunnus": "matti123",
-            "oikeus": "ADMIN",
             "kayttajaid": 1
         }
     },
