@@ -73,3 +73,11 @@ Päivitä lipun removed kenttää.
 **Code** : `404 NOT FOUND`
 
 **Content** : `{}`
+
+### OR
+
+**Condition** : Käyttäjällä ei ole USER-tason oikeuksia
+
+**Code** : `403 FORBIDDEN`
+
+**Content** : `{}
