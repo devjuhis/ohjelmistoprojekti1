@@ -84,3 +84,11 @@ käytetty ->1 tai ei käytetty -> 0 ja määrä 1 tai -1 (palautettu).
 **Code** : `400 BAD REQUEST`
 
 **Content example**: `{Tapahtumaa ei löydy id: x}`
+
+### OR
+
+**Condition** : Käyttäjällä ei ole USER-tason oikeuksia
+
+**Code** : `403 FORBIDDEN`
+
+**Content** : `{}
