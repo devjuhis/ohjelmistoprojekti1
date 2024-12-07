@@ -79,4 +79,3 @@ Endpointit uuden maksutapahtuman luomiseen.
 * [Luo uusi lippu](liput/post.md) : `POST /api/liput`
 * [Näytä yksittäinen maksutapahtuma](maksutapahtumat/get.md) : `GET /api/maksutapahtumat/{id}`
 * [Näytä yksittäisen maksutapahtuman liput](maksutapahtumat/getTickets.md) : `GET /api/maksutapahtumat/{id}/liput`
-* [Näytä yksittäisen tapahtuman hinnastot]: `GET /api/tapahtumat/{id}/hinnastot`
