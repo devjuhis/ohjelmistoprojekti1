@@ -50,3 +50,11 @@ Näyttää kaikki tiedot tulevista tapahtumista.
 **Code** : `403 FORBIDDEN`
 
 **Content** : `{}`
+
+### Or
+
+**Condition** : Tapahtumia ei ole tulevaisuudessa
+
+**Code** : `404 NOT FOUND`
+
+**Content** : `{}`
