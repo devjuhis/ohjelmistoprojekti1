@@ -58,7 +58,9 @@ Näyttää tiedon yksittäisestä lipusta.
     },
     "kaytetty": false,
     "maara": 1,
-    "removed": false
+    "removed": false,
+    "koodi": 688a082e-21ac-4735-ae2b-786703164f2d,
+    "luontiaika": 2024-12-07T13:41:44.982957
 }
 ```
 
