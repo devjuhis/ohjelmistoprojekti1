@@ -161,3 +161,11 @@ Näyttää tiedot tapahtuman lipuista.
 
 **Content** : `{}`
 
+### OR
+
+**Condition** : Käyttäjällä ei ole USER-tason oikeuksia
+
+**Code** : `403 FORBIDDEN`
+
+**Content** : `{}
+
