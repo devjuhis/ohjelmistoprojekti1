@@ -32,8 +32,6 @@ Poistaa valitun hinnaston, mikäli toiminnon tekevällä käyttäjällä on ADMI
 
 ### Or
 
-!!Autentikointia ei ole vielä tehty!!
-
 **Condition** : Endpointia käyttävällä käyttäjällä ei ole ADMIN-tason oikeuksia.
 
 **Code** : `403 FORBIDDEN`
