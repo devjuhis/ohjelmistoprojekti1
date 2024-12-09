@@ -269,7 +269,7 @@ käyttäjätunnus, salasana, tietokannan luonti yms.).
 
 ## Back End - kehitysympäristön asennusohjeet
 
-1. Vaatimukset:
+**1. Vaatimukset:**
 
 - Java (esim. versio 17)
 - Maven 4.0.0
@@ -281,27 +281,27 @@ käyttäjätunnus, salasana, tietokannan luonti yms.).
 - Spring Boot DevTools
 - JUnit 5 ja Mockito testaukseen
 
-2. Asennusohjeet:
+**2. Asennusohjeet:**
 
-- Git-repositorion kloonaaminen:
+Git-repositorion kloonaaminen:
 ```
 git clone https://github.com/devjuhis/ohjelmistoprojekti1.git
 ```
 
-- Riippuvuuksien asentaminen:
+Riippuvuuksien asentaminen:
 ```
 mvn clean install
 ```
 
-- Sovelluksen käynnistäminen:
+Sovelluksen käynnistäminen:
 ```
 mvn spring-boot:run
 ```
 Voit myös käyttää suoraan Visual Studio Coden "Run"-nappia.
 
-3. Tietokannan määritys kehitysympäristössä (H2):
+**3. Tietokannan määritys alun kehitysympäristössä (H2):**
 
-- H2 on muistissa toimiva tietokanta, joka määritellään application.properties -tiedostossa seuraavasti:
+H2 on muistissa toimiva tietokanta, joka määritellään application.properties -tiedostossa seuraavasti:
 ```
 # Oletusprofiili, joka aktivoituu, jos PROFILE ei asetettu
 spring.profiles.active=${PROFILE:h2}
@@ -310,9 +310,8 @@ spring.profiles.active=${PROFILE:h2}
 server.port=8080
 logging.level.org.springframework=INFO
 ```
-- Käyttöliittymä H2-konsoliin: http://localhost:8080/h2-console
 
-- ja application-h2.properties -tiedostossa seuraavasti:
+ja application-h2.properties -tiedostossa seuraavasti:
 ```
 spring.datasource.url=jdbc:h2:mem:testdb
 spring.datasource.driverClassName=org.h2.Driver
@@ -322,8 +321,9 @@ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
 ```
+Käyttöliittymä H2-konsoliin: http://localhost:8080/h2-console
 
-- ja application-prod.properties -tiedostossa seuraavasti:
+ja application-prod.properties -tiedostossa seuraavasti:
 ```
 spring.jpa.show-sql=true
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
@@ -336,21 +336,22 @@ spring.jpa.generate-ddl=true
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-4. Ympäristömuuttujat:
+**4. Tietokannan määritys myöhemmissä kehitysvaiheissa ja tuotannossa (MySQL):**
 
-- Tietokannan käyttäjätunnus ja salasana voivat olla määriteltynä ympäristömuuttujissa, kuten:
+[Julkaisu](#Julkaisu)
+
+**5. Ympäristömuuttujat:**
+
+Tietokannan käyttäjätunnus ja salasana voivat olla määriteltynä ympäristömuuttujissa, kuten:
 ```
 DB_USERNAME=devuser
 DB_PASSWORD=devpassword
 JWT_SECRET=secretkey
 ```
 
-5. Testaus:
+**6. Testaus:**
 
-- Yksikkötestit ja integraatiotestit voidaan suorittaa komennolla:
-```
-mvn test
-```
+[Testaus](#Testaus)
 
 ## Front End - kehitysympäristön asennusohjeet
 
@@ -358,7 +359,7 @@ tämä vielä tulossa, hold on...
 
 ## Käynnistys- ja käyttöohje
 
-Käyttöliittymä löytyy Rahti2-palvelimelta osoitteessa [https://op1-client-front-ohjelmistoprojekti.2.rahtiapp.fi/](https://op1-client-front-ohjelmistoprojekti.2.rahtiapp.fi/).
+Käyttöliittymä löytyy Rahti2-palvelimelta osoitteessa https://op1-client-front-ohjelmistoprojekti.2.rahtiapp.fi/.
 
 ### Käyttäjätunnukset:
 
