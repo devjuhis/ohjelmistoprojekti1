@@ -338,7 +338,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ### 4. Tietokannan määritys myöhemmissä kehitysvaiheissa ja tuotannossa (MySQL):
 
-[Julkaisu](#Julkaisu)
+Katso [Julkaisu](#Julkaisu).
 
 ### 5. Ympäristömuuttujat:
 
@@ -351,7 +351,7 @@ JWT_SECRET=secretkey
 
 ### 6. Testaus:
 
-[Testaus](#Testaus)
+Katso [Testaus](#Testaus).
 
 ## Front End - kehitysympäristön asennusohjeet
 
