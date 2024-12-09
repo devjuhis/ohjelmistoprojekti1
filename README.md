@@ -269,7 +269,7 @@ käyttäjätunnus, salasana, tietokannan luonti yms.).
 
 ## Back End - kehitysympäristön asennusohjeet
 
-**1. Vaatimukset:**
+### 1. Vaatimukset:
 
 - Java (esim. versio 17)
 - Maven 4.0.0
@@ -281,7 +281,7 @@ käyttäjätunnus, salasana, tietokannan luonti yms.).
 - Spring Boot DevTools
 - JUnit 5 ja Mockito testaukseen
 
-**2. Asennusohjeet:**
+### 2. Asennusohjeet:
 
 Git-repositorion kloonaaminen:
 ```
@@ -299,7 +299,7 @@ mvn spring-boot:run
 ```
 Voit myös käyttää suoraan Visual Studio Coden "Run"-nappia.
 
-**3. Tietokannan määritys alun kehitysympäristössä (H2):**
+### 3. Tietokannan määritys alun kehitysympäristössä (H2):
 
 H2 on muistissa toimiva tietokanta, joka määritellään application.properties -tiedostossa seuraavasti:
 ```
@@ -336,11 +336,11 @@ spring.jpa.generate-ddl=true
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-**4. Tietokannan määritys myöhemmissä kehitysvaiheissa ja tuotannossa (MySQL):**
+### 4. Tietokannan määritys myöhemmissä kehitysvaiheissa ja tuotannossa (MySQL):
 
 [Julkaisu](#Julkaisu)
 
-**5. Ympäristömuuttujat:**
+### 5. Ympäristömuuttujat:
 
 Tietokannan käyttäjätunnus ja salasana voivat olla määriteltynä ympäristömuuttujissa, kuten:
 ```
@@ -349,7 +349,7 @@ DB_PASSWORD=devpassword
 JWT_SECRET=secretkey
 ```
 
-**6. Testaus:**
+### 6. Testaus:
 
 [Testaus](#Testaus)
 
