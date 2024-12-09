@@ -77,6 +77,7 @@ Käyttöliittymän tärkeimmät näkymät ja niiden väliset siirtymät on esite
 > kaytetty | boolean | Oletuksena false, muutetaan lipuntarkastuksessa true:ksi
 > removed | boolean | Lipun soft delete, oletuksena false
 > koodi | string | UUID-koodi Qr-koodia varten
+> luontiaika | timestamp | Lipun luontiaika QR-koodin generoimiseen
 
 >  ### _Käyttäjä_
 > _Käyttäjä-taulu sisältää ohjelman käyttäjien tiedot. Ohjelman käyttäjiä ovat esimerkiksi myyjä ja manageri._
