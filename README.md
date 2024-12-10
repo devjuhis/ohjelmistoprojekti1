@@ -355,7 +355,90 @@ Katso [Testaus](#Testaus).
 
 ## Front End - kehitysympäristön asennusohjeet
 
-tämä vielä tulossa, hold on...
+### 1. Vaatimukset
+Varmista, että seuraavat ohjelmistot on asennettu koneellesi:
+
+-Node.js ja npm
+Tarkista versiot komennoilla:
+```
+node -v
+npm -v
+```
+
+### 2. Projektin kloonaaminen
+Kloonaa projektin Git-repositorio omalle koneellesi haluamaasi tiedostoon:
+
+```
+git clone https://github.com/AbuAk1/op1-client.git
+cd op1-client-side
+```
+
+### 3. Riippuvuuksien asentaminen
+Asenna kaikki tarvittavat riippuvuudet komennolla:
+
+```
+npm install
+```
+
+### 4. Kehityspalvelimen käynnistäminen
+Käynnistä Vite-kehityspalvelin seuraavalla komennolla:
+
+```
+npm run dev
+```
+
+-Vite käynnistää sovelluksen oletuksena osoitteessa http://localhost:5173.
+
+### 5. Tuotantoversion rakentaminen
+Luo tuotantoversio ajamalla komento:
+
+```
+npm run build
+```
+-Buildattu sovellus sijaitsee dist-kansiossa.
+
+### 6. Tuotantoversion esikatselu
+Voit esikatsella rakennettua sovellusta paikallisesti komennolla:
+
+```
+npm run preview
+```
+
+### 8. Käytettävät ympäristömuuttujat
+Projektissa voi olla ympäristömuuttujia, jotka määritellään env-tiedostoissa:
+
+.env.development – Kehitysympäristöä varten
+.env.production – Tuotantoympäristöä varten
+Esimerkki .env-tiedostosta:
+
+```
+VITE_API_URL=https://api.example.com
+VITE_JWT_SECRET=your-secret-key
+```
+
+Huom: Vite käyttää import.meta.env-syntaksia ympäristömuuttujien lukemiseen. Esimerkiksi:
+
+```
+const apiUrl = import.meta.env.VITE_API_URL;
+```
+
+### 9. Teknologiat ja kirjastot
+Projektissa käytettävät keskeiset kirjastot:
+
+-**React:** Frontend-käyttöliittymän rakentamiseen.
+-**React Router:** Reititykseen (react-router-dom).
+-**MUI:** Materiaalisuunnittelun komponentit (@mui/material ja @mui/icons-material).
+-**Emotion:** CSS-in-JS-tyylityksiin (@emotion/react ja @emotion/styled).
+-**QR-koodit:** jsqr ja qrcode.react.
+-**React ApexCharts:** Kaavioiden visualisointiin.
+
+### Yhteenveto tärkeistä komennoista
+
+> Komento | Kuvaus
+> ------- | ----- |
+> npm run dev |	Käynnistää kehityspalvelimen
+> npm run build | Rakentaa tuotantoversion
+> npm run preview | Esikatselee rakennettua versiota
 
 ## Käynnistys- ja käyttöohje
 
@@ -363,5 +446,7 @@ Käyttöliittymä löytyy Rahti2-palvelimelta osoitteessa https://op1-client-fro
 
 ### Käyttäjätunnukset:
 
-* **Admin**: matti123 / salasana
-* **User**: matti321 / salasana
+> Käyttöoikeus | Käyttäjätunnus | salasana
+> ------------ | -------------- | --------
+> **Admin** | matti123 | salasana
+> **User** | matti321 | salasana
