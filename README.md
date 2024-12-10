@@ -109,6 +109,7 @@ Käyttöliittymän tärkeimmät näkymät ja niiden väliset siirtymät on esite
 
 
 ### Teknologiat
+
 - Java
 - Spring Boot: Java-pohjainen kehys
 - Spring Security: Autentikointi ja auktorisointi
@@ -126,6 +127,7 @@ Käyttöliittymän tärkeimmät näkymät ja niiden väliset siirtymät on esite
 - Spring Security Test: Spring Security:n testaus
 
 ### Julkaisu
+
 Sovellus on julkaistu CSC Rahti-palvelussa. Sovellus on konfiguroitu käyttämään Dockerfile-tiedostoa sekä tuotantoympäristöön tarkoitettua application-prod.properties-tiedostoa tietokannan asetuksille. Alle on liitetty mainittujen tiedostojen sisällöt.
 
 - Dockerfile
@@ -160,6 +162,7 @@ spring.jpa.hibernate.ddl-auto=update
 ```
 
 ### Rajapintojen kuvaukset
+
 [Rajapintojen kuvaukset](documents/Rajapinnankuvaus/RESTAPIdokumentaatio.md) ovat erillisessä tiedostossa. 
 
 UML-sekvenssikaavio 
@@ -195,6 +198,7 @@ Client              REST API                    Server                   MySQL
 ```
 
 ### Turvallisuus
+
 Salasana:
 - Kun käyttäjä luo tilin, salasana salataan Spring Securityn tarjoamalla PasswordEncoder-rajapinnalla, jonka ansiosta salasanat eivät tallennu selväkielisenä tietokantaan.
 
@@ -233,14 +237,16 @@ Projektissamme on kehitysvaiheessa testattu palvelin puolelta komponenttien
 toimivuutta myös yksikkötesteillä sekä integraatiotesteillä. Palvelimen ja tietokannan konfiguroinnin sekä julkaisun jälkeen aloitimme React-sovelluksen kehittämisen. Sovelluksen kehitysvaiheessa testasimme lipun tarkastustoiminnallisuutta suorittamalla päästä päähän -testausta käyttäen Robot Frameworkia. Tämä lähestymistapa varmisti, että järjestelmän kaikki osat, mukaan lukien käyttöliittymä, palvelin ja tietokanta, toimivat saumattomasti yhdessä käyttäjän näkökulmasta.
 
 ### Yksikkö- ja integraatiotestaus
-JUnit-testikehystä hyödyntäen testasimme Lippu-luokan toiminnallisuutta eristettynä muista luokista. Testauksessa mockattiin tarvittavat tiedot ja riippuvuudet, jotta voitiin keskittyä pelkästään Lippu-luokan metodien ja logiikan oikeellisuuden varmistamiseen.
+
+Yksikkötesteissä JUnit-testikehystä hyödyntäen testasimme luotujen entitettien toiminnallisuutta. Testeissä testattiin entiteettien toimintoja kuten settereitä ja gettereitä. Lisäksi entiteettien konstruktroteita testattiin luomalla uusia entiteettejä. Lisäksi tarkistimme käyttäjä-entiteetin validointia.
 [Testausdokumentti/yksikkötestaus](documents/Testaus/yksikkotestaus.md)
 
-JUnit-testikehystä hyödyntäen testasimme, että jokainen entiteetti-luokka ja niiden repositoryt toimivat odotetusti. Testit suunniteltiin yksittäisten ominaisuuksien näkökulmasta varmistaen muun muassa entiteettien tallennus, päivitys ja repositoryjen metodien palauttamat tiedot sekä virhetilanteet.
+Integraatiotestauksesssa JUnit-testikehystä hyödyntäen testasimme, että entiteetti-luokat, niiden repositoryt ja REST-controllerit toimivat yhdessä. Testeissä testattiin GET-, POST-, PATCH-, DELETE-, ja softdelete pyyntöjä eri entiteeteille. Lisäksi tarkistimme, että HTTP-pyyntöjen vastaukset palauttavat JSON-muotoista dataa ja statuskoodien toimivuuden.
 [Testausdokumentti/integraatiotestaus](documents/Testaus/integraatiotestaus.md)
 
 
 ### End to end-testaus
+
 Hyödynsimme Robot Frameworkia päästä päähän-testauksessa varmistaaksemme, että sovellus toimii odotetusti kaikilla tasoilla. Robot Frameworkin avulla pystyimme testaamaan sovelluksen toimivuutta käyttöliittymän kautta simuloimalla käyttäjän toimintoja.
 
 Käytimme Selenium-kirjastoa testataksemme sovelluksen käyttöliittymää. Seleniumin avulla pystyimme syöttää oleellisia testitapauksia kuten kirjautumisen, lomakkeiden täytön sekä painikkeiden klikkauksen. Näin varmistimme, että sovelluksen logiikka toimi oikein käyttäjän näkökulmasta ja että sovellus reagoi odotetusti erilaisiin tilanteisiin.
@@ -251,18 +257,6 @@ Ennen sovelluksen julkaisua, end to end-testaus ajettiin kolmesta eri käyttäj�
 
 
 ## Asennustiedot
-
-Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta:
-
--   järjestelmän kehitysympäristö: miten järjestelmän kehitysympäristön saisi
-    rakennettua johonkin toiseen koneeseen
-
--   järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi
-    asennettua johonkin uuteen ympäristöön.
-
-Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja
-käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta,
-käyttäjätunnus, salasana, tietokannan luonti yms.).
 
 ## Back End - kehitysympäristön asennusohjeet
 
@@ -372,6 +366,7 @@ mvn test
 ## Front End - kehitysympäristön asennusohjeet
 
 ### 1. Vaatimukset
+
 Varmista, että seuraavat ohjelmistot on asennettu koneellesi:
 
 -Node.js ja npm
@@ -382,6 +377,7 @@ npm -v
 ```
 
 ### 2. Projektin kloonaaminen
+
 Kloonaa projektin Git-repositorio omalle koneellesi haluamaasi tiedostoon:
 
 ```
@@ -390,6 +386,7 @@ cd op1-client-side
 ```
 
 ### 3. Riippuvuuksien asentaminen
+
 Asenna kaikki tarvittavat riippuvuudet komennolla:
 
 ```
@@ -397,6 +394,7 @@ npm install
 ```
 
 ### 4. Kehityspalvelimen käynnistäminen
+
 Käynnistä Vite-kehityspalvelin seuraavalla komennolla:
 
 ```
@@ -406,6 +404,7 @@ npm run dev
 -Vite käynnistää sovelluksen oletuksena osoitteessa http://localhost:5173.
 
 ### 5. Tuotantoversion rakentaminen
+
 Jos haluat rakentaa tuotantoversion paikallisesti, voit ajaa seuraavan komennon:
 
 ```
@@ -416,6 +415,7 @@ npm run build
 Rahtiin julkaistessa build tapahtuu automatisoituna oheisen ohjeen mukaisesti, Docker-filesta määriteltynä: https://haagahelia.github.io/hh-csc-docs/rahti/react_julkaiseminen/.
 
 ### 6. Tuotantoversion esikatselu
+
 Voit esikatsella rakennettua sovellusta paikallisesti komennolla:
 
 ```
@@ -423,6 +423,7 @@ npm run preview
 ```
 
 ### 7. Teknologiat ja kirjastot
+
 Projektissa käytettävät keskeiset kirjastot:
 
 - **React:** Frontend-käyttöliittymän rakentamiseen

@@ -2,22 +2,21 @@
 
 ## Testauksen tavoite
 
-Testauksen tavoitteena on testata, että entiteetti-luokat ja niiden repositoryt toimivat odotetusti. 
+Testauksen tavoitteena on testata, että entiteetti-luokat, niiden repositoryt ja REST-controllerit toimivat yhdessä. Testauksessa käytetään MockMVC-simulaatiota.
 
 ## Testit
 
  **Testattava asia**                | **Testin suoritus**
  ---------------------------------- | -------------------
-Hinnaston ja Tapahtuman hakeminen id:llä | Testataan, että repository hakee oikealla id:llä 
-Käyttäjän hakeminen käyttäjätunnuksella   | Testataan, että repository hakee oikealla käyttäjätunnuksella
-Hinnaston, Käyttäjän ja Maksutapahtuman luonti | Testataan, että luonti onnistuu
-Hinnaston, Käyttäjän, Tapahtuman poisto |   Testataan, että poistu onnistuu
-Tapahtuman muokkaaminen     | Testataan, että muokkaus onnistuu
-Käyttäjän luonti väärillä tiedoilla     | Testataan, että käyttäjän luonti väärillä tunnuksilla ei onnistu 
-Haetaan maksutapahtumat, joiden removed-kenttä on false | Muutetaan luodun maksutapahtuman removed-kenttä true:ksi ja haetaan sen jälkeen tapahtumat, joiden removed-kenttä on false
-Maksutapahtuman soft delete | Testataan, että maksutapahtuman soft delete (PATCH) onnistuu
+HinnastoREST | Testataan, että endpoint palauttaa JSON-muotoista dataa. Testataan GET, POST, PATCH ja DELETE pyynnöt. 
+KäyttäjäREST | Testataan, että endpoint palauttaa JSON-muotoista dataa. Testataan GET, POST, PATCH ja softdelete pyynnöt.
+LippuREST | Testataan, että endpoint palauttaa JSON-muotoista dataa. Testataan GET, POST, PATCH, DELETE ja softdelete pyynnöt.
+LoginREST | Testataan kirjautuminen POST-pyynnöillä oikeilla ja virheellisillä tunnuksilla. Tarkistetaan, että virheellinen tunnus palauttaa oikean virheviestin ja oikea tunnus palauttaa JWT-tokenin.
+MaksutapahtumaREST | Testataan, että endpoint palauttaa JSON-muotoista dataa. Testataan GET, POST ja softdelete pyynnöt.
+TapahtumaREST    | Testataan, että endpoint palauttaa JSON-muotoista dataa. Testataan GET, POST, PATCH ja DELETE pyynnöt.
 
-Testiloki 20.11.2024
+
+Testiloki 10.12.2024
 =======================
 
 **Testaaja:** Tiimi7
@@ -28,15 +27,4 @@ Testiloki 20.11.2024
     - Test Runner for Java
     - Extension Pack for Java
 
-Testiloki 5.12.2024
-=======================
-
-![Kuvakaappaus testituloksista](inttestresult.png)
-
-**Testaaja:** Tiimi7
-
-**Ympäristö:**
-- JUnit 
-- Visual Studio Code + Extensions
-    - Test Runner for Java
-    - Extension Pack for Java
+![Kuvakaappaus testituloksista](integraatiotestit.png)
