@@ -425,12 +425,12 @@ const apiUrl = import.meta.env.VITE_API_URL;
 ### 9. Teknologiat ja kirjastot
 Projektissa käytettävät keskeiset kirjastot:
 
--**React:** Frontend-käyttöliittymän rakentamiseen.
--**React Router:** Reititykseen (react-router-dom).
--**MUI:** Materiaalisuunnittelun komponentit (@mui/material ja @mui/icons-material).
--**Emotion:** CSS-in-JS-tyylityksiin (@emotion/react ja @emotion/styled).
--**QR-koodit:** jsqr ja qrcode.react.
--**React ApexCharts:** Kaavioiden visualisointiin.
+- **React:** Frontend-käyttöliittymän rakentamiseen
+- **React Router:** Reititykseen (react-router-dom)
+- **MUI:** Materiaalisuunnittelun komponentit (@mui/material ja @mui/icons-material)
+- **Emotion:** CSS-in-JS-tyylityksiin (@emotion/react ja @emotion/styled)
+- **QR-koodit:** jsqr ja qrcode.react
+- **React ApexCharts:** Kaavioiden visualisointiin
 
 ### Yhteenveto tärkeistä komennoista
 
@@ -448,5 +448,5 @@ Käyttöliittymä löytyy Rahti2-palvelimelta osoitteessa https://op1-client-fro
 
 > Käyttöoikeus | Käyttäjätunnus | salasana
 > ------------ | -------------- | --------
-> **Admin** | matti123 | salasana
-> **User** | matti321 | salasana
+> **Admin** | admin | admin
+> **User** | myyja | myyja
