@@ -33,8 +33,8 @@ public class LoginRestTest {
 
         String login = """
             {
-	            "kayttajatunnus":"matti123",
-	            "salasana": "salasana"
+	            "kayttajatunnus":"testi123",
+	            "salasana": "admin"
             }
             """;
 

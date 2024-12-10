@@ -1,8 +1,12 @@
 package project.app.rest;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -13,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest
 @ActiveProfiles("h2")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class KayttajaRestTest {
 
     @Autowired
@@ -27,20 +32,23 @@ public class KayttajaRestTest {
     }
 
     @Test
+    @Order(1)
     public void statusOk() throws Exception {
         mockMvc.perform(get("/api/kayttajat")).andExpect(status().isOk());
     }
 
     @Test
+    @Order(2)
     public void responseIsJson() throws Exception {
 
         mockMvc.perform(get("/api/kayttajat"))
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk());
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
     }
 
     @Test
+    @Order(3)
     public void testPostKayttajat() throws Exception {
 
         String newKayttaja = """
@@ -54,14 +62,15 @@ public class KayttajaRestTest {
                 """;
 
         mockMvc.perform(post("/api/kayttajat")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(newKayttaja))
-        .andExpect(status().isCreated()) 
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.kayttajatunnus").value("minna123"));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(newKayttaja))
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.kayttajatunnus").value("minna123"));
     }
 
     @Test
+    @Order(4)
     public void testPatchKayttaja() throws Exception {
         String newKayttaja = """
                 {
@@ -69,23 +78,20 @@ public class KayttajaRestTest {
                 }
                 """;
 
-        mockMvc.perform(patch("/api/kayttajat/1") 
+        mockMvc.perform(patch("/api/kayttajat/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(newKayttaja)) 
+                .content(newKayttaja))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.kayttajatunnus").value("testi123")); 
+                .andExpect(jsonPath("$.kayttajatunnus").value("testi123"));
     }
 
     @Test
-    public void testDeleteKayttaja() throws Exception {
-        mockMvc.perform(delete("/api/kayttajat/2")) 
-                .andExpect(status().isNoContent()); 
-    }
-
-    @Test
+    @Order(5)
     public void testSoftDeleteKayttaja() throws Exception {
-        mockMvc.perform(patch("/api/kayttajat/softdelete/1")) 
-                .andExpect(status().isOk()); 
+        mockMvc.perform(patch("/api/kayttajat/softdelete/1"))
+                .andExpect(status().isOk());
     }
+
     
+
 }

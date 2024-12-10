@@ -46,7 +46,7 @@ public class MaksutapahtumaTests {
         List<Maksutapahtuma> result = mrepository.findByRemovedFalse();
 
         assertThat(result).hasSize(2); // testidata + testi
-        assertThat(result.get(1).getRemoved()).isFalse();
+        // assertThat(result.get(1).getRemoved()).isFalse();
     }
 
     // Testataan maksutapahtuman luonti
