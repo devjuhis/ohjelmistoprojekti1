@@ -7,6 +7,8 @@ Hiltunen Ilona, Järvinen Juho, Keinänen Aleksi, Klenberg Eriika, Nevala Sanni
 
 Kyseessä on Haaga-Helia ammattikorkeakoulun Ohjelmistoprojekti 1-kurssitoteutuksen projektityö (syksy 2024), jossa luotiin kuvitteellisen asiakkaan tilaama lipunmyyntijärjestelmä.
 
+Käyttöliittymä on toteutettu repositorioon https://github.com/AbuAk1/op1-client.
+
 ### Järjestelmä
 
 Asiakkaana toimii lipputoimisto, joka tarvitsee lipunmyyntijärjestelmän myyntipisteeseen. Lipputoimiston myyjä myy ja tulostaa asiakkailleen liput tapahtumiin lipunmyyntijärjestelmästä. Lipputoimisto voi lisätä ja muokata lipunmyyntijärjestelmässä tapahtumia ja myytävien lippujen tietoja sekä nähdä koostetusti myyntitapahtumat ja myyntiraportit. Lipuissa on QR-koodit, jotta liput voidaan merkitä käytetyksi asiakkaan saapuessa tapahtumaan. 
@@ -232,15 +234,10 @@ toimivuutta myös yksikkötesteillä sekä integraatiotesteillä. Palvelimen ja 
 
 ### Yksikkö- ja integraatiotestaus
 JUnit-testikehystä hyödyntäen testasimme Lippu-luokan toiminnallisuutta eristettynä muista luokista. Testauksessa mockattiin tarvittavat tiedot ja riippuvuudet, jotta voitiin keskittyä pelkästään Lippu-luokan metodien ja logiikan oikeellisuuden varmistamiseen.
-[Testausdokumentti](documents/Testaus/yksikkotestaus.md)
+[Testausdokumentti/yksikkötestaus](documents/Testaus/yksikkotestaus.md)
 
 JUnit-testikehystä hyödyntäen testasimme, että jokainen entiteetti-luokka ja niiden repositoryt toimivat odotetusti. Testit suunniteltiin yksittäisten ominaisuuksien näkökulmasta varmistaen muun muassa entiteettien tallennus, päivitys ja repositoryjen metodien palauttamat tiedot sekä virhetilanteet.
-[Testausdokumentti](documents/Testaus/integraatiotestaus.md)
-
-Testasimme rajapintojen toimivuutta JUnit-testikehystä käyttäen. MockMvc:n avulla
-pystyi simuloimaan HTTP-pyyntöjä sekä tarkistamaan oikeat statuskoodit. Testauksen avulla voimme varmistaa, että rajapinta toimii kuten pitääkin.
-[Testausdokumentti](documents/Testaus/apitestaus.md)
-
+[Testausdokumentti/integraatiotestaus](documents/Testaus/integraatiotestaus.md)
 
 
 ### End to end-testaus
@@ -248,9 +245,9 @@ Hyödynsimme Robot Frameworkia päästä päähän-testauksessa varmistaaksemme,
 
 Käytimme Selenium-kirjastoa testataksemme sovelluksen käyttöliittymää. Seleniumin avulla pystyimme syöttää oleellisia testitapauksia kuten kirjautumisen, lomakkeiden täytön sekä painikkeiden klikkauksen. Näin varmistimme, että sovelluksen logiikka toimi oikein käyttäjän näkökulmasta ja että sovellus reagoi odotetusti erilaisiin tilanteisiin.
 
-End to end-testauksen ajoimme lipun tarkastukselle jo client:in kehitysvaiheessa. [Testausdokumentti](documents/Testaus/firstendtoend.md)
+End to end-testauksen ajoimme lipun tarkastukselle jo client:in kehitysvaiheessa. [Testausdokumentti/first end-to-end](documents/Testaus/firstendtoend.md)
 
-Ennen sovelluksen julkaisua, end to end-testaus ajettiin kolmesta eri käyttäjätarinasta testidatan avulla. [Testausdokumentti](documents/Testaus/E-to-e-testaus.md)
+Ennen sovelluksen julkaisua, end to end-testaus ajettiin kolmesta eri käyttäjätarinasta testidatan avulla. [Testausdokumentti/end-to-end-testaus](documents/Testaus/E-to-e-testaus.md)
 
 
 ## Asennustiedot
@@ -335,23 +332,42 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 spring.jpa.generate-ddl=true
 spring.jpa.hibernate.ddl-auto=update
 ```
+ja application-local.properties -tiedostossa seuraavasti:
+```
+spring.jpa.show-sql=true
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/<tietokantasi määrittelyt>
+spring.datasource.username=tiimi7
+spring.datasource.password=X&jL3xstc
+spring.datasource.initialization-mode=create-drop
+spring.batch.initialize-schema=always
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update
+```
 
 ### 4. Tietokannan määritys myöhemmissä kehitysvaiheissa ja tuotannossa (MySQL):
 
-Katso [Julkaisu](#Julkaisu).
+Katso [julkaisu](#Julkaisu) miten nykyinen projekti on määritelty.
+
+Rahti -palvelussa tietokanta luodaan seuraavasti https://haagahelia.github.io/hh-csc-docs/rahti/tietokantapalvelun_luominen/.
+
+Spring Boot -palvelu voidaan julkaista Rahdissa tämän ohjeen mukaisesti: https://haagahelia.github.io/hh-csc-docs/reseptit/spring_rahti/.
 
 ### 5. Ympäristömuuttujat:
 
-Tietokannan käyttäjätunnus ja salasana voivat olla määriteltynä ympäristömuuttujissa, kuten:
-```
-DB_USERNAME=devuser
-DB_PASSWORD=devpassword
-JWT_SECRET=secretkey
-```
+Tietokannan käyttäjätunnus ja salasana voivat olla määriteltynä ympäristömuuttujissa, kuten tässä ohjeistetaan:
+
+Meidän projektissa ympäristömuuttujat on nimetty DB_URL, DB_USER ja DB_PASSWORD. Katso linkistä ohjeistus ympäristömuuttujien määrittelyyn Rahti CSC-palvelussa:
+https://haagahelia.github.io/hh-csc-docs/rahti/spring_tietokannan_konfigurointi/
 
 ### 6. Testaus:
 
-Katso [Testaus](#Testaus).
+Katso [testaus](#Testaus).
+
+- Yksikkötestit ja integraatiotestit voidaan suorittaa komennolla:
+```
+mvn test
+```
 
 ## Front End - kehitysympäristön asennusohjeet
 
@@ -390,12 +406,14 @@ npm run dev
 -Vite käynnistää sovelluksen oletuksena osoitteessa http://localhost:5173.
 
 ### 5. Tuotantoversion rakentaminen
-Luo tuotantoversio ajamalla komento:
+Jos haluat rakentaa tuotantoversion paikallisesti, voit ajaa seuraavan komennon:
 
 ```
 npm run build
 ```
 -Buildattu sovellus sijaitsee dist-kansiossa.
+
+Rahtiin julkaistessa build tapahtuu automatisoituna oheisen ohjeen mukaisesti, Docker-filesta määriteltynä: https://haagahelia.github.io/hh-csc-docs/rahti/react_julkaiseminen/.
 
 ### 6. Tuotantoversion esikatselu
 Voit esikatsella rakennettua sovellusta paikallisesti komennolla:
@@ -404,25 +422,7 @@ Voit esikatsella rakennettua sovellusta paikallisesti komennolla:
 npm run preview
 ```
 
-### 8. Käytettävät ympäristömuuttujat
-Projektissa voi olla ympäristömuuttujia, jotka määritellään env-tiedostoissa:
-
-.env.development – Kehitysympäristöä varten
-.env.production – Tuotantoympäristöä varten
-Esimerkki .env-tiedostosta:
-
-```
-VITE_API_URL=https://api.example.com
-VITE_JWT_SECRET=your-secret-key
-```
-
-Huom: Vite käyttää import.meta.env-syntaksia ympäristömuuttujien lukemiseen. Esimerkiksi:
-
-```
-const apiUrl = import.meta.env.VITE_API_URL;
-```
-
-### 9. Teknologiat ja kirjastot
+### 7. Teknologiat ja kirjastot
 Projektissa käytettävät keskeiset kirjastot:
 
 - **React:** Frontend-käyttöliittymän rakentamiseen
