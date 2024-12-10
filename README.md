@@ -425,12 +425,12 @@ const apiUrl = import.meta.env.VITE_API_URL;
 ### 9. Teknologiat ja kirjastot
 Projektissa käytettävät keskeiset kirjastot:
 
--**React:** Frontend-käyttöliittymän rakentamiseen.
--**React Router:** Reititykseen (react-router-dom).
--**MUI:** Materiaalisuunnittelun komponentit (@mui/material ja @mui/icons-material).
--**Emotion:** CSS-in-JS-tyylityksiin (@emotion/react ja @emotion/styled).
--**QR-koodit:** jsqr ja qrcode.react.
--**React ApexCharts:** Kaavioiden visualisointiin.
+-**React:** Frontend-käyttöliittymän rakentamiseen
+-**React Router:** Reititykseen (react-router-dom)
+-**MUI:** Materiaalisuunnittelun komponentit (@mui/material ja @mui/icons-material)
+-**Emotion:** CSS-in-JS-tyylityksiin (@emotion/react ja @emotion/styled)
+-**QR-koodit:** jsqr ja qrcode.react
+-**React ApexCharts:** Kaavioiden visualisointiin
 
 ### Yhteenveto tärkeistä komennoista
 
