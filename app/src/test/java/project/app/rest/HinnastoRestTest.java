@@ -16,6 +16,8 @@ import org.springframework.web.context.WebApplicationContext;
 @ActiveProfiles("h2")
 public class HinnastoRestTest {
 
+    
+
     @Autowired
     private WebApplicationContext webAppContext;
 

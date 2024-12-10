@@ -31,8 +31,8 @@ public class KayttajaTest {
     @Test
     @Order(1)
     public void findByKayttajatunnus() {
-        Kayttaja kayttaja = repository.findByKayttajatunnus("matti123");
-        assertThat(kayttaja.getKayttajatunnus().equals("matti123"));
+        Kayttaja kayttaja = repository.findByKayttajatunnus("admin");
+        assertThat(kayttaja.getKayttajatunnus().equals("admin"));
     }
     
     @Test
@@ -45,9 +45,9 @@ public class KayttajaTest {
     @Test
     @Order(3)
     public void deleteKayttaja() {
-        Kayttaja kayttaja = repository.findByKayttajatunnus("matti321");
+        Kayttaja kayttaja = repository.findByKayttajatunnus("myyja");
         repository.delete(kayttaja);
-        assertThat(repository.findByKayttajatunnus("matti321")).isNull();
+        assertThat(repository.findByKayttajatunnus("myyja")).isNull();
     }
 
     @Test

@@ -50,7 +50,7 @@ public class LippuRestTest {
                         "tapahtumaId": 1
                         },
                 "hinnasto": {
-                        "hinnastoId": 1
+                        "hinnastoid": 1
                         },
                 "maksutapahtuma": {
                         "maksutapahtumaId": 1

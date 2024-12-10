@@ -63,7 +63,7 @@ public class MaksuTapahtumaRestTest {
 
     @Test
     public void testSoftDeleteMaksutapahtuma() throws Exception {
-        mockMvc.perform(patch("/api/maksutapahtumat/2")) 
+        mockMvc.perform(patch("/api/maksutapahtumat/1")) 
                 .andExpect(status().isOk()); 
     }
     
