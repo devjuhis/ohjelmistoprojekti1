@@ -238,7 +238,7 @@ toimivuutta myös yksikkötesteillä sekä integraatiotesteillä. Palvelimen ja 
 
 ### Yksikkö- ja integraatiotestaus
 
-Yksikkötesteissä JUnit-testikehystä hyödyntäen testasimme luotujen entitettien toiminnallisuutta. Testeissä testattiin entiteettien toimintoja kuten settereitä ja gettereitä. Lisäksi entiteettien konstruktroteita testattiin luomalla uusia entiteettejä. Lisäksi tarkistimme käyttäjä-entiteetin validointia.
+Yksikkötesteissä JUnit-testikehystä hyödyntäen testasimme luotujen entitettien toiminnallisuutta. Testeissä testattiin entiteettien toimintoja kuten settereitä ja gettereitä. Lisäksi entiteettien konstruktroreita testattiin luomalla uusia entiteettejä. Lisäksi tarkistimme käyttäjä-entiteetin validointia.
 [Testausdokumentti/yksikkötestaus](documents/Testaus/yksikkotestaus.md)
 
 Integraatiotestauksesssa JUnit-testikehystä hyödyntäen testasimme, että entiteetti-luokat, niiden repositoryt ja REST-controllerit toimivat yhdessä. Testeissä testattiin GET-, POST-, PATCH-, DELETE-, ja softdelete pyyntöjä eri entiteeteille. Lisäksi tarkistimme, että HTTP-pyyntöjen vastaukset palauttavat JSON-muotoista dataa ja statuskoodien toimivuuden.
