@@ -10,13 +10,13 @@ Näyttää tiedon yksittäisestä lipusta.
 
 **Auth required** : YES
 
-**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER-tason oikeudet. 
+**Permissions required** : Toiminnon tekevällä käyttäjällä on oltava USER- tai ADMIN-tason oikeudet. 
 
 **Data**: `{}`
 
 ## Success Response
 
-**Condition** : Lippu on olemassa, ja pyynnön tekevällä käyttäjällä on USER-tason oikeudet.
+**Condition** : Lippu on olemassa, ja pyynnön tekevällä käyttäjällä on USER- tai ADMIN-tason oikeudet.
 
 **Code** : `200 OK`
 
@@ -84,7 +84,7 @@ Näyttää tiedon yksittäisestä lipusta.
 
 ### OR
 
-**Condition** : Käyttäjällä ei ole USER-tason oikeuksia
+**Condition** : Käyttäjällä ei ole USER- tai ADMIN-tason oikeuksia
 
 **Code** : `403 FORBIDDEN`
 
